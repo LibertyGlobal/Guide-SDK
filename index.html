@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <script type="text/javascript" src="dist/sdk.js"></script>
+        <script type="text/javascript">
+            // all regions
+            var allRegions =
+                    SDK.Region.all();
+
+            // region with id
+            var regionWithId =
+                    SDK.Region.one()
+                            .filter(SDK.Region.ID.equalTo('NL'));
+
+            // all channels in given region
+            // showing only id, name, and broadcastsLink attributes
+            // sorted by region name
+            var allChannelsInRegion =
+                    SDK.Channel.all()
+                            .filter(SDK.Channel.REGION_ID.equalTo('NL'))
+                            .expose(SDK.Channel.ID, SDK.Channel.NAME, SDK.Channel.BROADCASTS_LINK)
+                            .sortBy(SDK.Channel.NAME);
+
+
+            // all channels in region that start with "RTL"
+            // showing only opengraph links
+            var allChannelsRTL =
+                    SDK.Channel.all()
+                            .filter(SDK.Channel.REGION_ID.equalTo('NL'))
+                            .filter(SDK.Channel.NAME.matches(/^RTL/i))
+                            .expose(SDK.Channel.OPENGRAPH_LINK);
+
+
+            // all broadcasts for given channel
+            // starting at or after now
+            // sorted by channel name and limited to 10
+            var allBroadcastsForChannelStartingAtOrAfter =
+                    SDK.Broadcast.all()
+                            .filter(SDK.Channel.NAME.matches(/^RTL/i))
+                            .filter(SDK.Broadcast.START_TIME.greaterThanOrEqualTo(Date.now()))
+                            .sortBy(SDK.Channel.NAME)
+                            .limitTo(10);
+
+            console.group('allRegions');
+            console.log(allRegions.toString());
+            console.groupEnd();
+
+            console.group('regionWithId');
+            console.log(regionWithId.toString());
+            console.groupEnd();
+
+            console.group('allChannelsInRegion');
+            console.log(allChannelsInRegion.toString());
+            console.groupEnd();
+
+            console.group('allChannelsRTL');
+            console.log(allChannelsRTL.toString());
+            console.groupEnd();
+
+            console.group('allBroadcastsForChannelStartingAtOrAfter');
+            console.log(allBroadcastsForChannelStartingAtOrAfter.toString());
+            console.groupEnd();
+        </script>
+    </body>
+</html>

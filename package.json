@@ -1,0 +1,15 @@
+{
+  "author": "Joris Snaras <jsnaras@libertyglobal.com>",
+  "description": "",
+  "devDependencies": {
+    "grunt-contrib-clean": "~0.4.1",
+    "grunt-bumpup": "~0.2.0",
+    "grunt": "~0.4.1",
+    "grunt-rigger": "~0.5.0"
+  },
+  "main": "dist/sdk.js",
+  "name": "sdk",
+  "readmeFilename": "README.md",
+  "title": "SDK",
+  "version": "0.0.1"
+}
