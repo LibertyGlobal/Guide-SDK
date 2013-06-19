@@ -3,10 +3,13 @@
  * @module utils
  */
 
-(function(w){
-    var utils = {
+(function(exports){
+    exports.utils = {
+        getRandomInt: function(){
 
-    };
+        },
+        replaceAll: function(){
 
-    w.kraken.utils = utils;
-})(window);
+        }
+    }
+})(typeof exports === 'undefined'? this.kraken: exports);
