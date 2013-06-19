@@ -1,4 +1,8 @@
 var TextualField = Object.create(AbstractField);
 
-TEqualable.useIn(TextualField);
-TMatchable.useIn(TextualField);
+var textual = function (name) {
+    return TextualField.create(name);
+};
+
+makeEqualable(TextualField);
+makeMatchable(TextualField);

@@ -47,7 +47,7 @@ AbstractRequest.prototype.limitTo = function (limit) {
     return this;
 };
 
-AbstractRequest.prototype.expose = function () {
+AbstractRequest.prototype.fields = function () {
     this.parameters.show = Array.prototype.slice.call(arguments);
 
     return this;

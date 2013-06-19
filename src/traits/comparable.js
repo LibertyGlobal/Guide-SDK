@@ -1,17 +1,26 @@
-var TComparable = new Trait({
-    lessThan: function (value) {
+var makeComparable = (function () {
+    function lessThan(value) {
         return this.name + '<' + value;
-    },
+    }
 
-    greaterThan: function (value) {
-        return this.name + '>' + value;
-    },
-
-    lessThanOrEqualTo: function (value) {
+    function lessThanOrEqualTo(value) {
         return this.name + '<=' + value;
-    },
+    }
 
-    greaterThanOrEqualTo: function (value) {
+    function greaterThan(value) {
+        return this.name + '>' + value;
+    }
+
+    function greaterThanOrEqualTo(value) {
         return this.name + '>=' + value;
     }
-});
+
+    return function (object) {
+        object.lessThan = lessThan;
+        object.lessThanOrEqualTo = lessThanOrEqualTo;
+        object.greaterThan = greaterThan;
+        object.greaterThanOrEqualTo = greaterThanOrEqualTo;
+
+        return object;
+    };
+}());

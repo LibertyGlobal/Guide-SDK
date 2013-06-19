@@ -6,7 +6,6 @@
     }
 }(this, function () {
 
-    //= src/utils
     //= src/traits
     //= src/fields
     //= src/requests

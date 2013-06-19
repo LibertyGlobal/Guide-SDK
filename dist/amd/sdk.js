@@ -1,6 +1,6 @@
 // SDK
 // ----------------------------------
-// v0.0.1
+// v0.0.2
 //
 // Copyright (c) 2013 Joris Snaras <jsnaras@libertyglobal.com>
 
@@ -12,64 +12,54 @@
     }
 }(this, function () {
 
-    function Trait(methods) {
-        this.traits = methods ? [ methods ] : [];
-    }
-    
-    Trait.prototype.uses = function (trait) {
-        this.traits = this.traits.concat(trait.traits);
-    
-        return this;
-    };
-    
-    Trait.prototype.useIn = function (object) {
-        this.traits.forEach(function (trait) {
-            Object.keys(trait).forEach(function (name) {
-                object[name] = object[name] || trait[name];
-            });
-        });
-    
-        return object;
-    };
-    
-    Trait.unimplemented = function (object, traitName) {
-        if (typeof object === 'undefined' || typeof traitName === 'undefined') {
-            throw new Error('Unimplemented trait property.');
+    var makeComparable = (function () {
+        function lessThan(value) {
+            return this.name + '<' + value;
         }
     
-        throw new Error(traitName + ' is not implemented for ' + object);
-    };
-
-    var TComparable = new Trait({
-        lessThan: function (value) {
-            return this.name + '<' + value;
-        },
-    
-        greaterThan: function (value) {
-            return this.name + '>' + value;
-        },
-    
-        lessThanOrEqualTo: function (value) {
+        function lessThanOrEqualTo(value) {
             return this.name + '<=' + value;
-        },
+        }
     
-        greaterThanOrEqualTo: function (value) {
+        function greaterThan(value) {
+            return this.name + '>' + value;
+        }
+    
+        function greaterThanOrEqualTo(value) {
             return this.name + '>=' + value;
         }
-    });
-
-    var TEqualable = new Trait({
-        equalTo: function (value) {
+    
+        return function (object) {
+            object.lessThan = lessThan;
+            object.lessThanOrEqualTo = lessThanOrEqualTo;
+            object.greaterThan = greaterThan;
+            object.greaterThanOrEqualTo = greaterThanOrEqualTo;
+    
+            return object;
+        };
+    }());
+    var makeEqualable = (function () {
+        function equalTo(value ) {
             return this.name + '=' + value;
         }
-    });
-
-    var TMatchable = new Trait({
-        matches: function (value) {
+    
+        return function (object) {
+            object.equalTo = equalTo;
+    
+            return object;
+        }
+    }());
+    var makeMatchable = (function () {
+        function matches(value) {
             return this.name + '~' + value;
         }
-    });
-
+    
+        return function (object) {
+            object.matches = matches;
+    
+            return object;
+        };
+    }());
     var AbstractField = {
         create: function (name) {
             var object = Object.create(this);
@@ -83,17 +73,22 @@
             return this.name;
         }
     };
-
     var NumericField = Object.create(AbstractField);
     
-    TEqualable.useIn(NumericField);
-    TComparable.useIn(NumericField);
-
+    var numeric = function (name) {
+        return NumericField.create(name);
+    };
+    
+    makeEqualable(NumericField);
+    makeComparable(NumericField);
     var TextualField = Object.create(AbstractField);
     
-    TEqualable.useIn(TextualField);
-    TMatchable.useIn(TextualField);
-
+    var textual = function (name) {
+        return TextualField.create(name);
+    };
+    
+    makeEqualable(TextualField);
+    makeMatchable(TextualField);
     function AbstractRequest(resource) {
         this.resource = resource;
         this.parameters = {};
@@ -143,7 +138,7 @@
         return this;
     };
     
-    AbstractRequest.prototype.expose = function () {
+    AbstractRequest.prototype.fields = function () {
         this.parameters.show = Array.prototype.slice.call(arguments);
     
         return this;
@@ -223,7 +218,6 @@
         // TODO: implement
         throw new Error('Not implemented');
     };
-
     function BroadcastRequest(limit) {
         AbstractRequest.call(this, BroadcastRequest.resource, limit || 0);
     }
@@ -250,7 +244,6 @@
     
         return this.buildURL(BroadcastRequest.url, parameters);
     };
-
     function ChannelRequest(limit) {
         AbstractRequest.call(this, ChannelRequest.resource, limit || 0);
     }
@@ -275,7 +268,6 @@
     
         return this.buildURL(ChannelRequest.url, parameters);
     };
-
     function RegionRequest(limit) {
         AbstractRequest.call(this, RegionRequest.resource, limit || 0);
     }
@@ -300,20 +292,19 @@
     
         return this.buildURL(RegionRequest.url, parameters);
     };
-
     SDK.Broadcast = {
-        SELF_LINK: TextualField.create('broadcast.selfLink'),
-        ID: TextualField.create('broadcast.id'),
-        CHANNEL_ID: TextualField.create('broadcast.channelId'),
-        TITLE: TextualField.create('broadcast.title'),
-        SYNOPSIS: TextualField.create('broadcast.synopsis'),
-        CATEGORY: TextualField.create('broadcast.category'),
-        VIDEO_ID: TextualField.create('broadcast.videoId'),
-        START_TIME: NumericField.create('broadcast.start'),
-        END_TIME: NumericField.create('broadcast.end'),
-        IMAGE_LINK: NumericField.create('broadcast.imageLink'),
-        MORE_LINK: NumericField.create('broadcast.moreLink'),
-        OPENGRAPH_LINK: NumericField.create('broadcast.opengraphLink'),
+        SELF_LINK: textual('broadcast.selfLink'),
+        ID: textual('broadcast.id'),
+        CHANNEL_ID: textual('broadcast.channelId'),
+        TITLE: textual('broadcast.title'),
+        SYNOPSIS: textual('broadcast.synopsis'),
+        CATEGORY: textual('broadcast.category'),
+        VIDEO_ID: textual('broadcast.videoId'),
+        START_TIME: numeric('broadcast.start'),
+        END_TIME: numeric('broadcast.end'),
+        IMAGE_LINK: textual('broadcast.imageLink'),
+        MORE_LINK: textual('broadcast.moreLink'),
+        OPENGRAPH_LINK: numeric('broadcast.opengraphLink'),
     
         one: function () {
             return new BroadcastRequest().limit(1);
@@ -323,15 +314,14 @@
             return new BroadcastRequest();
         }
     };
-
     SDK.Channel = {
-        SELF_LINK: TextualField.create('channel.selfLink'),
-        ID: TextualField.create('channel.channelId'),
-        NAME: TextualField.create('channel.name'),
-        POSITION: TextualField.create('channel.logicalPosition'),
-        REGION_ID: TextualField.create('channel.regionId'),
-        BROADCASTS_LINK: TextualField.create('channel.broadcastsLink'),
-        OPENGRAPH_LINK: TextualField.create('channel.opengraphLink'),
+        SELF_LINK: textual('channel.selfLink'),
+        ID: textual('channel.channelId'),
+        NAME: textual('channel.name'),
+        POSITION: textual('channel.logicalPosition'),
+        REGION_ID: textual('channel.regionId'),
+        BROADCASTS_LINK: textual('channel.broadcastsLink'),
+        OPENGRAPH_LINK: textual('channel.opengraphLink'),
     
         one: function () {
             return new ChannelRequest().limit(1);
@@ -341,14 +331,13 @@
             return new ChannelRequest();
         }
     };
-
     SDK.Region = {
-        SELF_LINK: TextualField.create('region.selfLink'),
-        ID: TextualField.create('region.id'),
-        NAME: TextualField.create('region.name'),
-        CHANNEL_LINEUP_LINK: TextualField.create('region.channelLineupLink'),
-        TOP_BROADCASTS_LINK: TextualField.create('region.topBroadcastsLink'),
-        TOP_VIDEOS_LINK: TextualField.create('region.topVideosLink'),
+        SELF_LINK: textual('region.selfLink'),
+        ID: textual('region.id'),
+        NAME: textual('region.name'),
+        CHANNEL_LINEUP_LINK: textual('region.channelLineupLink'),
+        TOP_BROADCASTS_LINK: textual('region.topBroadcastsLink'),
+        TOP_VIDEOS_LINK: textual('region.topVideosLink'),
     
         one: function () {
             return new RegionRequest(1);

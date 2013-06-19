@@ -21,9 +21,8 @@
             var allChannelsInRegion =
                     SDK.Channel.all()
                             .filter(SDK.Channel.REGION_ID.equalTo('NL'))
-                            .expose(SDK.Channel.ID, SDK.Channel.NAME, SDK.Channel.BROADCASTS_LINK)
+                            .fields(SDK.Channel.ID, SDK.Channel.NAME, SDK.Channel.BROADCASTS_LINK)
                             .sortBy(SDK.Channel.NAME);
-
 
             // all channels in region that start with "RTL"
             // showing only opengraph links
@@ -31,7 +30,7 @@
                     SDK.Channel.all()
                             .filter(SDK.Channel.REGION_ID.equalTo('NL'))
                             .filter(SDK.Channel.NAME.matches(/^RTL/i))
-                            .expose(SDK.Channel.OPENGRAPH_LINK);
+                            .fields(SDK.Channel.OPENGRAPH_LINK);
 
 
             // all broadcasts for given channel

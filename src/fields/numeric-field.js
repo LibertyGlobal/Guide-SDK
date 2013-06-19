@@ -1,4 +1,8 @@
 var NumericField = Object.create(AbstractField);
 
-TEqualable.useIn(NumericField);
-TComparable.useIn(NumericField);
+var numeric = function (name) {
+    return NumericField.create(name);
+};
+
+makeEqualable(NumericField);
+makeComparable(NumericField);
