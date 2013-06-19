@@ -13,12 +13,15 @@ module.exports = function(grunt) {
         'src/utils/utils.js',
         'src/utils/ajax.js',
         'src/utils/polyfills.js',
+        'src/fields/abstractfield.js',
+        'src/fields/numericfield.js',
+        'src/fields/textfield.js',
         'src/collection.js',
-        'src/queryBuildingLogic/queryBuilderBase.js',
-        'src/queryBuildingLogic/country.js',
-        'src/queryBuildingLogic/city.js',
-        'src/queryBuildingLogic/channel.js',
-        'src/queryBuildingLogic/broadcast.js'
+        'src/entitybase.js',
+        'src/entities/country.js',
+        'src/entities/city.js',
+        'src/entities/channel.js',
+        'src/entities/broadcast.js'
         ],
         dest: './lib/<%= pkg.name %>.js'
       }
@@ -36,8 +39,8 @@ module.exports = function(grunt) {
       files: ['src/**/*.js'],
       options: {
         // options here to override JSHint defaults
+        asi: true,
         globals: {
-          asi: true,
           jQuery: true,
           console: true,
           module: true,

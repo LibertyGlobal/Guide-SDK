@@ -1,11 +1,6 @@
 /**
- * Ajax is a part of Kraken API client library
- * Created : 6/18/13
- * @namespace utils
- */
-
-/**
  * Module for ajax, JSONP
+ * @namespace utils
  * @module ajax
  */
 (function(w){
