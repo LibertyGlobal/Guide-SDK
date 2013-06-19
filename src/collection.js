@@ -1,11 +1,6 @@
 /**
- * Collection is a part of Kraken API client library
- * Created : 6/18/13
- * @namespace kraken
- */
-
-/**
  * Represents basic functionality for Kraken data sets
+ * @namespace kraken
  * @class Collection
  */
 (function(w){
