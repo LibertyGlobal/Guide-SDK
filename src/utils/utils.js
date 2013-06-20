@@ -3,10 +3,8 @@
  * @module utils
  */
 
-(function(w){
-    var utils = {
+(function (kraken) {
+    kraken.utils = {
 
-    };
-
-    w.kraken.utils = utils;
-})(window);
+    }
+})(typeof exports === 'undefined' ? this.kraken : exports);

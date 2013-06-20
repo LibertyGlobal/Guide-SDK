@@ -1,30 +1,31 @@
 {
-  "name": "Kraken",
-  "version": "0.0.0",
-  "description": "KrakenAPI client library",
-  "main": "index.js",
-  "directories": {
-    "example": "examples",
-    "test": "tests"
-  },
-  "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-jsdoc": "",
-    "grunt-contrib-jshint": "~0.6.0",
-    "grunt-contrib-nodeunit": "~0.2.0",
-    "grunt-contrib-uglify": "~0.2.2",
-    "grunt-contrib-watch": "",
-    "grunt-contrib-concat": ""
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": "",
-  "keywords": [
-    "tv",
-    "schedule",
-    "api"
-  ],
-  "author": "Liberty Global",
-  "license": "BSD"
+    "name": "Kraken",
+    "version": "0.0.0",
+    "description": "KrakenAPI client library",
+    "main": "index.js",
+    "directories": {
+        "example": "examples",
+        "test": "tests"
+    },
+    "devDependencies": {
+        "grunt": "~0.4.1",
+        "grunt-jsdoc": "",
+        "grunt-contrib-jshint": "~0.6.0",
+        "grunt-contrib-nodeunit": "~0.2.0",
+        "grunt-contrib-uglify": "~0.2.2",
+        "grunt-contrib-watch": "",
+        "grunt-contrib-concat": "",
+        "grunt-karma": ""
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": "",
+    "keywords": [
+        "tv",
+        "schedule",
+        "api"
+    ],
+    "author": "Liberty Global",
+    "license": "BSD"
 }

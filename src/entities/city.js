@@ -1,14 +1,15 @@
 /**
- * City is a part of Kraken API client library
- * Created : 6/18/13
- * @namespace kraken.queryBuildingLogic
- */
-
-
-/**
  * Class describes city-specific fields and request logic
- * @class kraken.City
+ * @namespace kraken.entities
+ * @class City
+ * @extends EntityBase
  */
-(function(w){
 
-})(window);
+(function (kraken) {
+    kraken.City = function () {
+        kraken.EntityBase.call(this);
+        this.baseURL = '/cities/';
+    }
+
+    var p = kraken.City.prototype = Object.create(kraken.EntityBase.prototype);
+})(typeof exports === 'undefined' ? this.kraken : exports);

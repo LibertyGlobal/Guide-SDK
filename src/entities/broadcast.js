@@ -1,14 +1,15 @@
 /**
- * Broadcast is a part of Kraken API client library
- * Created : 6/18/13
- * @namespace kraken.queryBuildingLogic
- */
-
-
-/**
  * Class describes broadcast-specific fields and request logic
+ * @namespace kraken.entities
  * @class Broadcast
+ * @extends EntityBase
  */
-(function(w){
 
-})(window);
+(function (kraken) {
+    kraken.Broadcast = function () {
+        kraken.EntityBase.call(this);
+        this.baseURL = 'broadcasts.json?';
+    }
+
+    var p = kraken.Broadcast.prototype = Object.create(kraken.EntityBase.prototype);
+})(typeof exports === 'undefined' ? this.kraken : exports);

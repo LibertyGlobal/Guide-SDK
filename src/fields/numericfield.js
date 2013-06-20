@@ -1,29 +1,27 @@
 /**
- * @namespace fields
+ * Numeric field supports math comparing functions.
+ * @namespace kraken.fields
  * @class NumericField
+ * @extends AbstractField
  */
 
-(function(kraken){
-    /**
-     * @constructor
-     * @param name determines string representation of field
-     */
-    kraken.NumericField = function(name){
+(function (kraken) {
+    kraken.NumericField = function (name) {
         kraken.AbstractField.call(this, name);
     }
 
     var p = kraken.NumericField.prototype = Object.create(kraken.AbstractField.prototype);
 
-    p.equalTo = function(operand){
-        this.getStringForOperation('=', operand);
+    p.equalTo = function (operand) {
+        return this.getStringForOperation('=', operand);
     }
 
-    p.greaterThan = function(operand){
-        this.getStringForOperation('>', operand);
+    p.greaterThan = function (operand) {
+        return this.getStringForOperation('>', operand);
     }
 
-    p.lessThan = function(operand){
-        this.getStringForOperation('<', operand);
+    p.lessThan = function (operand) {
+        return this.getStringForOperation('<', operand);
     }
 
-})(typeof exports === 'undefined'? this.kraken: exports);
+})(typeof exports === 'undefined' ? this.kraken : exports);

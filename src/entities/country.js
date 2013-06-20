@@ -1,14 +1,15 @@
 /**
- * Country is a part of Kraken API client library
- * Created : 6/18/13
- * @namespace kraken.queryBuildingLogic
- */
-
-
-/**
  * Class describes country-specific fields and request logic
+ * @namespace kraken.entities
  * @class Country
+ * @extends EntityBase
  */
-(function(w){
 
-})(window);
+(function (kraken) {
+    kraken.Country = function () {
+        kraken.EntityBase.call(this);
+        this.baseURL = 'regions.json';
+    }
+
+    var p = kraken.Country.prototype = Object.create(kraken.EntityBase.prototype);
+})(typeof exports === 'undefined' ? this.kraken : exports);

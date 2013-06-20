@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KrakenAPI initialization example</title>
+</head>
+<body>
+</body>
+<script src="../../lib/Kraken.js"></script>
+<script>
+    var countries = new kraken.Country();
+    var onCountriesReceived = function(data){
+        this.each(function(element){
+            console.log(element.id);
+        })
+    }
+
+    countries.one(onCountriesReceived);
+</script>
+</html>

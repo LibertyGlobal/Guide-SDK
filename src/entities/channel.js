@@ -1,14 +1,15 @@
 /**
- * Channel is a part of Kraken API client library
- * Created : 6/18/13
- * @namespace kraken.queryBuildingLogic
- */
-
-
-/**
  * Class describes channel-specific fields and request logic
+ * @namespace kraken.entities
  * @class Channel
+ * @extends EntityBase
  */
-(function(w){
 
-})(window);
+(function (kraken) {
+    kraken.Channel = function () {
+        kraken.EntityBase.call(this);
+        this.baseURL = 'channels.json?';
+    }
+
+    var p = kraken.Channel.prototype = Object.create(kraken.EntityBase.prototype);
+})(typeof exports === 'undefined' ? this.kraken : exports);
