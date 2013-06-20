@@ -3,15 +3,27 @@
  * @class NumericField
  */
 
-(function(exports){
+(function(kraken){
     /**
      * @constructor
-     * @arg name determines string representation of field
+     * @param name determines string representation of field
      */
-    exports.NumericField = function(name){
-        exports.AbstractField.call(this, name);
+    kraken.NumericField = function(name){
+        kraken.AbstractField.call(this, name);
     }
 
-    p = exports.NumericField.prototype = Object.create(exports.AbstractField.prototype);
+    p = kraken.NumericField.prototype = Object.create(kraken.AbstractField.prototype);
+
+    p.equalTo = function(operand){
+        this.addOperation('=', operand);
+    }
+
+    p.greaterThan = function(operand){
+        this.addOperation('>', operand);
+    }
+
+    p.lessThan = function(operand){
+        this.addOperation('<', operand);
+    }
 
 })(typeof exports === 'undefined'? this.kraken: exports);
