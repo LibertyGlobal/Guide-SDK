@@ -15,11 +15,11 @@
     var p = kraken.TextField.prototype = Object.create(kraken.AbstractField.prototype);
 
     p.equalTo = function(operand){
-        this.addOperation('=', operand);
+        this.getStringForOperation('=', operand);
     }
 
     p.isMatching = function(operand){
-        this.addOperation('~', operand);
+        this.getStringForOperation('~', operand);
     }
 
 })(typeof exports === 'undefined'? this.kraken: exports);
