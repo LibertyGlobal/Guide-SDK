@@ -12,7 +12,7 @@
         kraken.AbstractField.call(this, name);
     }
 
-    p = kraken.TextField.prototype = Object.create(kraken.AbstractField.prototype);
+    var p = kraken.TextField.prototype = Object.create(kraken.AbstractField.prototype);
 
     p.equalTo = function(operand){
         this.addOperation('=', operand);

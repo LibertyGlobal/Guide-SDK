@@ -13,7 +13,7 @@
         this.operations = [];
     }
 
-    p = kraken.AbstractField.prototype;
+    var p = kraken.AbstractField.prototype;
 
     p.toString = function(){
         return this.name;
