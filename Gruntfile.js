@@ -59,7 +59,7 @@ module.exports = function (grunt) {
         },
         watch: {
             files: ['<%= jshint.files %>'],
-            tasks: ['jshint', 'jsdoc', 'concat', 'uglify']
+            tasks: ['jshint', 'concat', 'uglify']
         }
     });
 
@@ -69,9 +69,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-jsdoc');
-
-    // Default task(s).
-    grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
 
     // Default task(s).
     grunt.registerTask('doc', ['jshint', 'jsdoc', 'concat', 'uglify']);
