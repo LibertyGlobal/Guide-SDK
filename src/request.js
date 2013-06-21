@@ -13,12 +13,26 @@
     var p = kraken.Request.prototype;
 
     p.execute = function (URL, callback, nextBatchSteps) {
-        kraken.jsonp(URL, {}, callback);
+        var pipelineData = [];
+        kraken.jsonp(URL, {}, this.createScopedCallback(callback, nextBatchSteps, pipelineData));
     }
 
-    p.proceedResponse = function (response) {
-        /*TODO Save nextBatchAdress for next page processing
-         Also add data to temporary object
-         And request nextBatchAdress one more time if nextBatchSteps is greater than 0*/
+    p.proceedResponse = function (response, nextBatchSteps, pipelineData) {
+        pipelineData = pipelineData.concat(response.data);
+        this.nextBatchLinkURL = response.nextBatchLink.href;
+        nextBatchSteps--;
+
+        if ((nextBatchSteps > 0 || nextBatchSteps === undefined) && nextBatchLinkURL){
+            kraken.jsonp(this.nextBatchLinkURL, {}, this.createScopedCallback(callback, nextBatchSteps));
+        }
+    }
+
+    p.createScopedCallback = function (callback, nextBatchSteps, pipelineData) {
+        var scopedCallback = function (data) {
+            this.proceedResponse(data, nextBatchSteps, pipelineData);
+            callback.bind(this)(data);
+        }
+
+        return scopedCallback.bind(this);
     }
 })(typeof exports === 'undefined' ? this.kraken : exports);
