@@ -8,8 +8,10 @@
 (function (kraken) {
     kraken.Country = function () {
         kraken.EntityBase.call(this);
-        this.baseURL = 'regions.json';
+        this._baseURL = 'regions.json';
     }
+
+    kraken.utils.addFactory(kraken.Country);
 
     var p = kraken.Country.prototype = Object.create(kraken.EntityBase.prototype);
 })(typeof exports === 'undefined' ? this.kraken : exports);

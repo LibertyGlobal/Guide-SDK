@@ -15,4 +15,10 @@
     p.execute = function (URL, callback, nextBatchSteps) {
         kraken.jsonp(URL, {}, callback);
     }
+
+    p.proceedResponse = function (response) {
+        /*TODO Save nextBatchAdress for next page processing
+         Also add data to temporary object
+         And request nextBatchAdress one more time if nextBatchSteps is greater than 0*/
+    }
 })(typeof exports === 'undefined' ? this.kraken : exports);

@@ -8,8 +8,10 @@
 (function (kraken) {
     kraken.Channel = function () {
         kraken.EntityBase.call(this);
-        this.baseURL = 'channels.json?';
+        this._baseURL = 'channels.json?';
     }
+
+    kraken.utils.addFactory(kraken.Channel);
 
     var p = kraken.Channel.prototype = Object.create(kraken.EntityBase.prototype);
 })(typeof exports === 'undefined' ? this.kraken : exports);

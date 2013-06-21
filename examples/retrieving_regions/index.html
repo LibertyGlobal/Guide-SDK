@@ -7,13 +7,11 @@
 </body>
 <script src="../../lib/Kraken.js"></script>
 <script>
-    var countries = new kraken.Country();
     var onCountriesReceived = function(data){
         this.each(function(element){
             console.log(element.id);
         })
     }
-
-    countries.one(onCountriesReceived);
+    kraken.Country.create().one(onCountriesReceived);
 </script>
 </html>

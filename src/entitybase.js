@@ -8,10 +8,10 @@
 (function (kraken) {
     kraken.EntityBase = function () {
         kraken.Collection.call(this);
-        this.URLelements = [];
-        this.requestURL = '';
-        this.baseURL = '';
-        this.request = new kraken.Request();
+        this._URLelements = [];
+        this._requestURL = '';
+        this._baseURL = '';
+        this._request = new kraken.Request();
     }
 
     var p = kraken.EntityBase.prototype = Object.create(kraken.Collection.prototype);
@@ -22,7 +22,8 @@
      * @param {number} limitTo Number of maximum data elements in response.
      */
     p.limit = function (limitTo) {
-        this.addURLElement('maxBatchSize=' + limitTo);
+        this._addURLElement('maxBatchSize=' + limitTo);
+        return this;
     }
 
     /**
@@ -33,8 +34,9 @@
     p.fields = function (multipleArgs) {
         this.addURLElement('show=');
         for (var i = 0; i < arguments.length; i++) {
-            this.addURLElement(arguments[i]);
+            this._addURLElement(arguments[i]);
         }
+        return this;
     }
 
     /**
@@ -48,7 +50,8 @@
             method = 'asc';
         }
 
-        this.addURLElement('sort=' + field + '(' + method + ')');
+        this._addURLElement('sort=' + field + '(' + method + ')');
+        return this;
     }
 
     /**
@@ -58,53 +61,62 @@
      */
     p.filter = function (multipleArgs) {
         for (var i = 0; i < arguments.length; i++) {
-            this.addURLElement(arguments[i]);
+            this._addURLElement(arguments[i]);
         }
+        return this;
     }
 
-    p.addURLElement = function (URLElement) {
-        this.URLelements.push(URLElement);
+    p.one = function (callback) {
+        this._buildURLFromElements();
+        this._request.execute(this._requestURL, this._createScopedCallback(callback), 1);
+        return this;
     }
 
-    p.buildURLFromElements = function () {
-        this.requestURL = kraken.config.APIURL;
-        this.requestURL += this.baseURL;
+    p.next = function (callback) {
+        this._request.execute(this._request.nextBatchLink || this._buildURLFromElements(), this._createScopedCallback(callback), 1);
+        return this;
+    }
 
-        for (var i = 0; i < this.URLelements.length; i++) {
-            this.requestURL += this.URLelements[i];
-            if (i < this.URLelements.length - 1) {
-                this.requestURL += '&';
+    p.all = function (callback) {
+        this._buildURLFromElements();
+        this._request.execute(this._requestURL, this._createScopedCallback(callback), 0);
+        return this;
+    }
+
+    p._addURLElement = function (URLElement) {
+        this._URLelements.push(URLElement);
+    }
+
+    p._buildURLFromElements = function () {
+        this._requestURL = kraken.config.APIURL;
+
+        if (kraken.config.region !== ''){
+            this._requestURL += 'regions/' + kraken.config.region + '/';
+        }
+
+        this._requestURL += this._baseURL;
+
+        for (var i = 0; i < this._URLelements.length; i++) {
+            this._requestURL += this._URLelements[i];
+            if (i < this._URLelements.length - 1) {
+                this._requestURL += '&';
             }
         }
 
-        return this.requestURL;
+        return this._requestURL;
     }
 
-    p.processData = function (data) {
+    p._processData = function (data) {
         this.add(data.data);
     }
 
-    p.createScopedCallback = function (callback) {
-        var scopedCallback = function(data){
-            this.processData(data);
+    p._createScopedCallback = function (callback) {
+        var scopedCallback = function (data) {
+            this._processData(data);
             callback.bind(this)(data);
         }
 
         return scopedCallback.bind(this);
-    }
-
-    p.one = function (callback) {
-        this.buildURLFromElements();
-        this.request.execute(this.requestURL, this.createScopedCallback(callback), 1);
-    }
-
-    p.next = function (callback) {
-        this.request.execute(this.request.nextBatchLink || this.buildURLFromElements(), this.createScopedCallback(callback), 1);
-    }
-
-    p.all = function (callback) {
-        this.buildURLFromElements();
-        this.request.execute(this.requestURL, this.createScopedCallback(callback), 0);
     }
 
 })(typeof exports === 'undefined' ? this.kraken : exports);

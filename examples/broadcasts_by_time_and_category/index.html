@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KrakenAPI initialization example</title>
+</head>
+<body>
+</body>
+<script src="../../lib/Kraken.js"></script>
+<script>
+    var onBroadcastsReceived = function(data){
+        this.each(function(element){
+            console.log(element.id);
+        })
+    }
+
+    kraken.config.region = 'NL';
+    kraken.Broadcast.create().one(onBroadcastsReceived);
+
+    /*
+        Seems to be more linear with other properties, but looks too verbose
+        kraken.Broadcast.create().filter(kraken.Broadcast.regionId.isEqual('NL-7-104')).one(onBroadcastsReceived);
+    */
+</script>
+</html>

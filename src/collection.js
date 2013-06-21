@@ -17,8 +17,16 @@
         }
     }
 
-    p.where = function (conditionString) {
-
+    p.where = function (conditionObject) {
+        //TODO test
+        var result = [];
+        this.each(function (dataObject) {
+            for (var i in conditionObject) {
+                if (dataObject[i] === conditionObject[i]) {
+                    result.push(dataObject[i]);
+                }
+            }
+        })
     }
 
     p.add = function (objectToAdd) {
