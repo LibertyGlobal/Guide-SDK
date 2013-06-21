@@ -71,6 +71,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-jsdoc');
 
     // Default task(s).
-    grunt.registerTask('default', ['jshint', 'jsdoc', 'concat', 'uglify']);
+    grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
 
 };

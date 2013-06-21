@@ -9,12 +9,16 @@
 <script>
     var onBroadcastsReceived = function(data){
         this.each(function(element){
-            console.log(element.id);
+            console.log(element);
         })
     }
 
     kraken.config.region = 'NL';
-    kraken.Broadcast.create().findOne(onBroadcastsReceived);
+
+    kraken.Broadcast.create()
+            .limit(5)
+            .fields(kraken.Broadcast.ID, kraken.Broadcast.TITLE, kraken.Broadcast.START, kraken.Broadcast.SYNOPSIS)
+            .findAll(onBroadcastsReceived);
 
     /*
         Seems to be more linear with other properties, but looks too verbose
