@@ -14,7 +14,7 @@
     }
 
     kraken.config.region = 'NL';
-    kraken.Broadcast.create().one(onBroadcastsReceived);
+    kraken.Broadcast.create().findOne(onBroadcastsReceived);
 
     /*
         Seems to be more linear with other properties, but looks too verbose

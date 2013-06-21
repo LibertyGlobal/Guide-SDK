@@ -18,7 +18,7 @@
 
     /**
      * Adds limitation to response data length. For example "a.limit(10);"
-     * @method kraken.EntityBase#limit
+     * @method EntityBase#limit
      * @param {number} limitTo Number of maximum data elements in response.
      */
     p.limit = function (limitTo) {
@@ -28,7 +28,7 @@
 
     /**
      * Determines list of fields to be retrieved from server. For example by "a.shows(kraken.channel.id, kraken.channel.name);"
-     * @method kraken.EntityBase#fields
+     * @method EntityBase#fields
      * @param {string} multipleArgs You can add unlimited number of strings as multiple parameters.
      */
     p.fields = function (multipleArgs) {
@@ -41,7 +41,7 @@
 
     /**
      * Sets sorting field and method. For example "a.sort(kraken.broadcast.startTime);"
-     * @method kraken.EntityBase#sort
+     * @method EntityBase#sort
      * @param {string} field Field to sort records by.
      * @param {string} [method="asc"] Determines method we want to sort records with - ascendant (asc) or descendant (desc).
      */
@@ -56,7 +56,7 @@
 
     /**
      * Filters data by some of entity properties. For example "a.filter(kraken.channel.id.equalTo(1));"
-     * @method kraken.EntityBase#filter
+     * @method EntityBase#filter
      * @param {string} multipleArgs You can add unlimited number of strings as multiple parameters.
      */
     p.filter = function (multipleArgs) {
@@ -66,18 +66,33 @@
         return this;
     }
 
-    p.one = function (callback) {
+    /**
+     * Retrieves one page of data.
+     * @method EntityBase#findOne
+     * @param {Function} callback Callback to execute and pass response to.
+     */
+    p.findOne = function (callback) {
         this._buildURLFromElements();
         this._request.execute(this._requestURL, this._createScopedCallback(callback), 1);
         return this;
     }
 
-    p.next = function (callback) {
+    /**
+     * Retrieves next page of data.
+     * @method EntityBase#findNext
+     * @param {Function} callback Callback to execute and pass response to.
+     */
+    p.findNext = function (callback) {
         this._request.execute(this._request.nextBatchLink || this._buildURLFromElements(), this._createScopedCallback(callback), 1);
         return this;
     }
 
-    p.all = function (callback) {
+    /**
+     * Retrieves all pages of data one by one and then executes callback.
+     * @method EntityBase#findAll
+     * @param {Function} callback Callback to execute and pass response to.
+     */
+    p.findAll = function (callback) {
         this._buildURLFromElements();
         this._request.execute(this._requestURL, this._createScopedCallback(callback), 0);
         return this;
