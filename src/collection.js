@@ -1,13 +1,19 @@
 /**
- * Represents basic functionality for Kraken data sets
+ * Represents basic functionality for Kraken data sets.
+ *
  * @namespace kraken
  * @class Collection
  */
 
 (function (kraken) {
-    kraken.Collection = function () {
+
+    kraken.Collection = function (items) {
         this.items = [];
-    }
+
+        if (typeof items !== 'undefined') {
+            this.add(items);
+        }
+    };
 
     var p = kraken.Collection.prototype;
 
@@ -17,27 +23,23 @@
      * @param functionToApply Function to apply to elements.
      */
     p.each = function (functionToApply) {
-        for (var i = 0; i < this.items.length; i++) {
-            functionToApply.apply(this, [this.items[i], i]);
-        }
-    }
+        this.items.forEach(functionToApply);
+    };
 
     /**
      * Returns all records which matches conditionalObject. For example if it is {a: 1} - method will return only objects from collection where 'a' property is present and is equal to 1
      * @method Collection#where
-     * @param conditionalObject Object to match.
+     * @param {Object} filter Filter descriptor object.
      */
-    p.where = function (conditionObject) {
-        //TODO test
-        var result = [];
-        this.each(function (dataObject) {
-            for (var i in conditionObject) {
-                if (dataObject[i] === conditionObject[i]) {
-                    result.push(dataObject[i]);
-                }
-            }
-        })
-    }
+    p.where = function (filter) {
+        var keys = Object.keys(filter);
+
+        return this.items.filter(function (item) {
+            return keys.every(function (key) {
+                return item.hasOwnProperty(key) && item[key] === filter[key];
+            });
+        });
+    };
 
     /**
      * Adds object or array to collection.
@@ -45,12 +47,12 @@
      * @param {Object|Array} objectToAdd Object or array to add to collection.
      */
     p.add = function (objectToAdd) {
-        if (objectToAdd instanceof Array) {
+        if (Array.isArray(objectToAdd)) {
             this.items = this.items.concat(objectToAdd);
         } else {
             this.items.push(objectToAdd);
         }
-    }
+    };
 
     /**
      * Retrieves collection item by index.
@@ -59,5 +61,10 @@
      */
     p.get = function (index) {
         return this.items[index];
-    }
+    };
+
+    p.toArray = function () {
+        return this.items.slice(0);
+    };
+
 })(typeof exports === 'undefined' ? this.kraken : exports);
