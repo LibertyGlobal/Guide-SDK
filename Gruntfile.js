@@ -130,6 +130,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
+    grunt.loadNpmTasks('grunt-contrib-jasmine');
+    grunt.loadNpmTasks('grunt-jsdoc');
 
     grunt.registerTask('test', [
         'jshint',
@@ -153,5 +155,8 @@ module.exports = function (grunt) {
         'build'
     ]);
 
-    grunt.registerTask('doc', ['jshint', 'jsdoc', 'concat', 'uglify']);
+    grunt.registerTask('doc',[
+        'jshint',
+        'jsdoc'
+    ]);
 };

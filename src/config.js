@@ -1,16 +1,19 @@
 /**
  * Global variables
- * @namespace kraken
- * @module config
+ * @namespace kraken.config
  */
 
 (function (exports) {
     exports.config = {
         /**
          * Represents URL of Kraken REST server.
-         * @const kraken.APIURL
+         * @const kraken.config.APIURL
          */
         APIURL: 'http://appdev.io/kraken/v2/schedule/',
+        /**
+         * Represents URL of Kraken REST server.
+         * @const kraken.config.region
+         */
         region: ''
     }
 })(typeof exports === 'undefined' ? this.kraken : exports);
