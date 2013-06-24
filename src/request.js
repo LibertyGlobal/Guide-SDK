@@ -6,6 +6,7 @@
 
 (function (kraken) {
     kraken.Request = function () {
+        //Initial request URL needed to make items observable and fire onChange event of entity
         this.initialRequestURL = '';
         this.nextBatchLink = '';
     }
@@ -14,23 +15,30 @@
 
     p.execute = function (URL, callback, nextBatchSteps) {
         var pipelineData = [];
+        this.initialRequestURL = URL;
         kraken.jsonp(URL, {}, this.createScopedCallback(callback, nextBatchSteps, pipelineData));
     }
 
-    p.proceedResponse = function (response, nextBatchSteps, pipelineData) {
+    p.proceedResponse = function (response, nextBatchSteps, pipelineData, callback) {
         pipelineData = pipelineData.concat(response.data);
-        this.nextBatchLinkURL = response.nextBatchLink.href;
-        nextBatchSteps--;
+        if (response.nextBatchLink) {
+            this.nextBatchLinkURL = response.nextBatchLink.href;
+        }
 
-        if ((nextBatchSteps > 0 || nextBatchSteps === undefined) && nextBatchLinkURL){
-            kraken.jsonp(this.nextBatchLinkURL, {}, this.createScopedCallback(callback, nextBatchSteps));
+        if (nextBatchSteps !== undefined) {
+            nextBatchSteps--;
+        }
+
+        if ((nextBatchSteps > 0 || nextBatchSteps === undefined) && this.nextBatchLinkURL) {
+            kraken.jsonp(this.nextBatchLinkURL, {}, this.createScopedCallback(callback, nextBatchSteps, pipelineData));
+        } else {
+            callback.bind(this)(pipelineData);
         }
     }
 
     p.createScopedCallback = function (callback, nextBatchSteps, pipelineData) {
         var scopedCallback = function (data) {
-            this.proceedResponse(data, nextBatchSteps, pipelineData);
-            callback.bind(this)(data);
+            this.proceedResponse(data, nextBatchSteps, pipelineData, callback);
         }
 
         return scopedCallback.bind(this);
