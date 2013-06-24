@@ -91,7 +91,7 @@
      */
     p.findAll = function (callback) {
         this._buildURLFromElements();
-        this._request.execute(this._requestURL, this._createScopedCallback(callback), 0);
+        this._request.execute(this._requestURL, this._createScopedCallback(callback));
         return this;
     }
 
@@ -102,7 +102,7 @@
     p._buildURLFromElements = function () {
         this._requestURL = kraken.config.APIURL;
 
-        if (kraken.config.region !== ''){
+        if (kraken.config.region !== '') {
             this._requestURL += 'regions/' + kraken.config.region + '/';
         }
 
@@ -119,7 +119,7 @@
     }
 
     p._processData = function (data) {
-        this.add(data.data);
+        this.add(data);
     }
 
     p._createScopedCallback = function (callback) {

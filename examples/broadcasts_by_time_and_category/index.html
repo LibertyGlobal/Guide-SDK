@@ -16,13 +16,10 @@
     kraken.config.region = 'NL';
 
     kraken.Broadcast.create()
-            .limit(5)
+            .limit(2)
             .fields(kraken.Broadcast.ID, kraken.Broadcast.TITLE, kraken.Broadcast.START, kraken.Broadcast.SYNOPSIS)
-            .findAll(onBroadcastsReceived);
+            .filter(kraken.Broadcast.START.greaterThan('2013-06-24T09:23Z'))
+            .findOne(onBroadcastsReceived);
 
-    /*
-        Seems to be more linear with other properties, but looks too verbose
-        kraken.Broadcast.create().filter(kraken.Broadcast.regionId.isEqual('NL-7-104')).one(onBroadcastsReceived);
-    */
 </script>
 </html>
