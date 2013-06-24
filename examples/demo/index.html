@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <link href="style.css" rel="stylesheet" type="text/css" media="all">
+    </head>
+    <body>
+
+        <div id="page">
+            <header>
+                <p id="logo">
+
+                </p>
+
+                <div class="block">
+                    Any
+                    <select
+                            data-bind="options: genres, optionsText: 'title', value: chosenGenre, disable: isBusy"></select>
+                    on TV <select
+                        data-bind="options: times, optionsText: 'title', value: chosenTime, disable: isBusy"></select>?
+                </div>
+            </header>
+
+            <div id="results">
+                <div class="block">
+                    <div data-bind="if: isBusy">
+                        <div class="spinner">
+                            <div class="bar1"></div>
+                            <div class="bar2"></div>
+                            <div class="bar3"></div>
+                            <div class="bar4"></div>
+                            <div class="bar5"></div>
+                            <div class="bar6"></div>
+                            <div class="bar7"></div>
+                            <div class="bar8"></div>
+                            <div class="bar9"></div>
+                            <div class="bar10"></div>
+                            <div class="bar11"></div>
+                            <div class="bar12"></div>
+                        </div>
+                    </div>
+
+                    <div data-bind="ifnot: isBusy">
+                        <ul data-bind="foreach: results">
+                            <li>
+                                <time data-bind="text: time"></time>
+                                <strong data-bind="text: title"></strong>
+                                on <span data-bind="text: channel"></span>
+                                <br>
+                                <small data-bind="text: synopsis"></small>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="code">
+                <div class="block">
+                    <pre data-bind="text: query"></pre>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="knockout.js"></script>
+        <script type="text/javascript" src="moment.js"></script>
+        <script type="text/javascript" src="../../lib/Kraken.js"></script>
+        <script type="text/javascript" src="demo.js"></script>
+        <script type="text/javascript">
+            kraken.config.region = 'NL';
+            ko.applyBindings(new Demo());
+        </script>
+    </body>
+</html>
