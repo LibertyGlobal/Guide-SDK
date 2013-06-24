@@ -1,7 +1,7 @@
 /**
  * Module for ajax, JSONP
- * @namespace utils
- * @module jsonp
+ * @namespace kraken
+ * @function kraken.jsonp
  */
 
 (function (kraken) {
