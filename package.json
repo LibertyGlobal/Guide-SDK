@@ -1,5 +1,6 @@
 {
-  "name": "Kraken",
+  "name": "kraken",
+  "title": "Kraken",
   "version": "0.0.0",
   "description": "KrakenAPI client library",
   "main": "",
@@ -14,7 +15,8 @@
     "grunt-contrib-jshint": "~0.6.0",
     "grunt-contrib-watch": "~0.4.4",
     "grunt-contrib-jasmine": "~0.5.1",
-    "grunt-template-jasmine-istanbul": "~0.2.4"
+    "grunt-template-jasmine-istanbul": "~0.2.4",
+    "grunt-jsdoc": "~3.2.0"
   },
   "scripts": {
     "test": "grunt test"
