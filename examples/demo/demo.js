@@ -54,8 +54,8 @@ Demo.prototype.initiateUpdate = function () {
     request.filter(kraken.Broadcast.END[end.operator](end.value));
     request.fields(kraken.Broadcast.TITLE, kraken.Broadcast.START, kraken.Broadcast.SYNOPSIS, 'channel.name');
 
-    request.findAll(function (response) {
-        self.results(ko.utils.arrayMap(response.data, function (item) {
+    request.findOne(function (response) {
+        self.results(ko.utils.arrayMap(response, function (item) {
             return {
                 title: item.title,
                 channel: item.channel.name,

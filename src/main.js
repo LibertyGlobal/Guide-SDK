@@ -1,5 +1,5 @@
-var Kraken = {};
-var K = Kraken;
+var kraken = {};
+var K = kraken;
 
 //= utils/utils
 

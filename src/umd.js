@@ -4,7 +4,7 @@
     } else if (typeof define === 'function' && define.amd) {
         define(factory);
     } else {
-        root.Kraken = root.K = factory();
+        root.kraken = root.K = factory();
     }
 }(this, function () {
 

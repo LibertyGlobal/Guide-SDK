@@ -11,12 +11,12 @@
     } else if (typeof define === 'function' && define.amd) {
         define(factory);
     } else {
-        root.Kraken = root.K = factory();
+        root.kraken = root.K = factory();
     }
 }(this, function () {
 
-    var Kraken = {};
-    var K = Kraken;
+    var kraken = {};
+    var K = kraken;
     
     /**
      * @namespace utils
@@ -376,7 +376,6 @@
     
         this._queryStringElements = [];
         this._requestURL = '';
-        this._baseURL = '';
         this._request = new Request();
     }
     
@@ -480,13 +479,7 @@
         }
     
         this._requestURL += this._baseURL;
-    
-        for (var i = 0; i < this._queryStringElements.length; i++) {
-            this._requestURL += this._queryStringElements[i];
-            if (i < this._queryStringElements.length - 1) {
-                this._requestURL += '&';
-            }
-        }
+        this._requestURL += this._queryStringElements.join('&');
     
         return this._requestURL;
     };

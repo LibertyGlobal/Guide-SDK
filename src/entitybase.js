@@ -10,7 +10,6 @@ function EntityBase() {
 
     this._queryStringElements = [];
     this._requestURL = '';
-    this._baseURL = '';
     this._request = new Request();
 }
 
@@ -114,13 +113,7 @@ EntityBase.prototype._buildURLFromElements = function () {
     }
 
     this._requestURL += this._baseURL;
-
-    for (var i = 0; i < this._queryStringElements.length; i++) {
-        this._requestURL += this._queryStringElements[i];
-        if (i < this._queryStringElements.length - 1) {
-            this._requestURL += '&';
-        }
-    }
+    this._requestURL += this._queryStringElements.join('&');
 
     return this._requestURL;
 };
