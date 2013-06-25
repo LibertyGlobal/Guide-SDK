@@ -1,5 +1,3 @@
-/* global EntityBase, NumericField, TextField */
-
 /**
  * Class describes broadcast-specific fields and request logic
  * @namespace kraken.entities

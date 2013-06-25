@@ -1,6 +1,3 @@
-/* exported EntityBase */
-/* global Request, Collection */
-
 /**
  * Represents base query-building logic
  * @namespace kraken

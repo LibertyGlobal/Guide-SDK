@@ -1,6 +1,3 @@
-/* exported TextField */
-/* global AbstractField: false */
-
 /**
  * Textual field supports equal and regexp matching.
  * @namespace kraken.fields

@@ -1,6 +1,3 @@
-/* exported Request */
-/* global jsonp */
-
 /**
  * Request is a property of entity which communicates to server and remember state of transmittion
  * @namespace kraken

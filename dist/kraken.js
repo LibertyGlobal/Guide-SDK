@@ -31,8 +31,6 @@
         }
     };
     
-    /* exported jsonp */
-    
     /**
      * Module for ajax, JSONP
      * @namespace kraken
@@ -146,9 +144,6 @@
         region: ''
     };
     
-    /* exported Request */
-    /* global jsonp */
-    
     /**
      * Request is a property of entity which communicates to server and remember state of transmittion
      * @namespace kraken
@@ -197,8 +192,6 @@
         return scopedCallback.bind(this);
     };
     
-    /* exported AbstractField */
-    
     /**
      * Abstract field with generic logic.
      * @namespace kraken.fields
@@ -216,9 +209,6 @@
     AbstractField.prototype._getStringForOperation = function (operator, operand) {
         return this._name + operator + operand;
     };
-    
-    /* exported NumericField */
-    /* global AbstractField: false */
     
     /**
      * Numeric field supports math comparing functions.
@@ -278,9 +268,6 @@
         return this._getStringForOperation('<=', operand);
     };
     
-    /* exported TextField */
-    /* global AbstractField: false */
-    
     /**
      * Textual field supports equal and regexp matching.
      * @namespace kraken.fields
@@ -311,8 +298,6 @@
     TextField.prototype.isMatching = function (operand) {
         return this._getStringForOperation('~', operand);
     };
-    
-    /* exported Collection */
     
     /**
      * Represents basic functionality for Kraken data sets.
@@ -378,9 +363,6 @@
     Collection.prototype.toArray = function () {
         return this.items.slice(0);
     };
-    
-    /* exported EntityBase */
-    /* global Request, Collection */
     
     /**
      * Represents base query-building logic
@@ -522,8 +504,6 @@
         return scopedCallback.bind(this);
     };
     
-    /* global EntityBase, NumericField, TextField */
-    
     /**
      * Class describes broadcast-specific fields and request logic
      * @namespace kraken.entities
@@ -552,8 +532,6 @@
     K.Broadcast.prototype._baseURL = 'broadcasts.json?';
     
     K.utils.addFactory(K.Broadcast);
-    /* global EntityBase, NumericField, TextField */
-    
     /**
      * Class describes channel-specific fields and request logic
      * @namespace kraken.entities
@@ -576,8 +554,6 @@
     
     K.Channel.prototype = Object.create(EntityBase.prototype);
     K.Channel.prototype._baseURL = 'channels.json?';
-    /* global EntityBase, NumericField, TextField */
-    
     /**
      * Class describes city-specific fields and request logic
      * @namespace kraken.entities
@@ -600,8 +576,6 @@
     
     K.City.prototype = Object.create(EntityBase.prototype);
     K.City.prototype._baseURL = 'regions.json';
-    /* global EntityBase, NumericField, TextField */
-    
     /**
      * Class describes country-specific fields and request logic
      * @namespace kraken.entities

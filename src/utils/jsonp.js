@@ -1,5 +1,3 @@
-/* exported jsonp */
-
 /**
  * Module for ajax, JSONP
  * @namespace kraken
