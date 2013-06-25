@@ -1,3 +1,5 @@
+/* exported Collection */
+
 /**
  * Represents basic functionality for Kraken data sets.
  *

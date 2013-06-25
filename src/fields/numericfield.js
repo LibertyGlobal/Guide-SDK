@@ -1,3 +1,6 @@
+/* exported NumericField */
+/* global AbstractField: false */
+
 /**
  * Numeric field supports math comparing functions.
  * @namespace kraken.fields

@@ -1,3 +1,6 @@
+/* exported Request */
+/* global jsonp */
+
 /**
  * Request is a property of entity which communicates to server and remember state of transmittion
  * @namespace kraken
@@ -6,6 +9,7 @@
 
 function Request() {
     //Initial request URL needed to make items observable and fire onChange event of entity
+    //noinspection JSUnusedGlobalSymbols
     this.initialRequestURL = '';
     this.nextBatchLink = '';
 }
@@ -13,6 +17,7 @@ function Request() {
 Request.prototype.execute = function (URL, callback, nextBatchSteps) {
     var pipelineData = [];
 
+    //noinspection JSUnusedGlobalSymbols
     this.initialRequestURL = URL;
 
     jsonp(URL, {}, this.createScopedCallback(callback, nextBatchSteps, pipelineData));
@@ -30,7 +35,7 @@ Request.prototype.proceedResponse = function (response, nextBatchSteps, pipeline
     }
 
     if ((nextBatchSteps > 0 || nextBatchSteps === undefined) && this.nextBatchLinkURL) {
-        K.jsonp(this.nextBatchLinkURL, {}, this.createScopedCallback(callback, nextBatchSteps, pipelineData));
+        jsonp(this.nextBatchLinkURL, {}, this.createScopedCallback(callback, nextBatchSteps, pipelineData));
     } else {
         callback.bind(this)(pipelineData);
     }

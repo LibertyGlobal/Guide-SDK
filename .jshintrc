@@ -1,0 +1,16 @@
+{
+    "asi": true,
+    "curly": true,
+    "eqnull": true,
+    "eqeqeq": true,
+    "undef": true,
+    "globals": {
+        "module": true,
+        "define": true,
+        "window": true,
+        "document": true,
+        "console": true,
+        "Kraken": true,
+        "K": true
+    }
+}

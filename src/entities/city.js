@@ -1,3 +1,5 @@
+/* global EntityBase, NumericField, TextField */
+
 /**
  * Class describes city-specific fields and request logic
  * @namespace kraken.entities

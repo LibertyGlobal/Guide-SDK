@@ -1,3 +1,5 @@
+/* global EntityBase, NumericField, TextField */
+
 /**
  * Class describes channel-specific fields and request logic
  * @namespace kraken.entities

@@ -1,3 +1,5 @@
+/* exported AbstractField */
+
 /**
  * Abstract field with generic logic.
  * @namespace kraken.fields

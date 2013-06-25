@@ -1,3 +1,5 @@
+/* exported jsonp */
+
 /**
  * Module for ajax, JSONP
  * @namespace kraken
@@ -50,9 +52,11 @@ var jsonp = (function () {
 
             var prefix = encodeURIComponent(parameter) + '=';
             var pars = queryString.split(/[&;]/g);
-            for (var i = pars.length; i-- > 0;)               //reverse iteration as may be destructive
-                if (pars[i].lastIndexOf(prefix, 0) !== -1)   //idiom for string.startsWith
+            for (var i = pars.length; i-- > 0;) {            //reverse iteration as may be destructive
+                if (pars[i].lastIndexOf(prefix, 0) !== -1) {  //idiom for string.startsWith
                     pars.splice(i, 1);
+                }
+            }
             url = urlBase + '?' + pars.join('&');
         }
         return url;
@@ -86,10 +90,6 @@ var jsonp = (function () {
 
         load(url + query + callbackName + '=' + uniqueName);
         return uniqueName;
-    }
-
-    function setDefaults(obj) {
-        config = obj;
     }
 
     return jsonp;

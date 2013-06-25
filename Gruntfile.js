@@ -46,15 +46,10 @@ module.exports = function (grunt) {
         },
 
         jshint: {
-            files: [ 'src/**/*.js', '!src/**/utils/**' ],
+//            files: [ 'src/**/*.js', '!src/**/utils/**' ],
+            files: [ 'src/**/*.js' ],
             options: {
-                asi: true,
-                globals: {
-                    jQuery: true,
-                    console: true,
-                    module: true,
-                    document: true
-                }
+                jshintrc: ".jshintrc"
             }
         },
 

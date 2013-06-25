@@ -1,3 +1,6 @@
+/* exported EntityBase */
+/* global Request, Collection */
+
 /**
  * Represents base query-building logic
  * @namespace kraken
@@ -49,7 +52,7 @@ EntityBase.prototype.sort = function (field, order) {
         order = 'asc';
     }
 
-    if (order == 'asc' || order == 'desc') {
+    if (order === 'asc' || order === 'desc') {
         this._addURLElement('sort=' + field + '(' + order + ')');
     } else {
         throw new Error('Invalid sort option, expecting "asc" or "desc"');
