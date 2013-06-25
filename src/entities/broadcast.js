@@ -5,26 +5,24 @@
  * @extends EntityBase
  */
 
-(function (kraken) {
-    kraken.Broadcast = function () {
-        kraken.EntityBase.call(this);
-        this._baseURL = 'broadcasts.json?';
-    }
+K.Broadcast = function () {
+    EntityBase.call(this);
+};
 
-    kraken.Broadcast.ID = new kraken.TextField('id');
-    kraken.Broadcast.TITLE = new kraken.TextField('title');
-    kraken.Broadcast.CATEGORY = new kraken.TextField('category');
-    kraken.Broadcast.EPISODE = new kraken.NumericField('episode');
-    kraken.Broadcast.SYNOPSIS = new kraken.TextField('synopsis');
-    kraken.Broadcast.START = new kraken.NumericField('start');
-    kraken.Broadcast.END = new kraken.NumericField('end');
-    kraken.Broadcast.YEAR = new kraken.TextField('year');
-    kraken.Broadcast.VIDEO_ID = new kraken.TextField('videoId');
-    kraken.Broadcast.SELF_LINK = new kraken.TextField('selfLink');
-    kraken.Broadcast.MORE_LINK = new kraken.TextField('moreLink');
-    kraken.Broadcast.OPENGRAPH_LINK = new kraken.TextField('opengraphLink');
+K.Broadcast.ID = new TextField('id');
+K.Broadcast.TITLE = new TextField('title');
+K.Broadcast.CATEGORY = new TextField('category');
+K.Broadcast.EPISODE = new NumericField('episode');
+K.Broadcast.SYNOPSIS = new TextField('synopsis');
+K.Broadcast.START = new NumericField('start');
+K.Broadcast.END = new NumericField('end');
+K.Broadcast.YEAR = new TextField('year');
+K.Broadcast.VIDEO_ID = new TextField('videoId');
+K.Broadcast.SELF_LINK = new TextField('selfLink');
+K.Broadcast.MORE_LINK = new TextField('moreLink');
+K.Broadcast.OPENGRAPH_LINK = new TextField('opengraphLink');
 
-    kraken.utils.addFactory(kraken.Broadcast);
+K.Broadcast.prototype = Object.create(EntityBase.prototype);
+K.Broadcast.prototype._baseURL = 'broadcasts.json?';
 
-    var p = kraken.Broadcast.prototype = Object.create(kraken.EntityBase.prototype);
-})(typeof exports === 'undefined' ? this.kraken : exports);
+K.utils.addFactory(K.Broadcast);

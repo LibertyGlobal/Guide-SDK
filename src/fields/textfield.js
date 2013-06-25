@@ -5,29 +5,26 @@
  * @extends AbstractField
  */
 
-(function (kraken) {
-    kraken.TextField = function (name) {
-        kraken.AbstractField.call(this, name);
-    }
+function TextField(name) {
+    AbstractField.call(this, name);
+}
 
-    var p = kraken.TextField.prototype = Object.create(kraken.AbstractField.prototype);
+TextField.prototype = Object.create(AbstractField.prototype);
 
-    /**
-     * Adds = filtering operation.
-     * @method TextField#equalTo
-     * @param operand
-     */
-    p.equalTo = function (operand) {
-        return this.getStringForOperation('=', operand);
-    }
+/**
+ * Adds = filtering operation.
+ * @method TextField#equalTo
+ * @param operand
+ */
+TextField.prototype.equalTo = function (operand) {
+    return this._getStringForOperation('=', operand);
+};
 
-    /**
-     * Adds ~ filtering operation. Says to backend to filter records by regexp.
-     * @method TextField#equalTo
-     * @param operand
-     */
-    p.isMatching = function (operand) {
-        return this.getStringForOperation('~', operand);
-    }
-
-})(typeof exports === 'undefined' ? this.kraken : exports);
+/**
+ * Adds ~ filtering operation. Says to backend to filter records by regexp.
+ * @method TextField#equalTo
+ * @param operand
+ */
+TextField.prototype.isMatching = function (operand) {
+    return this._getStringForOperation('~', operand);
+};

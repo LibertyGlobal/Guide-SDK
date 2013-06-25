@@ -5,20 +5,18 @@
  * @extends EntityBase
  */
 
-(function (kraken) {
-    kraken.Country = function () {
-        kraken.EntityBase.call(this);
-        this._baseURL = 'regions.json';
-    }
+K.Country = function () {
+    EntityBase.call(this);
+};
 
-    kraken.Country.ID = new kraken.TextField('id');
-    kraken.Country.NAME = new kraken.TextField('name');
-    kraken.Country.CHANNEL_LINEUP_LINK = new kraken.TextField('channelLineupLink');
-    kraken.Country.SELF_LINK = new kraken.TextField('selfLink');
-    kraken.Country.TOP_BROADCASTS_LINK = new kraken.TextField('topBroadcastsLink');
-    kraken.Country.TOP_VIDEOS_LINK = new kraken.TextField('topVideosLink');
+K.Country.ID = new TextField('id');
+K.Country.NAME = new TextField('name');
+K.Country.CHANNEL_LINEUP_LINK = new TextField('channelLineupLink');
+K.Country.SELF_LINK = new TextField('selfLink');
+K.Country.TOP_BROADCASTS_LINK = new TextField('topBroadcastsLink');
+K.Country.TOP_VIDEOS_LINK = new TextField('topVideosLink');
 
-    kraken.utils.addFactory(kraken.Country);
+K.utils.addFactory(K.Country);
 
-    var p = kraken.Country.prototype = Object.create(kraken.EntityBase.prototype);
-})(typeof exports === 'undefined' ? this.kraken : exports);
+K.Country.prototype = Object.create(EntityBase.prototype);
+K.Country.prototype._baseURL = 'regions.json';

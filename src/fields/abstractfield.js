@@ -4,19 +4,14 @@
  * @class AbstractField
  */
 
-(function (kraken) {
-    kraken.AbstractField = function (name) {
-        this.name = name;
-        this.operations = [];
-    }
+function AbstractField(name) {
+    this._name = name;
+}
 
-    var p = kraken.AbstractField.prototype;
+AbstractField.prototype.toString = function () {
+    return this._name;
+};
 
-    p.toString = function () {
-        return this.name;
-    }
-
-    p.getStringForOperation = function (operator, operand) {
-        return this.name + operator + operand;
-    }
-})(typeof exports === 'undefined' ? this.kraken : exports);
+AbstractField.prototype._getStringForOperation = function (operator, operand) {
+    return this._name + operator + operand;
+};

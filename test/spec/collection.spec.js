@@ -1,12 +1,12 @@
-describe('kraken.Collection', function () {
+describe('Collection', function () {
 
     describe('constructor()', function () {
         it('should instantiate the collection', function () {
-            expect(new kraken.Collection).toEqual(jasmine.any(kraken.Collection));
+            expect(new Collection).toEqual(jasmine.any(Collection));
         });
 
         it('should store the passed arguments as items', function () {
-            var sut = new kraken.Collection([ 'foo', 'bar' ]);
+            var sut = new Collection([ 'foo', 'bar' ]);
 
             expect(sut.toArray()).toEqual([ 'foo', 'bar' ]);
         });
@@ -15,7 +15,7 @@ describe('kraken.Collection', function () {
     describe('each()', function () {
         describe('when there are no items', function () {
             beforeEach(function () {
-                this.sut = new kraken.Collection();
+                this.sut = new Collection();
                 this.spy = this.spy = jasmine.createSpy('callback');
             });
 
@@ -28,7 +28,7 @@ describe('kraken.Collection', function () {
 
         describe('when there is one or more items', function () {
             beforeEach(function () {
-                this.sut = new kraken.Collection([ 'foo', 'bar' ]);
+                this.sut = new Collection([ 'foo', 'bar' ]);
                 this.spy = this.spy = jasmine.createSpy('callback');
             });
 
@@ -44,7 +44,7 @@ describe('kraken.Collection', function () {
 
     describe('where()', function () {
         beforeEach(function () {
-            this.sut = new kraken.Collection([
+            this.sut = new Collection([
                 { id: 1, foo: 100, bar: 200 },
                 { id: 2, foo: 100, bar: 200 },
                 { id: 3, foo: 200, bar: 200 },
@@ -73,7 +73,7 @@ describe('kraken.Collection', function () {
 
     describe('add()', function () {
         beforeEach(function () {
-            this.sut = new kraken.Collection([ 'foo', 'bar' ]);
+            this.sut = new Collection([ 'foo', 'bar' ]);
         });
 
         describe('when the item is an array', function () {
@@ -97,7 +97,7 @@ describe('kraken.Collection', function () {
 
     describe('get()', function () {
         beforeEach(function () {
-            this.sut = new kraken.Collection([ 'foo', 'bar' ]);
+            this.sut = new Collection([ 'foo', 'bar' ]);
         });
 
         describe('when the item at given index is available', function () {
@@ -115,7 +115,7 @@ describe('kraken.Collection', function () {
 
     describe('toArray()', function () {
         beforeEach(function () {
-            this.sut = new kraken.Collection([ 'foo', 'bar' ]);
+            this.sut = new Collection([ 'foo', 'bar' ]);
         });
 
         it('should return all items as an array', function () {

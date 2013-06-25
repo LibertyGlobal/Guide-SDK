@@ -5,20 +5,18 @@
  * @extends EntityBase
  */
 
-(function (kraken) {
-    kraken.Channel = function () {
-        kraken.EntityBase.call(this);
-        this._baseURL = 'channels.json?';
-    }
+K.Channel = function () {
+    EntityBase.call(this);
+};
 
-    kraken.Channel.ID = new kraken.TextField('id');
-    kraken.Channel.NAME = new kraken.TextField('name');
-    kraken.Channel.LOGICAL_POSITION = new kraken.NumericField('logicalPosition');
-    kraken.Channel.SELF_LINK = new kraken.TextField('selfLink');
-    kraken.Channel.BROADCASTS_LINK = new kraken.TextField('broadcastsLink');
-    kraken.Channel.OPENGRAPH_LINK = new kraken.TextField('opengraphLink');
+K.Channel.ID = new TextField('id');
+K.Channel.NAME = new TextField('name');
+K.Channel.LOGICAL_POSITION = new NumericField('logicalPosition');
+K.Channel.SELF_LINK = new TextField('selfLink');
+K.Channel.BROADCASTS_LINK = new TextField('broadcastsLink');
+K.Channel.OPENGRAPH_LINK = new TextField('opengraphLink');
 
-    kraken.utils.addFactory(kraken.Channel);
+K.utils.addFactory(K.Channel);
 
-    var p = kraken.Channel.prototype = Object.create(kraken.EntityBase.prototype);
-})(typeof exports === 'undefined' ? this.kraken : exports);
+K.Channel.prototype = Object.create(EntityBase.prototype);
+K.Channel.prototype._baseURL = 'channels.json?';

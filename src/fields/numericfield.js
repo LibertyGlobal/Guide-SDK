@@ -5,56 +5,53 @@
  * @extends AbstractField
  */
 
-(function (kraken) {
-    kraken.NumericField = function (name) {
-        kraken.AbstractField.call(this, name);
-    };
+function NumericField(name) {
+    AbstractField.call(this, name);
+}
 
-    var p = kraken.NumericField.prototype = Object.create(kraken.AbstractField.prototype);
+NumericField.prototype = Object.create(AbstractField.prototype);
 
-    /**
-     * Adds = filtering operation.
-     * @method NumericField#equalTo
-     * @param operand
-     */
-    p.equalTo = function (operand) {
-        return this.getStringForOperation('=', operand);
-    };
+/**
+ * Adds = filtering operation.
+ * @method NumericField#equalTo
+ * @param operand
+ */
+NumericField.prototype.equalTo = function (operand) {
+    return this._getStringForOperation('=', operand);
+};
 
-    /**
-     * Adds > filtering operation.
-     * @method NumericField#greaterThan
-     * @param operand
-     */
-    p.greaterThan = function (operand) {
-        return this.getStringForOperation('>', operand);
-    };
+/**
+ * Adds > filtering operation.
+ * @method NumericField#greaterThan
+ * @param operand
+ */
+NumericField.prototype.greaterThan = function (operand) {
+    return this._getStringForOperation('>', operand);
+};
 
-    /**
-     * Adds >= filtering operation.
-     * @method NumericField#greaterThan
-     * @param operand
-     */
-    p.greaterThanOrEqualTo = function (operand) {
-        return this.getStringForOperation('>=', operand);
-    };
+/**
+ * Adds >= filtering operation.
+ * @method NumericField#greaterThan
+ * @param operand
+ */
+NumericField.prototype.greaterThanOrEqualTo = function (operand) {
+    return this._getStringForOperation('>=', operand);
+};
 
-    /**
-     * Adds < filtering operation.
-     * @method NumericField#lessThan
-     * @param operand
-     */
-    p.lessThan = function (operand) {
-        return this.getStringForOperation('<', operand);
-    };
+/**
+ * Adds < filtering operation.
+ * @method NumericField#lessThan
+ * @param operand
+ */
+NumericField.prototype.lessThan = function (operand) {
+    return this._getStringForOperation('<', operand);
+};
 
-    /**
-     * Adds <= filtering operation.
-     * @method NumericField#lessThanOrEqualTo
-     * @param operand
-     */
-    p.lessThanOrEqualTo = function (operand) {
-        return this.getStringForOperation('<=', operand);
-    };
-
-})(typeof exports === 'undefined' ? this.kraken : exports);
+/**
+ * Adds <= filtering operation.
+ * @method NumericField#lessThanOrEqualTo
+ * @param operand
+ */
+NumericField.prototype.lessThanOrEqualTo = function (operand) {
+    return this._getStringForOperation('<=', operand);
+};

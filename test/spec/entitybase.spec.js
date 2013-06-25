@@ -1,19 +1,19 @@
 describe('EntityBase', function () {
 
     it('should be defined', function () {
-        expect(kraken.EntityBase).toBeDefined();
+        expect(EntityBase).toBeDefined();
     });
 
     describe('constructor()', function () {
-        it('should instantiate an object of type kraken.EntityBase', function () {
-            expect(new kraken.EntityBase).toEqual(jasmine.any(kraken.EntityBase));
+        it('should instantiate an object of type EntityBase', function () {
+            expect(new EntityBase).toEqual(jasmine.any(EntityBase));
         });
     });
 
     describe('limit()', function () {
         beforeEach(function () {
-            this.requestExecutionSpy = spyOn(kraken.Request.prototype, 'execute');
-            this.sut = new kraken.EntityBase();
+            this.requestExecutionSpy = spyOn(Request.prototype, 'execute');
+            this.sut = new EntityBase();
         });
 
         it('should return the object itself', function () {
@@ -31,8 +31,8 @@ describe('EntityBase', function () {
 
     describe('fields()', function () {
         beforeEach(function () {
-            this.requestExecutionSpy = spyOn(kraken.Request.prototype, 'execute');
-            this.sut = new kraken.EntityBase();
+            this.requestExecutionSpy = spyOn(Request.prototype, 'execute');
+            this.sut = new EntityBase();
         });
 
         it('should return the object itself', function () {
@@ -50,8 +50,8 @@ describe('EntityBase', function () {
 
     describe('sort()', function () {
         beforeEach(function () {
-            this.requestExecutionSpy = spyOn(kraken.Request.prototype, 'execute');
-            this.sut = new kraken.EntityBase();
+            this.requestExecutionSpy = spyOn(Request.prototype, 'execute');
+            this.sut = new EntityBase();
         });
 
         describe('when the order argument is "asc"', function () {
@@ -97,8 +97,8 @@ describe('EntityBase', function () {
 
     describe('filter()', function () {
         beforeEach(function () {
-            this.requestExecutionSpy = spyOn(kraken.Request.prototype, 'execute');
-            this.sut = new kraken.EntityBase();
+            this.requestExecutionSpy = spyOn(Request.prototype, 'execute');
+            this.sut = new EntityBase();
         });
 
         it('should return the object itself', function () {
@@ -119,11 +119,11 @@ describe('EntityBase', function () {
         // TODO: real tests
 
         beforeEach(function () {
-            this.requestExecutionSpy = spyOn(kraken.Request.prototype, 'execute');
-            this.sut = new kraken.EntityBase();
+            this.requestExecutionSpy = spyOn(Request.prototype, 'execute');
+            this.sut = new EntityBase();
         });
 
-        it('should invoke kraken.Request#execute() with the URL, callback, and limit arguments', function () {
+        it('should invoke Request#execute() with the URL, callback, and limit arguments', function () {
             this.sut.findOne();
 
             expect(this.requestExecutionSpy).toHaveBeenCalledWith(jasmine.any(String), jasmine.any(Function), 1);
@@ -134,12 +134,12 @@ describe('EntityBase', function () {
         // TODO: real tests
 
         beforeEach(function () {
-            this.requestExecutionSpy = spyOn(kraken.Request.prototype, 'execute');
-            this.sut = new kraken.EntityBase();
+            this.requestExecutionSpy = spyOn(Request.prototype, 'execute');
+            this.sut = new EntityBase();
         });
 
         describe('when fetching for the first time', function () {
-            it('should invoke kraken.Request#execute() with the URL, callback, and the limit arguments', function () {
+            it('should invoke Request#execute() with the URL, callback, and the limit arguments', function () {
                 this.sut.findNext();
 
                 expect(this.requestExecutionSpy).toHaveBeenCalledWith(jasmine.any(String), jasmine.any(Function), 1);
@@ -151,7 +151,7 @@ describe('EntityBase', function () {
                 this.sut._request.nextBatchLink = 'foo';
             });
 
-            it('should invoke kraken.Request#execute() with the "nextBatchLink" URL from previous response, callback, and the limit arguments', function () {
+            it('should invoke Request#execute() with the "nextBatchLink" URL from previous response, callback, and the limit arguments', function () {
                 this.sut.findNext();
 
                 expect(this.requestExecutionSpy).toHaveBeenCalledWith('foo', jasmine.any(Function), 1);
@@ -163,11 +163,11 @@ describe('EntityBase', function () {
         // TODO: real tests
 
         beforeEach(function () {
-            this.requestExecutionSpy = spyOn(kraken.Request.prototype, 'execute');
-            this.sut = new kraken.EntityBase();
+            this.requestExecutionSpy = spyOn(Request.prototype, 'execute');
+            this.sut = new EntityBase();
         });
 
-        it('should invoke kraken.Request#execute() with the URL and a callback', function () {
+        it('should invoke Request#execute() with the URL and a callback', function () {
             this.sut.findAll();
 
             expect(this.requestExecutionSpy).toHaveBeenCalledWith(jasmine.any(String), jasmine.any(Function));

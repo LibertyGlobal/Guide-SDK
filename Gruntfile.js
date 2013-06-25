@@ -20,21 +20,20 @@ module.exports = function (grunt) {
                 '\n'
             ].join('\n'),
             files: [
-                'src/core.js',
-                'src/config.js',
+                'src/main.js',
                 'src/utils/utils.js',
                 'src/utils/jsonp.js',
-                'src/utils/polyfills.js',
+                'src/config.js',
+                'src/request.js',
                 'src/fields/abstractfield.js',
                 'src/fields/numericfield.js',
                 'src/fields/textfield.js',
-                'src/request.js',
                 'src/collection.js',
                 'src/entitybase.js',
-                'src/entities/country.js',
-                'src/entities/city.js',
+                'src/entities/broadcast.js',
                 'src/entities/channel.js',
-                'src/entities/broadcast.js'
+                'src/entities/city.js',
+                'src/entities/country.js'
             ]
         },
 
@@ -86,19 +85,19 @@ module.exports = function (grunt) {
         watch: {
             all: {
                 files: [ '<%= meta.src %>/**/*.js', '<%= meta.spec %>/**/*.js' ],
-                tasks: [ 'test', 'build' ]
+                tasks: [ 'test' ]
             }
         },
 
-        concat: {
+        rig: {
             options: {
-                separator: '\n\n',
                 banner: '<%= meta.banner %>'
             },
 
-            build: {
-                src: '<%= meta.files %>',
-                dest: '<%= meta.dist %>/<%= meta.pkg.name %>.js'
+            compile: {
+                files: {
+                    '<%= meta.dist %>/<%= meta.pkg.name %>.js': '<%= meta.src %>/umd.js'
+                }
             }
         },
 
@@ -113,14 +112,23 @@ module.exports = function (grunt) {
             }
         },
 
-        jsdoc: {
-            dist: {
-                src: ['src/**/*.js', 'test/*.js'],
-                options: {
-                    destination: 'doc'
-                }
-            }
+        bumpup: {
+            options: {
+                dateformat: 'YYYY-MM-DD HH:mm',
+                normalize: true
+            },
+
+            files: [ 'package.json' ]
         }
+
+//        jsdoc: {
+//            dist: {
+//                src: ['src/**/*.js', 'test/*.js'],
+//                options: {
+//                    destination: 'doc'
+//                }
+//            }
+//        }
     });
 
 
@@ -130,8 +138,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
-    grunt.loadNpmTasks('grunt-contrib-jasmine');
-    grunt.loadNpmTasks('grunt-jsdoc');
+    grunt.loadNpmTasks('grunt-bumpup');
+    grunt.loadNpmTasks('grunt-rigger');
+//    grunt.loadNpmTasks('grunt-jsdoc');
 
     grunt.registerTask('test', [
         'jshint',
@@ -140,7 +149,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', [
         'clean',
-        'concat',
+        'rig',
         'uglify'
     ]);
 
@@ -156,7 +165,18 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('doc',[
-        'jshint',
         'jsdoc'
     ]);
+
+    grunt.registerTask('updatePackage', function () {
+        grunt.config.set('meta.pkg', grunt.file.readJSON('package.json'));
+    });
+
+    grunt.registerTask('release', function (type) {
+        type = type || 'patch';
+
+        grunt.task.run('bumpup:' + type);
+        grunt.task.run('updatePackage');
+        grunt.task.run('default');
+    });
 };
