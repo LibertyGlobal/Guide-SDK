@@ -15,7 +15,10 @@
     }
 }(this, function () {
 
+    //Defining global namespace
     var kraken = {};
+    
+    //Defining shortcut for namespace
     var K = kraken;
     
     /**
@@ -145,7 +148,7 @@
     };
     
     /**
-     * Request is a property of entity which communicates to server and remember state of transmittion
+     * Request is a class which is designed to be used as a property of entity to communicate with server and remember state of data transfer
      * @namespace kraken
      * @class Request
      */
@@ -193,7 +196,7 @@
     };
     
     /**
-     * Abstract field with generic logic.
+     * Abstract field with generic logic. Fields are used for sorting, filtering data also they represents entities data properties names.
      * @namespace kraken.fields
      * @class AbstractField
      */
@@ -211,7 +214,7 @@
     };
     
     /**
-     * Numeric field supports math comparing functions.
+     * Numeric field supports math comparing functions.  Fields are used for sorting, filtering data also they represents entities data properties names.
      * @namespace kraken.fields
      * @class NumericField
      * @extends AbstractField
@@ -269,10 +272,11 @@
     };
     
     /**
-     * Textual field supports equal and regexp matching.
+     * Textual field supports equal and regexp matching.  Fields are used for sorting, filtering data also they represents entities data properties names.
      * @namespace kraken.fields
      * @class TextField
      * @extends AbstractField
+     * @tutorial Typical case for using TextField is to find broadcasts in particular category. This will look like
      */
     
     function TextField(name) {
@@ -360,6 +364,10 @@
         return this.items[index];
     };
     
+    /**
+     * Returns data as array.
+     * @method Collection#toArray
+     */
     Collection.prototype.toArray = function () {
         return this.items.slice(0);
     };

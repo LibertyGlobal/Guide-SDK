@@ -59,6 +59,10 @@ Collection.prototype.get = function (index) {
     return this.items[index];
 };
 
+/**
+ * Returns data as array.
+ * @method Collection#toArray
+ */
 Collection.prototype.toArray = function () {
     return this.items.slice(0);
 };

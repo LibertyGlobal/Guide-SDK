@@ -1,4 +1,7 @@
+//Defining global namespace
 var kraken = {};
+
+//Defining shortcut for namespace
 var K = kraken;
 
 //= utils/utils
