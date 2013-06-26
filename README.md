@@ -1,4 +1,4 @@
-![Kraken beta logo](./img/logo-kraken.png)
+![Kraken beta logo](https://github.com/LibertyGlobal/sdk/blob/master/doc/img/logo-kraken.png?raw=true)
 
 Kraken JavaScript SDK
 =====================
