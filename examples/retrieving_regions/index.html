@@ -5,9 +5,10 @@
 </head>
 <body>
 </body>
-<script src="../../lib/Kraken.js"></script>
+<script src="../../dist/kraken.js"></script>
 <script>
     var onCountriesReceived = function(data){
+        console.log(data);
         this.each(function(element){
             console.log(element.id);
         })

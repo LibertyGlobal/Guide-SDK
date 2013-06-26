@@ -90,5 +90,38 @@ var jsonp = (function () {
         return uniqueName;
     }
 
-    return jsonp;
+    function nodeRequest(url, params, callback) {
+        var http = require('http');
+        var urlmodule = require('url');
+
+        var urlData = urlmodule.parse(url, true);
+
+        var options = {
+            host: urlData.hostname,
+            port: 80,
+            method: 'GET',
+            path: urlData.path
+        };
+
+        var temporaryCallback = function(res){
+            callback(res);
+        }
+
+        // do the GET request
+        var reqGet = http.request(options, function(res) {
+            res.on('data', function(d) {
+                temporaryCallback(JSON.parse(d));
+            });
+        });
+
+        reqGet.end();
+    }
+
+    var moduleResult = jsonp;
+
+    if (typeof module !== 'undefined' && module.exports) {
+        moduleResult = nodeRequest;
+    }
+
+    return moduleResult;
 })();
