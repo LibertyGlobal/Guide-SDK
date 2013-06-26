@@ -11,7 +11,7 @@ Explore [official page](http://appdev.io) for more information.
 Basic concepts
 --------------
 
-SDK contains few public classes ,representing API entities:
+SDK contains few public classes representing API entities:
 
 * Channel
 * Broadcast
@@ -32,7 +32,7 @@ This code creates new Country object and gets all records without filtering or s
 
 
 ####Limiting response size####
-You are free to get only first two countries. Let`s modify our example:
+You are free to get only first two countries. Let`s modify our example.
 
     kraken.Country.create()
     .limit(2)
@@ -46,21 +46,21 @@ API supports paging and to work with it on client side three data retrieval meth
 * __findNext__ - retrieves next page of data,
 * __findAll__ - retrieves all data pages available for your request.
 
-Maximum possible response (page) size is 128 records, default size is the same.
+Maximum possible response (page) size is 128 records and default size is the same.
 You can set particular page size by using `limit()`.
 
 
 ####Specifying fields to retrieve####
-It`s quite important to get only data you really need, so please, specify fields as following:
+It`s quite important to get only data you really need, so please, specify fields as following.
 
     kraken.config.region = 'NL';
     kraken.Channel.create()
-    .fields(kraken.Channel.title, kraken.Channel.id)
+    .fields(kraken.Channel.TITLE, kraken.Channel.ID)
     .findAll(dataReceivedCallback);
 
 
 ####Filtering####
-Most advanced tool for specific data retrieval is filtering. In this example we will get only broadcasts with category equal to sports:
+Most advanced tool for specific data retrieval is filtering. In this example we will get only broadcasts with category equal to sports.
 
     kraken.config.region = 'NL';
     kraken.Broadcast.create()
@@ -69,7 +69,7 @@ Most advanced tool for specific data retrieval is filtering. In this example we 
 
 
 ####Sorting####
-This will get all channels sorted by title.
+This will get all channels sorted by title:
 
     kraken.config.region = 'NL';
     kraken.Channel.create()
