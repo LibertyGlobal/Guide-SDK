@@ -26,68 +26,69 @@
     <section>
         <article>
             <pre class="prettyprint source"><code>/**
- * Represents basic functionality for Kraken data sets
+ * Represents basic functionality for Kraken data sets.
+ *
  * @namespace kraken
  * @class Collection
  */
 
-(function (kraken) {
-    kraken.Collection = function () {
-        this.items = [];
-    }
+function Collection(items) {
+    this.items = [];
 
-    var p = kraken.Collection.prototype;
-
-    /**
-     * Applies function to every element in collection.
-     * @method Collection#each
-     * @param functionToApply Function to apply to elements.
-     */
-    p.each = function (functionToApply) {
-        for (var i = 0; i &lt; this.items.length; i++) {
-            functionToApply.apply(this, [this.items[i], i]);
-        }
+    if (typeof items !== 'undefined') {
+        this.add(items);
     }
+}
 
-    /**
-     * Returns all records which matches conditionalObject. For example if it is {a: 1} - method will return only objects from collection where 'a' property is present and is equal to 1
-     * @method Collection#where
-     * @param conditionalObject Object to match.
-     */
-    p.where = function (conditionObject) {
-        //TODO test
-        var result = [];
-        this.each(function (dataObject) {
-            for (var i in conditionObject) {
-                if (dataObject[i] === conditionObject[i]) {
-                    result.push(dataObject[i]);
-                }
-            }
-        })
-    }
+/**
+ * Applies function to every element in collection.
+ * @method Collection#each
+ * @param functionToApply Function to apply to elements.
+ */
+Collection.prototype.each = function (functionToApply) {
+    this.items.forEach(functionToApply);
+};
 
-    /**
-     * Adds object or array to collection.
-     * @method Collection#add
-     * @param {Object|Array} objectToAdd Object or array to add to collection.
-     */
-    p.add = function (objectToAdd) {
-        if (objectToAdd instanceof Array) {
-            this.items = this.items.concat(objectToAdd);
-        } else {
-            this.items.push(objectToAdd);
-        }
-    }
+/**
+ * Returns all records which matches conditionalObject. For example if it is {a: 1} - method will return only objects from collection where 'a' property is present and is equal to 1
+ * @method Collection#where
+ * @param {Object} filter Filter descriptor object.
+ */
+Collection.prototype.where = function (filter) {
+    var keys = Object.keys(filter);
 
-    /**
-     * Retrieves collection item by index.
-     * @method Collection#get
-     * @param {Number} index Index of object to retrieve from collection.
-     */
-    p.get = function (index) {
-        return this.items[index];
+    return this.items.filter(function (item) {
+        return keys.every(function (key) {
+            return item.hasOwnProperty(key) && item[key] === filter[key];
+        });
+    });
+};
+
+/**
+ * Adds object or array to collection.
+ * @method Collection#add
+ * @param {Object|Array} objectToAdd Object or array to add to collection.
+ */
+Collection.prototype.add = function (objectToAdd) {
+    if (Object.prototype.toString.call(objectToAdd) === '[object Array]') {
+        this.items = this.items.concat(objectToAdd);
+    } else {
+        this.items.push(objectToAdd);
     }
-})(typeof exports === 'undefined' ? this.kraken : exports);</code></pre>
+};
+
+/**
+ * Retrieves collection item by index.
+ * @method Collection#get
+ * @param {Number} index Index of object to retrieve from collection.
+ */
+Collection.prototype.get = function (index) {
+    return this.items[index];
+};
+
+Collection.prototype.toArray = function () {
+    return this.items.slice(0);
+};</code></pre>
         </article>
     </section>
 
@@ -97,13 +98,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="module-polyfills.html">polyfills</a></li><li><a href="module-utils.html">utils</a></li></ul><h3>Classes</h3><ul><li><a href="AbstractField.html">AbstractField</a></li><li><a href="Broadcast.html">Broadcast</a></li><li><a href="Channel.html">Channel</a></li><li><a href="City.html">City</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Country.html">Country</a></li><li><a href="EntityBase.html">EntityBase</a></li><li><a href="NumericField.html">NumericField</a></li><li><a href="Request.html">Request</a></li><li><a href="TextField.html">TextField</a></li></ul><h3>Namespaces</h3><ul><li><a href="kraken.html">kraken</a></li><li><a href="kraken.config.html">config</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="module-utils.html">utils</a></li></ul><h3>Classes</h3><ul><li><a href="AbstractField.html">AbstractField</a></li><li><a href="Broadcast.html">Broadcast</a></li><li><a href="Channel.html">Channel</a></li><li><a href="City.html">City</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Country.html">Country</a></li><li><a href="EntityBase.html">EntityBase</a></li><li><a href="NumericField.html">NumericField</a></li><li><a href="Request.html">Request</a></li><li><a href="TextField.html">TextField</a></li></ul><h3>Namespaces</h3><ul><li><a href="kraken.config.html">config</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.0-dev</a> on Mon Jun 24 2013 15:04:59 GMT+0200 (CEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.0-dev</a> on Wed Jun 26 2013 17:13:49 GMT+0200 (CEST)
 </footer>
 
 <script> prettyPrint(); </script>

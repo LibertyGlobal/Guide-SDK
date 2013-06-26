@@ -1,5 +1,5 @@
 /**
- * Numeric field supports math comparing functions.
+ * Numeric field supports math comparing functions.  Fields are used for sorting, filtering data also they represents entities data properties names.
  * @namespace kraken.fields
  * @class NumericField
  * @extends AbstractField

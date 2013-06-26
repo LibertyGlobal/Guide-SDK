@@ -31,98 +31,94 @@
  * @function kraken.jsonp
  */
 
-(function (kraken) {
-    kraken.jsonp = (function () {
-        var counter = 0, head, window = this, config = {};
+var jsonp = (function () {
+    var counter = 0, head, window = this, config = {};
 
-        function load(url, pfnError) {
-            var script = document.createElement('script'),
-                done = false;
+    function load(url, pfnError) {
+        var script = document.createElement('script'),
+            done = false;
 
-            script.src = url;
-            script.async = true;
+        script.src = url;
+        script.async = true;
 
-            var errorHandler = pfnError || config.error;
-            if (typeof errorHandler === 'function') {
-                script.onerror = function (ex) {
-                    errorHandler({url: url, event: ex});
-                };
-            }
-
-            script.onload = script.onreadystatechange = function () {
-                if (!done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
-                    done = true;
-                    script.onload = script.onreadystatechange = null;
-                    if (script && script.parentNode) {
-                        script.parentNode.removeChild(script);
-                    }
-                }
+        var errorHandler = pfnError || config.error;
+        if (typeof errorHandler === 'function') {
+            script.onerror = function (ex) {
+                errorHandler({url: url, event: ex});
             };
-
-            if (!head) {
-                head = document.getElementsByTagName('head')[0];
-            }
-            head.appendChild(script);
         }
 
-        function encode(str) {
-            return encodeURIComponent(str);
-        }
-
-        function removeParameter(url, parameter) {
-            var urlparts = url.split('?');
-
-            if (urlparts.length >= 2) {
-                var urlBase = urlparts.shift(); //get first part, and remove from array
-                var queryString = urlparts.join("?"); //join it back up
-
-                var prefix = encodeURIComponent(parameter) + '=';
-                var pars = queryString.split(/[&;]/g);
-                for (var i = pars.length; i-- > 0;)               //reverse iteration as may be destructive
-                    if (pars[i].lastIndexOf(prefix, 0) !== -1)   //idiom for string.startsWith
-                        pars.splice(i, 1);
-                url = urlBase + '?' + pars.join('&');
-            }
-            return url;
-        }
-
-        function jsonp(url, params, callback, callbackName) {
-            //url = escape(url);
-
-            var query = (url || '').indexOf('?') === -1 ? '?' : '&', key;
-
-            callbackName = (callbackName || config.callbackName || 'callback');
-            var uniqueName = callbackName + "_json" + (++counter);
-
-            url = removeParameter(url, callbackName);
-
-            params = params || {};
-            for (key in params) {
-                if (params.hasOwnProperty(key)) {
-                    query += encode(key) + "=" + encode(params[key]) + "&";
+        script.onload = script.onreadystatechange = function () {
+            if (!done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
+                done = true;
+                script.onload = script.onreadystatechange = null;
+                if (script && script.parentNode) {
+                    script.parentNode.removeChild(script);
                 }
             }
+        };
 
-            window[ uniqueName ] = function (data) {
-                callback(data);
-                try {
-                    delete window[ uniqueName ];
-                } catch (e) {
+        if (!head) {
+            head = document.getElementsByTagName('head')[0];
+        }
+        head.appendChild(script);
+    }
+
+    function encode(str) {
+        return encodeURIComponent(str);
+    }
+
+    function removeParameter(url, parameter) {
+        var urlparts = url.split('?');
+
+        if (urlparts.length >= 2) {
+            var urlBase = urlparts.shift(); //get first part, and remove from array
+            var queryString = urlparts.join("?"); //join it back up
+
+            var prefix = encodeURIComponent(parameter) + '=';
+            var pars = queryString.split(/[&;]/g);
+            for (var i = pars.length; i-- > 0;) {            //reverse iteration as may be destructive
+                if (pars[i].lastIndexOf(prefix, 0) !== -1) {  //idiom for string.startsWith
+                    pars.splice(i, 1);
                 }
-                window[ uniqueName ] = null;
-            };
+            }
+            url = urlBase + '?' + pars.join('&');
+        }
+        return url;
+    }
 
-            load(url + query + callbackName + '=' + uniqueName);
-            return uniqueName;
+    function jsonp(url, params, callback, callbackName) {
+        //url = escape(url);
+
+        var query = (url || '').indexOf('?') === -1 ? '?' : '&', key;
+
+        callbackName = (callbackName || config.callbackName || 'callback');
+        var uniqueName = callbackName + "_json" + (++counter);
+
+        url = removeParameter(url, callbackName);
+
+        params = params || {};
+        for (key in params) {
+            if (params.hasOwnProperty(key)) {
+                query += encode(key) + "=" + encode(params[key]) + "&";
+            }
         }
 
-        function setDefaults(obj) {
-            config = obj;
-        }
+        window[ uniqueName ] = function (data) {
+            callback(data);
+            try {
+                delete window[ uniqueName ];
+            } catch (e) {
+            }
+            window[ uniqueName ] = null;
+        };
 
-        return jsonp;
-    })();
-})(typeof exports === 'undefined' ? this.kraken : exports);</code></pre>
+        load(url + query + callbackName + '=' + uniqueName);
+        return uniqueName;
+    }
+
+    return jsonp;
+})();</code></pre>
         </article>
     </section>
 
@@ -132,13 +128,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="module-polyfills.html">polyfills</a></li><li><a href="module-utils.html">utils</a></li></ul><h3>Classes</h3><ul><li><a href="AbstractField.html">AbstractField</a></li><li><a href="Broadcast.html">Broadcast</a></li><li><a href="Channel.html">Channel</a></li><li><a href="City.html">City</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Country.html">Country</a></li><li><a href="EntityBase.html">EntityBase</a></li><li><a href="NumericField.html">NumericField</a></li><li><a href="Request.html">Request</a></li><li><a href="TextField.html">TextField</a></li></ul><h3>Namespaces</h3><ul><li><a href="kraken.html">kraken</a></li><li><a href="kraken.config.html">config</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="module-utils.html">utils</a></li></ul><h3>Classes</h3><ul><li><a href="AbstractField.html">AbstractField</a></li><li><a href="Broadcast.html">Broadcast</a></li><li><a href="Channel.html">Channel</a></li><li><a href="City.html">City</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Country.html">Country</a></li><li><a href="EntityBase.html">EntityBase</a></li><li><a href="NumericField.html">NumericField</a></li><li><a href="Request.html">Request</a></li><li><a href="TextField.html">TextField</a></li></ul><h3>Namespaces</h3><ul><li><a href="kraken.config.html">config</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.0-dev</a> on Mon Jun 24 2013 15:04:59 GMT+0200 (CEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.0-dev</a> on Wed Jun 26 2013 17:13:49 GMT+0200 (CEST)
 </footer>
 
 <script> prettyPrint(); </script>

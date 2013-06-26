@@ -1,5 +1,5 @@
 /**
- * Abstract field with generic logic.
+ * Abstract field with generic logic. Fields are used for sorting, filtering data also they represents entities data properties names.
  * @namespace kraken.fields
  * @class AbstractField
  */

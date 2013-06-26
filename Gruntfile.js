@@ -46,7 +46,7 @@ module.exports = function (grunt) {
         },
 
         jshint: {
-//            files: [ 'src/**/*.js', '!src/**/utils/**' ],
+//          files: [ 'src/**/*.js', '!src/**/utils/**' ],
             files: [ 'src/**/*.js' ],
             options: {
                 jshintrc: ".jshintrc"
@@ -114,18 +114,17 @@ module.exports = function (grunt) {
             },
 
             files: [ 'package.json' ]
+        },
+
+        jsdoc: {
+            dist: {
+                src: ['README.md' ,'src/**/*.js', 'test/*.js'],
+                options: {
+                    destination: 'doc'
+                }
+            }
         }
-
-//        jsdoc: {
-//            dist: {
-//                src: ['src/**/*.js', 'test/*.js'],
-//                options: {
-//                    destination: 'doc'
-//                }
-//            }
-//        }
     });
-
 
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-watch');
@@ -135,7 +134,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-bumpup');
     grunt.loadNpmTasks('grunt-rigger');
-//    grunt.loadNpmTasks('grunt-jsdoc');
+    grunt.loadNpmTasks('grunt-jsdoc');
 
     grunt.registerTask('test', [
         'jshint',

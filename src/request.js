@@ -1,5 +1,5 @@
 /**
- * Request is a property of entity which communicates to server and remember state of transmittion
+ * Request is a class which is designed to be used as a property of entity to communicate with server and remember state of data transfer
  * @namespace kraken
  * @class Request
  */
