@@ -1,12 +1,10 @@
 ![Kraken beta logo](https://github.com/LibertyGlobal/sdk/blob/master/doc/img/logo-kraken.png?raw=true)
-
 Kraken JavaScript SDK
 =====================
 
 SDK provides simple way to retrieve TV schedule data.
 
 Explore [official page](http://appdev.io) for more information.
-Kraken SDK is opensourced on [Github](https://github.com/LibertyGlobal/sdk).
 
 
 Basic concepts
