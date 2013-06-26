@@ -16,7 +16,8 @@ describe('TextField', function(){
 
         it('Should inherit from AbstractField properly', function () {
             var fieldToTest = new TextField(fieldName);
-            expect(fieldToTest._getStringForOperation).toBeDefined() && expect(fieldToTest.toString()).toEqual(fieldName);
+            expect(fieldToTest._getStringForOperation).toBeDefined();
+            expect(fieldToTest.toString()).toEqual(fieldName);
         });
     });
 
