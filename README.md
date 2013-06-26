@@ -1,4 +1,5 @@
 ![Kraken beta logo](https://github.com/LibertyGlobal/sdk/blob/master/doc/img/logo-kraken.png?raw=true)
+
 Kraken JavaScript SDK
 =====================
 
@@ -33,7 +34,9 @@ This code creates new Country object and gets all records without filtering or s
 ####Limiting response size####
 You are free to get only first two countries. Let`s modify our example:
 
-    kraken.Country.create().limit(2).findOne(dataReceivedCallback);
+    kraken.Country.create()
+    .limit(2)
+    .findOne(dataReceivedCallback);
 
 
 ####Paging and difference between findOne, findAll and findNext methods####
