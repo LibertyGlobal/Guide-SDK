@@ -596,49 +596,26 @@
     K.Channel.prototype = Object.create(EntityBase.prototype);
     K.Channel.prototype._baseURL = 'channels.json?';
     /**
-     * Class describes city-specific fields and request logic
+     * Encapsulates Region-specific fields and request logic
      * @namespace kraken.entities
-     * @class City
+     * @class Region
      * @extends EntityBase
      */
-    
-    K.City = function () {
+    K.Region = function () {
         EntityBase.call(this);
     };
     
-    K.City.ID = new TextField('id');
-    K.City.NAME = new TextField('name');
-    K.City.CHANNEL_LINEUP_LINK = new TextField('channelLineupLink');
-    K.City.SELF_LINK = new TextField('selfLink');
-    K.City.TOP_BROADCASTS_LINK = new TextField('topBroadcastsLink');
-    K.City.TOP_VIDEOS_LINK = new TextField('topVideosLink');
+    K.Region.ID = new TextField('id');
+    K.Region.NAME = new TextField('name');
+    K.Region.CHANNEL_LINEUP_LINK = new TextField('channelLineupLink');
+    K.Region.SELF_LINK = new TextField('selfLink');
+    K.Region.TOP_BROADCASTS_LINK = new TextField('topBroadcastsLink');
+    K.Region.TOP_VIDEOS_LINK = new TextField('topVideosLink');
     
-    K.utils.addFactory(K.City);
+    K.utils.addFactory(K.Region);
     
-    K.City.prototype = Object.create(EntityBase.prototype);
-    K.City.prototype._baseURL = 'regions.json';
-    /**
-     * Class describes country-specific fields and request logic
-     * @namespace kraken.entities
-     * @class Country
-     * @extends EntityBase
-     */
-    
-    K.Country = function () {
-        EntityBase.call(this);
-    };
-    
-    K.Country.ID = new TextField('id');
-    K.Country.NAME = new TextField('name');
-    K.Country.CHANNEL_LINEUP_LINK = new TextField('channelLineupLink');
-    K.Country.SELF_LINK = new TextField('selfLink');
-    K.Country.TOP_BROADCASTS_LINK = new TextField('topBroadcastsLink');
-    K.Country.TOP_VIDEOS_LINK = new TextField('topVideosLink');
-    
-    K.utils.addFactory(K.Country);
-    
-    K.Country.prototype = Object.create(EntityBase.prototype);
-    K.Country.prototype._baseURL = 'regions.json';
+    K.Region.prototype = Object.create(EntityBase.prototype);
+    K.Region.prototype._baseURL = 'regions.json?';
 
     return K;
 
