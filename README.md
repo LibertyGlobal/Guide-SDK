@@ -5,7 +5,7 @@ Kraken JavaScript SDK
 
 SDK provides simple way to retrieve TV schedule data.
 
-Explore [official page](http://appdev.io) for more information.
+Explore [official page](http://appdev.io) and [JSDoc](http://htmlpreview.github.io/?http://raw.github.com/LibertyGlobal/Kraken-SDK/master/doc/index.html) for more information.
 
 
 Basic concepts
