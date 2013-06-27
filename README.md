@@ -25,7 +25,7 @@ Usage examples
 --------------
 
 ####Basic example####
-Let`s look at most basic example - getting list of countries supported by API.
+Let's look at most basic example - getting list of countries supported by API.
 This code creates new Country object and gets all records without filtering or sorting.
 
     kraken.Country.create().findAll(dataReceivedCallback);
