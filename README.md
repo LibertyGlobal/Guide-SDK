@@ -51,7 +51,7 @@ You can set particular page size by using `limit()`.
 
 
 ####Specifying fields to retrieve####
-It`s quite important to get only data you really need, so please, specify fields as following.
+It's quite important to get only data you really need, so please, specify fields as following.
 
     kraken.config.region = 'NL';
     kraken.Channel.create()
