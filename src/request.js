@@ -17,7 +17,7 @@ Request.prototype.execute = function (URL, callback, nextBatchSteps) {
     //noinspection JSUnusedGlobalSymbols
     this.initialRequestURL = URL;
 
-    jsonp(URL, {}, this.createScopedCallback(callback, nextBatchSteps, pipelineData));
+    requestTransport(URL, {}, this.createScopedCallback(callback, nextBatchSteps, pipelineData));
 };
 
 Request.prototype.proceedResponse = function (response, nextBatchSteps, pipelineData, callback) {
@@ -32,7 +32,7 @@ Request.prototype.proceedResponse = function (response, nextBatchSteps, pipeline
     }
 
     if ((nextBatchSteps > 0 || nextBatchSteps === undefined) && this.nextBatchLinkURL) {
-        jsonp(this.nextBatchLinkURL, {}, this.createScopedCallback(callback, nextBatchSteps, pipelineData));
+        requestTransport(this.nextBatchLinkURL, {}, this.createScopedCallback(callback, nextBatchSteps, pipelineData));
     } else {
         callback.bind(this)(pipelineData);
     }

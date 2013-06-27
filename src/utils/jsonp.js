@@ -1,10 +1,4 @@
-/**
- * Module for ajax, JSONP
- * @namespace kraken
- * @function kraken.jsonp
- */
-
-var jsonp = (function () {
+var jsonp = function () {
     var counter = 0, head, window = this, config = {};
 
     function load(url, pfnError) {
@@ -90,38 +84,5 @@ var jsonp = (function () {
         return uniqueName;
     }
 
-    function nodeRequest(url, params, callback) {
-        var http = require('http');
-        var urlmodule = require('url');
-
-        var urlData = urlmodule.parse(url, true);
-
-        var options = {
-            host: urlData.hostname,
-            port: 80,
-            method: 'GET',
-            path: urlData.path
-        };
-
-        var temporaryCallback = function(res){
-            callback(res);
-        }
-
-        // do the GET request
-        var reqGet = http.request(options, function(res) {
-            res.on('data', function(d) {
-                temporaryCallback(JSON.parse(d));
-            });
-        });
-
-        reqGet.end();
-    }
-
-    var moduleResult = jsonp;
-
-    if (typeof module !== 'undefined' && module.exports) {
-        moduleResult = nodeRequest;
-    }
-
-    return moduleResult;
-})();
+    return jsonp;
+};

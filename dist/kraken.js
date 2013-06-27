@@ -34,13 +34,7 @@
         }
     };
     
-    /**
-     * Module for ajax, JSONP
-     * @namespace kraken
-     * @function kraken.jsonp
-     */
-    
-    var jsonp = (function () {
+    var jsonp = function () {
         var counter = 0, head, window = this, config = {};
     
         function load(url, pfnError) {
@@ -126,6 +120,10 @@
             return uniqueName;
         }
     
+        return jsonp;
+    };
+    
+    var nodeRequest = function(){
         function nodeRequest(url, params, callback) {
             var http = require('http');
             var urlmodule = require('url');
@@ -139,13 +137,12 @@
                 path: urlData.path
             };
     
-            var temporaryCallback = function(res){
+            var temporaryCallback = function (res) {
                 callback(res);
             }
     
-            // do the GET request
-            var reqGet = http.request(options, function(res) {
-                res.on('data', function(d) {
+            var reqGet = http.request(options, function (res) {
+                res.on('data', function (d) {
                     temporaryCallback(JSON.parse(d));
                 });
             });
@@ -153,14 +150,24 @@
             reqGet.end();
         }
     
-        var moduleResult = jsonp;
+        return nodeRequest;
+    };
     
+    /**
+     * Determines are we in NodeJS or not and returns right transport module.
+     * @namespace kraken
+     * @function kraken.requestTransport
+     */
+    
+    var chooseTransport = function () {
         if (typeof module !== 'undefined' && module.exports) {
-            moduleResult = nodeRequest;
+            return nodeRequest();
+        } else {
+            return jsonp();
         }
+    };
     
-        return moduleResult;
-    })();
+    var requestTransport = chooseTransport();
     
     /**
      * Global variables
@@ -199,7 +206,7 @@
         //noinspection JSUnusedGlobalSymbols
         this.initialRequestURL = URL;
     
-        jsonp(URL, {}, this.createScopedCallback(callback, nextBatchSteps, pipelineData));
+        requestTransport(URL, {}, this.createScopedCallback(callback, nextBatchSteps, pipelineData));
     };
     
     Request.prototype.proceedResponse = function (response, nextBatchSteps, pipelineData, callback) {
@@ -214,7 +221,7 @@
         }
     
         if ((nextBatchSteps > 0 || nextBatchSteps === undefined) && this.nextBatchLinkURL) {
-            jsonp(this.nextBatchLinkURL, {}, this.createScopedCallback(callback, nextBatchSteps, pipelineData));
+            requestTransport(this.nextBatchLinkURL, {}, this.createScopedCallback(callback, nextBatchSteps, pipelineData));
         } else {
             callback.bind(this)(pipelineData);
         }

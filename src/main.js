@@ -8,6 +8,10 @@ var K = kraken;
 
 //= utils/jsonp
 
+//= utils/noderequest
+
+//= utils/requesttransport
+
 //= config
 
 //= request

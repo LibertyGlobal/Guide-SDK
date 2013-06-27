@@ -23,6 +23,8 @@ module.exports = function (grunt) {
                 'src/main.js',
                 'src/utils/utils.js',
                 'src/utils/jsonp.js',
+                'src/utils/noderequest.js',
+                'src/utils/requesttransport.js',
                 'src/config.js',
                 'src/request.js',
                 'src/fields/abstractfield.js',
