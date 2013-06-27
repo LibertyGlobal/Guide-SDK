@@ -52,6 +52,9 @@ module.exports = function (grunt) {
                 specs: '<%= meta.spec %>/**/*.spec.js',
                 helpers: '<%= meta.test %>/helpers/*.js',
                 keepRunner: true,
+		junit: {
+			path: 'junit/'
+		},
                 outfile: 'SpecRunner.html'
             },
 
