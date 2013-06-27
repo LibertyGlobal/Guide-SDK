@@ -21,21 +21,13 @@ module.exports = function (grunt) {
             ].join('\n'),
             files: [
                 'src/main.js',
-                'src/utils/utils.js',
-                'src/utils/jsonp.js',
-                'src/utils/noderequest.js',
-                'src/utils/requesttransport.js',
+                'src/utils/*.js',
                 'src/config.js',
                 'src/request.js',
-                'src/fields/abstractfield.js',
-                'src/fields/numericfield.js',
-                'src/fields/textfield.js',
+                'src/fields/*.js',
                 'src/collection.js',
                 'src/entitybase.js',
-                'src/entities/broadcast.js',
-                'src/entities/channel.js',
-                'src/entities/city.js',
-                'src/entities/country.js'
+                'src/entities/*.js'
             ]
         },
 
