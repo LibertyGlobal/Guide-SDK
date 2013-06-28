@@ -1,6 +1,5 @@
 module.exports = function (grunt) {
 
-    // Project configuration.
     grunt.initConfig({
         meta: {
             pkg: grunt.file.readJSON('package.json'),
@@ -40,7 +39,6 @@ module.exports = function (grunt) {
         },
 
         jshint: {
-//          files: [ 'src/**/*.js', '!src/**/utils/**' ],
             files: [ 'src/**/*.js' ],
             options: {
                 jshintrc: ".jshintrc"
@@ -52,9 +50,9 @@ module.exports = function (grunt) {
                 specs: '<%= meta.spec %>/**/*.spec.js',
                 helpers: '<%= meta.test %>/helpers/*.js',
                 keepRunner: true,
-		junit: {
-			path: 'junit/'
-		},
+                junit: {
+                    path: 'junit/'
+                },
                 outfile: 'SpecRunner.html'
             },
 
