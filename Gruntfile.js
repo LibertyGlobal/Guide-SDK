@@ -33,7 +33,10 @@ module.exports = function (grunt) {
         clean: {
             dist: {
                 files: [
-                    { src: [ '<%= meta.dist %>/*' ], dot: true }
+                    {
+                        src: [ '<%= meta.dist %>/*' ],
+                        dot: true
+                    }
                 ]
             }
         },
@@ -50,16 +53,24 @@ module.exports = function (grunt) {
                 specs: '<%= meta.spec %>/**/*.spec.js',
                 helpers: '<%= meta.test %>/helpers/*.js',
                 keepRunner: true,
-                junit: {
-                    path: 'junit/'
-                },
+                junit: { path: 'junit/' },
                 outfile: 'SpecRunner.html'
             },
 
             coverage: {
                 src: '<%= jasmine.all.src %>',
                 options: {
-                    type: 'cobertura',
+                    template: require('grunt-template-jasmine-istanbul'),
+                    templateOptions: {
+                        coverage: '<%= meta.report %>/coverage.json',
+                        report: '<%= meta.report %>/coverage'
+                    }
+                }
+            },
+
+            ci: {
+                src: '<%= jasmine.all.src %>',
+                options: {
                     template: require('grunt-template-jasmine-istanbul'),
                     templateOptions: {
                         coverage: '<%= meta.report %>/coverage.json',
@@ -82,6 +93,19 @@ module.exports = function (grunt) {
             all: {
                 files: [ '<%= meta.src %>/**/*.js', '<%= meta.spec %>/**/*.js' ],
                 tasks: [ 'test' ]
+            }
+        },
+
+        plato: {
+            all: {
+                options : {
+                    jshint : grunt.file.readJSON('.jshintrc'),
+                    quiet: true
+                },
+
+                files: {
+                    'report/metrics': [ 'src/**/*.js' ]
+                }
             }
         },
 
@@ -133,6 +157,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
+    grunt.loadNpmTasks('grunt-plato');
     grunt.loadNpmTasks('grunt-bumpup');
     grunt.loadNpmTasks('grunt-rigger');
     grunt.loadNpmTasks('grunt-jsdoc');
@@ -156,6 +181,14 @@ module.exports = function (grunt) {
     grunt.registerTask('default', [
         'jshint',
         'jasmine:coverage',
+        'plato',
+        'build'
+    ]);
+
+    grunt.registerTask('ci', [
+        'jshint',
+        'jasmine:ci',
+        'plato',
         'build'
     ]);
 
