@@ -59,10 +59,16 @@ module.exports = function (grunt) {
             coverage: {
                 src: '<%= jasmine.all.src %>',
                 options: {
+                    type: 'cobertura',
                     template: require('grunt-template-jasmine-istanbul'),
                     templateOptions: {
                         coverage: '<%= meta.report %>/coverage.json',
-                        report: '<%= meta.report %>/coverage'
+                        report: {
+                            type: 'cobertura',
+                            options: {
+                                dir: '<%= meta.report %>/coverage'
+                            }
+                        }
                     }
                 }
             },
