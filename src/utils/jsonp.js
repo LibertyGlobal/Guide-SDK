@@ -13,6 +13,8 @@ var jsonp = function () {
             script.onerror = function (ex) {
                 errorHandler({url: url, event: ex});
             };
+        } else {
+            console.warn('KrakenSDK: Error during request to ' + url);
         }
 
         script.onload = script.onreadystatechange = function () {
@@ -54,8 +56,7 @@ var jsonp = function () {
         return url;
     }
 
-    function jsonp(url, params, callback, callbackName) {
-        //url = escape(url);
+    function jsonp(url, callback, callbackName) {
 
         var query = (url || '').indexOf('?') === -1 ? '?' : '&', key;
 
@@ -63,13 +64,6 @@ var jsonp = function () {
         var uniqueName = callbackName + "_json" + (++counter);
 
         url = removeParameter(url, callbackName);
-
-        params = params || {};
-        for (key in params) {
-            if (params.hasOwnProperty(key)) {
-                query += encode(key) + "=" + encode(params[key]) + "&";
-            }
-        }
 
         window[ uniqueName ] = function (data) {
             callback(data);

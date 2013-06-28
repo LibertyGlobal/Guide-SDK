@@ -1,5 +1,5 @@
 var nodeRequest = function(){
-    function nodeRequest(url, params, callback) {
+    function nodeRequest(url, callback, errorCallback) {
         var http = require('http');
         var urlmodule = require('url');
 
@@ -23,6 +23,14 @@ var nodeRequest = function(){
         });
 
         reqGet.end();
+
+        reqGet.on('error', function(res){
+            if (errorCallback){
+                errorCallback(res);
+            } else {
+                console.warn('KrakenSDK: Error during request to ' + url);
+            }
+        });
     }
 
     return nodeRequest;
