@@ -7,4 +7,4 @@ var onDataRetrieved = function(d){
     })
 };
 
-kraken.Country.create().findAll(onDataRetrieved);
+kraken.Region.create().findAll(onDataRetrieved);

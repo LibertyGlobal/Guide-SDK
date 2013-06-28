@@ -49,6 +49,8 @@
                 script.onerror = function (ex) {
                     errorHandler({url: url, event: ex});
                 };
+            } else {
+                console.warn('KrakenSDK: Error during request to ' + url);
             }
     
             script.onload = script.onreadystatechange = function () {
@@ -90,8 +92,7 @@
             return url;
         }
     
-        function jsonp(url, params, callback, callbackName) {
-            //url = escape(url);
+        function jsonp(url, callback, callbackName) {
     
             var query = (url || '').indexOf('?') === -1 ? '?' : '&', key;
     
@@ -99,13 +100,6 @@
             var uniqueName = callbackName + "_json" + (++counter);
     
             url = removeParameter(url, callbackName);
-    
-            params = params || {};
-            for (key in params) {
-                if (params.hasOwnProperty(key)) {
-                    query += encode(key) + "=" + encode(params[key]) + "&";
-                }
-            }
     
             window[ uniqueName ] = function (data) {
                 callback(data);
@@ -124,7 +118,7 @@
     };
     
     var nodeRequest = function(){
-        function nodeRequest(url, params, callback) {
+        function nodeRequest(url, callback, errorCallback) {
             var http = require('http');
             var urlmodule = require('url');
     
@@ -148,6 +142,14 @@
             });
     
             reqGet.end();
+    
+            reqGet.on('error', function(res){
+                if (errorCallback){
+                    errorCallback(res);
+                } else {
+                    console.warn('KrakenSDK: Error during request to ' + url);
+                }
+            });
         }
     
         return nodeRequest;
@@ -206,7 +208,7 @@
         //noinspection JSUnusedGlobalSymbols
         this.initialRequestURL = URL;
     
-        requestTransport(URL, {}, this.createScopedCallback(callback, nextBatchSteps, pipelineData));
+        requestTransport(URL, this.createScopedCallback(callback, nextBatchSteps, pipelineData));
     };
     
     Request.prototype.proceedResponse = function (response, nextBatchSteps, pipelineData, callback) {
@@ -221,7 +223,7 @@
         }
     
         if ((nextBatchSteps > 0 || nextBatchSteps === undefined) && this.nextBatchLinkURL) {
-            requestTransport(this.nextBatchLinkURL, {}, this.createScopedCallback(callback, nextBatchSteps, pipelineData));
+            requestTransport(this.nextBatchLinkURL, this.createScopedCallback(callback, nextBatchSteps, pipelineData));
         } else {
             callback.bind(this)(pipelineData);
         }
