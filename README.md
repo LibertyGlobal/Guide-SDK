@@ -15,8 +15,7 @@ SDK contains few public classes representing API entities:
 
 * Channel
 * Broadcast
-* Country
-* City
+* Region
 
 Entities work very similar to jQuery objects. They encapsulate request building, request executing logic and data collection storage.
 
@@ -28,13 +27,13 @@ Usage examples
 Let's look at most basic example - getting list of countries supported by API.
 This code creates new Country object and gets all records without filtering or sorting.
 
-    kraken.Country.create().findAll(dataReceivedCallback);
+    kraken.Region.create().findAll(dataReceivedCallback);
 
 
 ####Limiting response size####
 You are free to get only first two countries. Let`s modify our example.
 
-    kraken.Country.create()
+    kraken.Region.create()
     .limit(2)
     .findOne(dataReceivedCallback);
 
@@ -74,7 +73,7 @@ This will get all channels sorted by title:
     kraken.config.region = 'NL';
     kraken.Channel.create()
     .sort(kraken.Channel.title, 'desc')
-    .findOne(dataReceivedCallback);
+    .findAll(dataReceivedCallback);
 
 BTW sorting on Broadcast class instances will not work in beta.
 
