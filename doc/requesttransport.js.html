@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: entities/broadcast.js</title>
+    <title>JSDoc: Source: utils/requesttransport.js</title>
     
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Source: entities/broadcast.js</h1>
+    <h1 class="page-title">Source: utils/requesttransport.js</h1>
     
     
 
@@ -26,33 +26,22 @@
     <section>
         <article>
             <pre class="prettyprint source"><code>/**
- * Class describes broadcast-specific fields and request logic
- * @namespace kraken.entities
- * @class Broadcast
- * @extends EntityBase
+ * Determines are we in NodeJS or not and returns right transport module.
+ * @namespace kraken
+ * @function kraken.requestTransport
  */
 
-K.Broadcast = function () {
-    EntityBase.call(this);
+var chooseTransport = function () {
+    if (typeof module !== 'undefined' && module.exports) {
+        return nodeRequest();
+    } else {
+        return jsonp();
+    }
 };
 
-K.Broadcast.ID = new TextField('id');
-K.Broadcast.TITLE = new TextField('title');
-K.Broadcast.CATEGORY = new TextField('category');
-K.Broadcast.EPISODE = new NumericField('episode');
-K.Broadcast.SYNOPSIS = new TextField('synopsis');
-K.Broadcast.START = new NumericField('start');
-K.Broadcast.END = new NumericField('end');
-K.Broadcast.YEAR = new TextField('year');
-K.Broadcast.VIDEO_ID = new TextField('videoId');
-K.Broadcast.SELF_LINK = new TextField('selfLink');
-K.Broadcast.MORE_LINK = new TextField('moreLink');
-K.Broadcast.OPENGRAPH_LINK = new TextField('opengraphLink');
+var requestTransport = chooseTransport();
 
-K.Broadcast.prototype = Object.create(EntityBase.prototype);
-K.Broadcast.prototype._baseURL = 'broadcasts.json?';
-
-K.utils.addFactory(K.Broadcast);</code></pre>
+</code></pre>
         </article>
     </section>
 

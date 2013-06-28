@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: entities/broadcast.js</title>
+    <title>JSDoc: Source: entities/region.js</title>
     
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Source: entities/broadcast.js</h1>
+    <h1 class="page-title">Source: entities/region.js</h1>
     
     
 
@@ -26,33 +26,26 @@
     <section>
         <article>
             <pre class="prettyprint source"><code>/**
- * Class describes broadcast-specific fields and request logic
+ * Encapsulates Region-specific fields and request logic
  * @namespace kraken.entities
- * @class Broadcast
+ * @class Region
  * @extends EntityBase
  */
-
-K.Broadcast = function () {
+K.Region = function () {
     EntityBase.call(this);
 };
 
-K.Broadcast.ID = new TextField('id');
-K.Broadcast.TITLE = new TextField('title');
-K.Broadcast.CATEGORY = new TextField('category');
-K.Broadcast.EPISODE = new NumericField('episode');
-K.Broadcast.SYNOPSIS = new TextField('synopsis');
-K.Broadcast.START = new NumericField('start');
-K.Broadcast.END = new NumericField('end');
-K.Broadcast.YEAR = new TextField('year');
-K.Broadcast.VIDEO_ID = new TextField('videoId');
-K.Broadcast.SELF_LINK = new TextField('selfLink');
-K.Broadcast.MORE_LINK = new TextField('moreLink');
-K.Broadcast.OPENGRAPH_LINK = new TextField('opengraphLink');
+K.Region.ID = new TextField('id');
+K.Region.NAME = new TextField('name');
+K.Region.CHANNEL_LINEUP_LINK = new TextField('channelLineupLink');
+K.Region.SELF_LINK = new TextField('selfLink');
+K.Region.TOP_BROADCASTS_LINK = new TextField('topBroadcastsLink');
+K.Region.TOP_VIDEOS_LINK = new TextField('topVideosLink');
 
-K.Broadcast.prototype = Object.create(EntityBase.prototype);
-K.Broadcast.prototype._baseURL = 'broadcasts.json?';
+K.utils.addFactory(K.Region);
 
-K.utils.addFactory(K.Broadcast);</code></pre>
+K.Region.prototype = Object.create(EntityBase.prototype);
+K.Region.prototype._baseURL = 'regions.json?';</code></pre>
         </article>
     </section>
 
