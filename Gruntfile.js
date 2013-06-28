@@ -189,7 +189,8 @@ module.exports = function (grunt) {
         'jshint',
         'jasmine:ci',
         'plato',
-        'build'
+        'build',
+	'doc'
     ]);
 
     grunt.registerTask('doc',[
