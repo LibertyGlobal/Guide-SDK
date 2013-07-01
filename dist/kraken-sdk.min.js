@@ -1,6 +1,6 @@
-// Kraken
+// Kraken SDK
 // ----------------------------------
-// v0.2.0
+// v0.2.2
 //
 // Copyright (c) 2013 Liberty Global
 // Distributed under BSD license
