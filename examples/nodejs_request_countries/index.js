@@ -1,4 +1,4 @@
-var kraken = require('../../dist/kraken.js');
+var kraken = require('../../dist/kraken-sdk.js');
 
 var onDataRetrieved = function(d){
     console.log(d);
