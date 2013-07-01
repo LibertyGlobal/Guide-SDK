@@ -138,7 +138,7 @@ module.exports = function (grunt) {
                 normalize: true
             },
 
-            files: [ 'package.json', 'component.json' ]
+            files: [ 'package.json', 'bower.json' ]
         },
 
         jsdoc: {
