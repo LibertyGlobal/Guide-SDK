@@ -121,7 +121,6 @@
         function nodeRequest(url, callback, errorCallback) {
             var http = require('http');
             var urlmodule = require('url');
-    
             var urlData = urlmodule.parse(url, true);
     
             var options = {
@@ -131,13 +130,9 @@
                 path: urlData.path
             };
     
-            var temporaryCallback = function (res) {
-                callback(res);
-            }
-    
             var reqGet = http.request(options, function (res) {
                 res.on('data', function (d) {
-                    temporaryCallback(JSON.parse(d));
+                    callback(JSON.parse(d));
                 });
             });
     
@@ -216,13 +211,15 @@
     
         if (response.nextBatchLink) {
             this.nextBatchLinkURL = response.nextBatchLink.href;
+        } else {
+            this.nextBatchLinkURL = undefined;
         }
     
         if (nextBatchSteps !== undefined) {
             nextBatchSteps--;
         }
     
-        if ((nextBatchSteps > 0 || nextBatchSteps === undefined) && this.nextBatchLinkURL) {
+        if ((nextBatchSteps > 0 || nextBatchSteps === undefined) && this.nextBatchLinkURL !== undefined) {
             requestTransport(this.nextBatchLinkURL, this.createScopedCallback(callback, nextBatchSteps, pipelineData));
         } else {
             callback.bind(this)(pipelineData);

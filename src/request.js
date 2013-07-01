@@ -25,13 +25,15 @@ Request.prototype.proceedResponse = function (response, nextBatchSteps, pipeline
 
     if (response.nextBatchLink) {
         this.nextBatchLinkURL = response.nextBatchLink.href;
+    } else {
+        this.nextBatchLinkURL = undefined;
     }
 
     if (nextBatchSteps !== undefined) {
         nextBatchSteps--;
     }
 
-    if ((nextBatchSteps > 0 || nextBatchSteps === undefined) && this.nextBatchLinkURL) {
+    if ((nextBatchSteps > 0 || nextBatchSteps === undefined) && this.nextBatchLinkURL !== undefined) {
         requestTransport(this.nextBatchLinkURL, this.createScopedCallback(callback, nextBatchSteps, pipelineData));
     } else {
         callback.bind(this)(pipelineData);
