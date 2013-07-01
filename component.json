@@ -1,0 +1,18 @@
+{
+    "name": "kraken-sdk",
+    "title": "Kraken SDK",
+    "version": "0.2.0",
+    "description": "Kraken API client library",
+    "main": "dist/kraken-sdk.js",
+    "ignore": [
+        "/.*",
+        "src/",
+        "lib/",
+        "doc/",
+        "examples/",
+        "test/",
+        "report/",
+        "Gruntfile.js",
+        "package.json"
+    ]
+}

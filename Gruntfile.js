@@ -138,7 +138,7 @@ module.exports = function (grunt) {
                 normalize: true
             },
 
-            files: [ 'package.json' ]
+            files: [ 'package.json', 'component.json' ]
         },
 
         jsdoc: {
@@ -190,7 +190,7 @@ module.exports = function (grunt) {
         'jasmine:ci',
         'plato',
         'build',
-	'doc'
+        'doc'
     ]);
 
     grunt.registerTask('doc',[

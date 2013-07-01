@@ -1,8 +1,8 @@
 {
   "name": "kraken-sdk",
-  "title": "Kraken",
+  "title": "Kraken SDK",
   "version": "0.2.0",
-  "description": "KrakenAPI client library",
+  "description": "Kraken API client library",
   "main": "dist/kraken-sdk.js",
   "devDependencies": {
     "grunt": "~0.4.1",
