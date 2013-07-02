@@ -14,7 +14,9 @@ var jsonp = function () {
                 errorHandler({url: url, event: ex});
             };
         } else {
-            console.warn('KrakenSDK: Error during request to ' + url);
+            script.onerror = function (ex) {
+                console.warn('KrakenSDK: Error during request to ' + url);
+            };
         }
 
         script.onload = script.onreadystatechange = function () {
