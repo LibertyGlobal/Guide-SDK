@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: fields/textfield.js</title>
+    <title>JSDoc: Source: fields/rootchangingfield.js</title>
     
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Source: fields/textfield.js</h1>
+    <h1 class="page-title">Source: fields/rootchangingfield.js</h1>
     
     
 
@@ -26,36 +26,37 @@
     <section>
         <article>
             <pre class="prettyprint source"><code>/**
- * Textual field supports equal and regexp matching.  Fields are used for sorting, filtering data also they represents entities data properties names.
+ * Root changing field differs from other fields with it`s behaviour on filtering. Instead of being added to the arguments of request this field should be added as root like /broadcasts/1z,2z.json
  * @namespace kraken.fields
- * @class TextField
+ * @class PrependField
  * @extends AbstractField
- * @tutorial Typical case for using TextField is to find broadcasts in particular category.
+ * @tutorial Typical case for using PrependField is to find broadcast by ID.
  */
 
-function TextField(name) {
+function RootChangingField(name, prefixString) {
     AbstractField.call(this, name);
+    this.prefixString = prefixString;
 }
 
-TextField.prototype = Object.create(AbstractField.prototype);
+RootChangingField.prototype = Object.create(AbstractField.prototype);
 
 /**
  * Adds = filtering operation.
- * @method TextField#equalTo
+ * @method PrependField#equalTo
  * @param operand
  */
-TextField.prototype.equalTo = function (operand) {
-    return this._getStringForOperation('=', operand);
+RootChangingField.prototype.equalTo = function (operand) {
+    return this._getURLModificationObject(this._modifyURL, operand);
 };
 
-/**
- * Adds ~ filtering operation. Says to backend to filter records by regexp.
- * @method TextField#equalTo
- * @param operand
- */
-TextField.prototype.isMatching = function (operand) {
-    return this._getStringForOperation('~', operand);
-};</code></pre>
+RootChangingField.prototype._modifyURL = function (URL, stringValue) {
+    var questionSymbolIndex = URL.indexOf('?') !== -1 ? URL.indexOf('?') : URL.length;
+    var pathOfURL = URL.substring(0, questionSymbolIndex);
+    var pathWithoutFileName = URL.substring(0, pathOfURL.lastIndexOf('/'));
+    var processedValue = '/' + this.prefixString + '/' + stringValue + '.json';
+
+    return URL.replace(pathOfURL, pathWithoutFileName + processedValue);
+}</code></pre>
         </article>
     </section>
 
