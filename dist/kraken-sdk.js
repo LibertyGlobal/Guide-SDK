@@ -1,6 +1,6 @@
 // Kraken SDK
 // ----------------------------------
-// v0.2.2
+// v0.2.4
 //
 // Copyright (c) 2013 Liberty Global
 // Distributed under BSD license
@@ -119,7 +119,7 @@
         return jsonp;
     };
     
-    var nodeRequest = function(){
+    var nodeRequest = function () {
         function nodeRequest(url, callback, errorCallback) {
             var http = require('http');
             var urlmodule = require('url');
@@ -140,8 +140,8 @@
     
             reqGet.end();
     
-            reqGet.on('error', function(res){
-                if (errorCallback){
+            reqGet.on('error', function (res) {
+                if (errorCallback) {
                     errorCallback(res);
                 } else {
                     console.warn('KrakenSDK: Error during request to ' + url);
@@ -254,6 +254,14 @@
         return this._name + operator + operand;
     };
     
+    AbstractField.prototype._getURLModificationObject = function (actionFunction, stringValue) {
+        var result = {};
+        result.stringValue = stringValue;
+        result.context = this;
+        result.actionFunction = actionFunction;
+        return result;
+    }
+    
     /**
      * Numeric field supports math comparing functions.  Fields are used for sorting, filtering data also they represents entities data properties names.
      * @namespace kraken.fields
@@ -317,7 +325,7 @@
      * @namespace kraken.fields
      * @class TextField
      * @extends AbstractField
-     * @tutorial Typical case for using TextField is to find broadcasts in particular category. This will look like
+     * @tutorial Typical case for using TextField is to find broadcasts in particular category.
      */
     
     function TextField(name) {
@@ -343,6 +351,70 @@
     TextField.prototype.isMatching = function (operand) {
         return this._getStringForOperation('~', operand);
     };
+    
+    /**
+     * Prepend field differs from other fields with it`s behaviour on filtering. Instead of being added to the arguments of request this field should be added to URL path.
+     * @namespace kraken.fields
+     * @class PrependField
+     * @extends AbstractField
+     * @tutorial Typical case for using PrependField is to find broadcasts by ChannelIds.
+     */
+    
+    function PrependField(name, prefixString) {
+        AbstractField.call(this, name);
+        this.prefixString = prefixString;
+    }
+    
+    PrependField.prototype = Object.create(AbstractField.prototype);
+    
+    /**
+     * Adds = filtering operation.
+     * @method PrependField#equalTo
+     * @param operand
+     */
+    PrependField.prototype.equalTo = function (operand) {
+        return this._getURLModificationObject(this._modifyURL, operand);
+    };
+    
+    PrependField.prototype._modifyURL = function (URL, stringValue) {
+        var lastSlashIndex = URL.lastIndexOf('/');
+        var processedValue = '/' + this.prefixString + '/' + stringValue;
+        URL = URL.substr(0, lastSlashIndex) + processedValue + URL.substr(lastSlashIndex);
+        return URL;
+    }
+    
+    /**
+     * Root changing field differs from other fields with it`s behaviour on filtering. Instead of being added to the arguments of request this field should be added as root like /broadcasts/1z,2z.json
+     * @namespace kraken.fields
+     * @class PrependField
+     * @extends AbstractField
+     * @tutorial Typical case for using PrependField is to find broadcast by ID.
+     */
+    
+    function RootChangingField(name, prefixString) {
+        AbstractField.call(this, name);
+        this.prefixString = prefixString;
+    }
+    
+    RootChangingField.prototype = Object.create(AbstractField.prototype);
+    
+    /**
+     * Adds = filtering operation.
+     * @method PrependField#equalTo
+     * @param operand
+     */
+    RootChangingField.prototype.equalTo = function (operand) {
+        return this._getURLModificationObject(this._modifyURL, operand);
+    };
+    
+    RootChangingField.prototype._modifyURL = function (URL, stringValue) {
+        var questionSymbolIndex = URL.indexOf('?') !== -1 ? URL.indexOf('?') : URL.length;
+        var pathOfURL = URL.substring(0, questionSymbolIndex);
+        var pathWithoutFileName = URL.substring(0, pathOfURL.lastIndexOf('/'));
+        var processedValue = '/' + this.prefixString + '/' + stringValue + '.json';
+    
+        return URL.replace(pathOfURL, pathWithoutFileName + processedValue);
+    }
     
     /**
      * Represents basic functionality for Kraken data sets.
@@ -423,7 +495,7 @@
     function EntityBase() {
         Collection.call(this);
     
-        this._queryStringElements = [];
+        this._queryModificationActions = [];
         this._requestURL = '';
         this._request = new Request();
     }
@@ -436,7 +508,7 @@
      * @param {number} limitTo Number of maximum data elements in response.
      */
     EntityBase.prototype.limit = function (limitTo) {
-        this._addURLElement('maxBatchSize=' + limitTo);
+        this._addURLModification('maxBatchSize=' + limitTo);
     
         return this;
     };
@@ -447,7 +519,7 @@
      * @param {string} multipleArgs You can add unlimited number of strings as multiple parameters.
      */
     EntityBase.prototype.fields = function (multipleArgs) {
-        this._addURLElement('show=' + Array.prototype.slice.call(arguments).join(','));
+        this._addURLModification('show=' + Array.prototype.slice.call(arguments).join(','));
     
         return this;
     };
@@ -464,7 +536,7 @@
         }
     
         if (order === 'asc' || order === 'desc') {
-            this._addURLElement('sort=' + field + '(' + order + ')');
+            this._addURLModification('sort=' + field + '(' + order + ')');
         } else {
             throw new Error('Invalid sort option, expecting "asc" or "desc"');
         }
@@ -479,7 +551,7 @@
      */
     EntityBase.prototype.filter = function (multipleArgs) {
         for (var i = 0; i < arguments.length; i++) {
-            this._addURLElement(arguments[i]);
+            this._addURLModification(arguments[i]);
         }
         return this;
     };
@@ -516,8 +588,8 @@
         return this;
     };
     
-    EntityBase.prototype._addURLElement = function (URLElement) {
-        this._queryStringElements.push(URLElement);
+    EntityBase.prototype._addURLModification = function (modificationObject) {
+        this._queryModificationActions.push(modificationObject);
     };
     
     EntityBase.prototype._buildURLFromElements = function () {
@@ -528,10 +600,27 @@
         }
     
         this._requestURL += this._baseURL;
-        this._requestURL += this._queryStringElements.join('&');
+    
+        for (var i = 0; i < this._queryModificationActions.length; i++){
+            //If processing is an action object - execute actionFunction on current URL
+            if (this._queryModificationActions[i].actionFunction){
+                this._requestURL = this._executeModificationAction(this._queryModificationActions[i]);
+            } else {
+                //If this is just a string - concat
+                var joinSymbol = '&';
+                if (i === 0){
+                    joinSymbol = '';
+                }
+                this._requestURL += joinSymbol + this._queryModificationActions[i];
+            }
+        }
     
         return this._requestURL;
     };
+    
+    EntityBase.prototype._executeModificationAction = function(actionObject){
+        return actionObject.actionFunction.apply(actionObject.context, [this._requestURL, actionObject.stringValue]);
+    }
     
     EntityBase.prototype._processData = function (data) {
         this.add(data);
@@ -557,12 +646,13 @@
         EntityBase.call(this);
     };
     
-    K.Broadcast.ID = new TextField('id');
+    K.Broadcast.ID = new RootChangingField('id', 'broadcasts');
     K.Broadcast.START = new NumericField('start');
     K.Broadcast.END = new NumericField('end');
     K.Broadcast.CRID = new TextField('crid');
     K.Broadcast.IMI = new TextField('imi');
     K.Broadcast.CHANNEL = new TextField('channel');
+    K.Broadcast.CHANNEL_ID = new PrependField('channel.channelId', 'channels');
     K.Broadcast.STATISTICS = new TextField('statistics');
     K.Broadcast.VIDEO_ID = new TextField('videoId');
     K.Broadcast.IMDB_ID = new TextField('imdbId');
@@ -580,7 +670,6 @@
     K.Broadcast.IMAGE_LINK = new NumericField('imageLink');
     K.Broadcast.MORE_LINK = new TextField('moreLink');
     
-    
     K.Broadcast.prototype = Object.create(EntityBase.prototype);
     K.Broadcast.prototype._baseURL = 'broadcasts.json?';
     
@@ -596,7 +685,7 @@
         EntityBase.call(this);
     };
     
-    K.Channel.ID = new TextField('id');
+    K.Channel.ID = new TextField('channelId');
     K.Channel.NAME = new TextField('name');
     K.Channel.SYNOPSIS = new TextField('synopsis');
     K.Channel.LOGICAL_POSITION = new NumericField('logicalPosition');
@@ -623,6 +712,7 @@
     
     K.Region.ID = new TextField('id');
     K.Region.NAME = new TextField('name');
+    K.Region.CATEGORIES = new TextField('categories');
     K.Region.CHANNEL_LINEUP_LINK = new TextField('channelLineupLink');
     K.Region.SELF_LINK = new TextField('selfLink');
     K.Region.TOP_BROADCASTS_LINK = new TextField('topBroadcastsLink');

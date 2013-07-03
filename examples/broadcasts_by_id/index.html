@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KrakenAPI example</title>
+</head>
+<body>
+</body>
+<script src="../../dist/kraken-sdk.js"></script>
+<script>
+    var onBroadcastsReceived = function(data){
+        this.each(function(element){
+            console.log(element);
+        })
+    }
+
+    kraken.config.region = 'NL';
+
+    kraken.Broadcast.create()
+            .limit(5)
+            .fields(kraken.Broadcast.ID, kraken.Broadcast.TITLE, kraken.Broadcast.START, kraken.Broadcast.SYNOPSIS, kraken.Broadcast.CHANNEL_ID)
+            .filter(kraken.Broadcast.ID.equalTo('3kjk4re5h-5z-1307012330'))
+            .findOne(onBroadcastsReceived);
+
+</script>
+</html>

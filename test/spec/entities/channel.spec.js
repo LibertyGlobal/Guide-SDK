@@ -6,10 +6,10 @@ describe('K.Channel', function () {
         });
     });
 
-    describe('ID', function () {
-        it('should represent "id" attribute', function () {
+    describe('CHANNEL_ID', function () {
+        it('should represent "channelId" attribute', function () {
             expect(K.Channel.ID).toEqual(jasmine.any(AbstractField));
-            expect(K.Channel.ID.toString()).toEqual('id');
+            expect(K.Channel.ID.toString()).toEqual('channelId');
         });
     });
 

@@ -15,3 +15,11 @@ AbstractField.prototype.toString = function () {
 AbstractField.prototype._getStringForOperation = function (operator, operand) {
     return this._name + operator + operand;
 };
+
+AbstractField.prototype._getURLModificationObject = function (actionFunction, stringValue) {
+    var result = {};
+    result.stringValue = stringValue;
+    result.context = this;
+    result.actionFunction = actionFunction;
+    return result;
+}

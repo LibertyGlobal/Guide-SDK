@@ -9,7 +9,7 @@ K.Channel = function () {
     EntityBase.call(this);
 };
 
-K.Channel.ID = new TextField('id');
+K.Channel.ID = new TextField('channelId');
 K.Channel.NAME = new TextField('name');
 K.Channel.SYNOPSIS = new TextField('synopsis');
 K.Channel.LOGICAL_POSITION = new NumericField('logicalPosition');

@@ -22,6 +22,10 @@ var K = kraken;
 
 //= fields/textfield
 
+//= fields/prependfield
+
+//= fields/rootchangingfield
+
 //= collection
 
 //= entitybase

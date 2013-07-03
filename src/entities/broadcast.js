@@ -9,12 +9,13 @@ K.Broadcast = function () {
     EntityBase.call(this);
 };
 
-K.Broadcast.ID = new TextField('id');
+K.Broadcast.ID = new RootChangingField('id', 'broadcasts');
 K.Broadcast.START = new NumericField('start');
 K.Broadcast.END = new NumericField('end');
 K.Broadcast.CRID = new TextField('crid');
 K.Broadcast.IMI = new TextField('imi');
 K.Broadcast.CHANNEL = new TextField('channel');
+K.Broadcast.CHANNEL_ID = new PrependField('channel.channelId', 'channels');
 K.Broadcast.STATISTICS = new TextField('statistics');
 K.Broadcast.VIDEO_ID = new TextField('videoId');
 K.Broadcast.IMDB_ID = new TextField('imdbId');
@@ -31,7 +32,6 @@ K.Broadcast.EPISODE = new NumericField('episode');
 K.Broadcast.SEASON = new NumericField('season');
 K.Broadcast.IMAGE_LINK = new NumericField('imageLink');
 K.Broadcast.MORE_LINK = new TextField('moreLink');
-
 
 K.Broadcast.prototype = Object.create(EntityBase.prototype);
 K.Broadcast.prototype._baseURL = 'broadcasts.json?';

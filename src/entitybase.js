@@ -8,7 +8,7 @@
 function EntityBase() {
     Collection.call(this);
 
-    this._queryStringElements = [];
+    this._queryModificationActions = [];
     this._requestURL = '';
     this._request = new Request();
 }
@@ -21,7 +21,7 @@ EntityBase.prototype = Object.create(Collection.prototype);
  * @param {number} limitTo Number of maximum data elements in response.
  */
 EntityBase.prototype.limit = function (limitTo) {
-    this._addURLElement('maxBatchSize=' + limitTo);
+    this._addURLModification('maxBatchSize=' + limitTo);
 
     return this;
 };
@@ -32,7 +32,7 @@ EntityBase.prototype.limit = function (limitTo) {
  * @param {string} multipleArgs You can add unlimited number of strings as multiple parameters.
  */
 EntityBase.prototype.fields = function (multipleArgs) {
-    this._addURLElement('show=' + Array.prototype.slice.call(arguments).join(','));
+    this._addURLModification('show=' + Array.prototype.slice.call(arguments).join(','));
 
     return this;
 };
@@ -49,7 +49,7 @@ EntityBase.prototype.sort = function (field, order) {
     }
 
     if (order === 'asc' || order === 'desc') {
-        this._addURLElement('sort=' + field + '(' + order + ')');
+        this._addURLModification('sort=' + field + '(' + order + ')');
     } else {
         throw new Error('Invalid sort option, expecting "asc" or "desc"');
     }
@@ -64,7 +64,7 @@ EntityBase.prototype.sort = function (field, order) {
  */
 EntityBase.prototype.filter = function (multipleArgs) {
     for (var i = 0; i < arguments.length; i++) {
-        this._addURLElement(arguments[i]);
+        this._addURLModification(arguments[i]);
     }
     return this;
 };
@@ -101,8 +101,8 @@ EntityBase.prototype.findAll = function (callback) {
     return this;
 };
 
-EntityBase.prototype._addURLElement = function (URLElement) {
-    this._queryStringElements.push(URLElement);
+EntityBase.prototype._addURLModification = function (modificationObject) {
+    this._queryModificationActions.push(modificationObject);
 };
 
 EntityBase.prototype._buildURLFromElements = function () {
@@ -113,10 +113,27 @@ EntityBase.prototype._buildURLFromElements = function () {
     }
 
     this._requestURL += this._baseURL;
-    this._requestURL += this._queryStringElements.join('&');
+
+    for (var i = 0; i < this._queryModificationActions.length; i++){
+        //If processing is an action object - execute actionFunction on current URL
+        if (this._queryModificationActions[i].actionFunction){
+            this._requestURL = this._executeModificationAction(this._queryModificationActions[i]);
+        } else {
+            //If this is just a string - concat
+            var joinSymbol = '&';
+            if (i === 0){
+                joinSymbol = '';
+            }
+            this._requestURL += joinSymbol + this._queryModificationActions[i];
+        }
+    }
 
     return this._requestURL;
 };
+
+EntityBase.prototype._executeModificationAction = function(actionObject){
+    return actionObject.actionFunction.apply(actionObject.context, [this._requestURL, actionObject.stringValue]);
+}
 
 EntityBase.prototype._processData = function (data) {
     this.add(data);

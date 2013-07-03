@@ -3,7 +3,7 @@
  * @namespace kraken.fields
  * @class TextField
  * @extends AbstractField
- * @tutorial Typical case for using TextField is to find broadcasts in particular category. This will look like
+ * @tutorial Typical case for using TextField is to find broadcasts in particular category.
  */
 
 function TextField(name) {
