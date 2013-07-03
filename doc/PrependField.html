@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Collection</title>
+    <title>JSDoc: Class: PrependField</title>
     
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Class: Collection</h1>
+    <h1 class="page-title">Class: PrependField</h1>
     
     
 
@@ -27,7 +27,7 @@
     
 <header>
     <h2>
-    Collection
+    PrependField
     </h2>
     
 </header>  
@@ -39,7 +39,7 @@
     
         
 <dt>
-    <h4 class="name" id="Collection"><span class="type-signature"></span>new Collection<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="PrependField"><span class="type-signature"></span>new PrependField<span class="signature">()</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -47,7 +47,7 @@
     
     
     <div class="description">
-        Represents basic functionality for Kraken data sets.
+        Prepend field differs from other fields with it`s behaviour on filtering. Instead of being added to the arguments of request this field should be added to URL path.
     </div>
     
 
@@ -80,10 +80,17 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="collection.js.html">collection.js</a>, line 1
+        <a href="prependfield.js.html">fields/prependfield.js</a>, line 1
     </li></ul></dd>
     
     
+    
+    <dt class="tag-tutorial">Tutorials:</dt>
+    <dd class="tag-tutorial">
+        <ul>
+            <li><em class="disabled">Tutorial: Typical case for using PrependField is to find broadcasts by ChannelIds.</em></li>
+        </ul>
+    </dd>
     
     
     
@@ -104,6 +111,12 @@
     
     </div>
     
+    
+        <h3 class="subsection-title">Extends</h3>
+        
+        <ul>
+            <li><a href="AbstractField.html">AbstractField</a></li>
+        </ul>
     
     
     
@@ -122,7 +135,7 @@
         <dl>
             
 <dt>
-    <h4 class="name" id="add"><span class="type-signature"></span>add<span class="signature">(objectToAdd)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="equalTo"><span class="type-signature"></span>equalTo<span class="signature">(operand)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -130,7 +143,7 @@
     
     
     <div class="description">
-        Adds object or array to collection.
+        Adds = filtering operation.
     </div>
     
 
@@ -164,18 +177,10 @@
 	
         <tr>
             
-                <td class="name"><code>objectToAdd</code></td>
+                <td class="name"><code>operand</code></td>
             
             
             <td class="type">
-            
-                
-<span class="param-type">Object</span>
-|
-
-<span class="param-type">Array</span>
-
-
             
             </td>
             
@@ -183,7 +188,7 @@
             
             
             
-            <td class="description last">Object or array to add to collection.</td>
+            <td class="description last"></td>
         </tr>
 	
 	
@@ -214,7 +219,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="collection.js.html">collection.js</a>, line 40
+        <a href="prependfield.js.html">fields/prependfield.js</a>, line 16
     </li></ul></dd>
     
     
@@ -238,7 +243,7 @@
         
             
 <dt>
-    <h4 class="name" id="each"><span class="type-signature"></span>each<span class="signature">(functionToApply)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="equalTo"><span class="type-signature"></span>equalTo<span class="signature">(operand)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -246,7 +251,7 @@
     
     
     <div class="description">
-        Applies function to every element in collection.
+        Adds = filtering operation.
     </div>
     
 
@@ -280,7 +285,7 @@
 	
         <tr>
             
-                <td class="name"><code>functionToApply</code></td>
+                <td class="name"><code>operand</code></td>
             
             
             <td class="type">
@@ -291,7 +296,7 @@
             
             
             
-            <td class="description last">Function to apply to elements.</td>
+            <td class="description last"></td>
         </tr>
 	
 	
@@ -322,7 +327,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="collection.js.html">collection.js</a>, line 16
+        <a href="rootchangingfield.js.html">fields/rootchangingfield.js</a>, line 16
     </li></ul></dd>
     
     
@@ -343,10 +348,38 @@
     
 </dd>
 
+        </dl>
+    
+    
+    
+    
+    
+</article>
+
+</section>  
+
+
+
+
+
+
+<section>
+    
+<header>
+    <h2>
+    PrependField
+    </h2>
+    
+</header>  
+
+<article>
+    <div class="container-overview">
+    
+    
+    
         
-            
 <dt>
-    <h4 class="name" id="get"><span class="type-signature"></span>get<span class="signature">(index)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="PrependField"><span class="type-signature"></span>new PrependField<span class="signature">()</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -354,7 +387,103 @@
     
     
     <div class="description">
-        Retrieves collection item by index.
+        Root changing field differs from other fields with it`s behaviour on filtering. Instead of being added to the arguments of request this field should be added as root like /broadcasts/1z,2z.json
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="rootchangingfield.js.html">fields/rootchangingfield.js</a>, line 1
+    </li></ul></dd>
+    
+    
+    
+    <dt class="tag-tutorial">Tutorials:</dt>
+    <dd class="tag-tutorial">
+        <ul>
+            <li><em class="disabled">Tutorial: Typical case for using PrependField is to find broadcast by ID.</em></li>
+        </ul>
+    </dd>
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+    
+    </div>
+    
+    
+        <h3 class="subsection-title">Extends</h3>
+        
+        <ul>
+            <li><a href="AbstractField.html">AbstractField</a></li>
+        </ul>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl>
+            
+<dt>
+    <h4 class="name" id="equalTo"><span class="type-signature"></span>equalTo<span class="signature">(operand)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Adds = filtering operation.
     </div>
     
 
@@ -388,15 +517,10 @@
 	
         <tr>
             
-                <td class="name"><code>index</code></td>
+                <td class="name"><code>operand</code></td>
             
             
             <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
             
             </td>
             
@@ -404,7 +528,7 @@
             
             
             
-            <td class="description last">Index of object to retrieve from collection.</td>
+            <td class="description last"></td>
         </tr>
 	
 	
@@ -435,7 +559,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="collection.js.html">collection.js</a>, line 53
+        <a href="prependfield.js.html">fields/prependfield.js</a>, line 16
     </li></ul></dd>
     
     
@@ -459,7 +583,7 @@
         
             
 <dt>
-    <h4 class="name" id="toArray"><span class="type-signature"></span>toArray<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="equalTo"><span class="type-signature"></span>equalTo<span class="signature">(operand)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -467,72 +591,7 @@
     
     
     <div class="description">
-        Returns data as array.
-    </div>
-    
-
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="collection.js.html">collection.js</a>, line 62
-    </li></ul></dd>
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="where"><span class="type-signature"></span>where<span class="signature">(filter)</span><span class="type-signature"></span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        Returns all records which matches conditionalObject. For example if it is {a: 1} - method will return only objects from collection where 'a' property is present and is equal to 1
+        Adds = filtering operation.
     </div>
     
 
@@ -566,15 +625,10 @@
 	
         <tr>
             
-                <td class="name"><code>filter</code></td>
+                <td class="name"><code>operand</code></td>
             
             
             <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
             
             </td>
             
@@ -582,7 +636,7 @@
             
             
             
-            <td class="description last">Filter descriptor object.</td>
+            <td class="description last"></td>
         </tr>
 	
 	
@@ -613,7 +667,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="collection.js.html">collection.js</a>, line 25
+        <a href="rootchangingfield.js.html">fields/rootchangingfield.js</a>, line 16
     </li></ul></dd>
     
     
@@ -656,7 +710,7 @@
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.0-dev</a> on Wed Jul 03 2013 15:21:18 GMT-0000 (UTC)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.0-dev</a> on Wed Jul 03 2013 15:21:20 GMT-0000 (UTC)
 </footer>
 
 <script> prettyPrint(); </script>
