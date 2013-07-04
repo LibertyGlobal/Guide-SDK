@@ -8,6 +8,7 @@
 function EntityBase() {
     Collection.call(this);
 
+    this.filters = [];
     this._queryModificationActions = [];
     this._requestURL = '';
     this._request = new Request();
@@ -65,7 +66,9 @@ EntityBase.prototype.sort = function (field, order) {
 EntityBase.prototype.filter = function (multipleArgs) {
     for (var i = 0; i < arguments.length; i++) {
         this._addURLModification(arguments[i]);
+        this.filters.push(arguments[i]);
     }
+
     return this;
 };
 
@@ -139,9 +142,15 @@ EntityBase.prototype._processData = function (data) {
     this.add(data);
 };
 
+EntityBase.prototype._processResponse = function (response) {
+    this.filters = response.filter;
+    this.sortings = response.order;
+};
+
 EntityBase.prototype._createScopedCallback = function (callback) {
-    var scopedCallback = function (data) {
+    var scopedCallback = function (data, response) {
         this._processData(data);
+        this._processResponse(response);
         callback.bind(this)(data);
     };
 

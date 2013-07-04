@@ -1,6 +1,6 @@
 // Kraken SDK
 // ----------------------------------
-// v0.2.4
+// v0.2.6
 //
 // Copyright (c) 2013 Liberty Global
 // Distributed under BSD license
@@ -224,7 +224,7 @@
         if ((nextBatchSteps > 0 || nextBatchSteps === undefined) && this.nextBatchLinkURL !== undefined) {
             requestTransport(this.nextBatchLinkURL, this.createScopedCallback(callback, nextBatchSteps, pipelineData));
         } else {
-            callback.bind(this)(pipelineData);
+            callback.bind(this)(pipelineData, response);
         }
     };
     
@@ -495,6 +495,7 @@
     function EntityBase() {
         Collection.call(this);
     
+        this.filters = [];
         this._queryModificationActions = [];
         this._requestURL = '';
         this._request = new Request();
@@ -552,7 +553,9 @@
     EntityBase.prototype.filter = function (multipleArgs) {
         for (var i = 0; i < arguments.length; i++) {
             this._addURLModification(arguments[i]);
+            this.filters.push(arguments[i]);
         }
+    
         return this;
     };
     
@@ -626,9 +629,15 @@
         this.add(data);
     };
     
+    EntityBase.prototype._processResponse = function (response) {
+        this.filters = response.filter;
+        this.sortings = response.order;
+    };
+    
     EntityBase.prototype._createScopedCallback = function (callback) {
-        var scopedCallback = function (data) {
+        var scopedCallback = function (data, response) {
             this._processData(data);
+            this._processResponse(response);
             callback.bind(this)(data);
         };
     
