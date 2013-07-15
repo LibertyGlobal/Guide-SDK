@@ -7,6 +7,9 @@
 
 K.Broadcast = function () {
     EntityBase.call(this);
+    if (kraken.config.region === undefined) {
+        console.warn('Please, specify region before sending requests to Broadcasts endpoint.');
+    }
 };
 
 K.Broadcast.ID = new RootChangingField('id', 'broadcasts');

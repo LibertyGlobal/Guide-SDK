@@ -7,6 +7,9 @@
 
 K.Channel = function () {
     EntityBase.call(this);
+    if (kraken.config.region === undefined) {
+        console.warn('Please, specify region before sending requests to Channel endpoint.');
+    }
 };
 
 K.Channel.ID = new TextField('channelId');
