@@ -1,6 +1,6 @@
 // Kraken SDK
 // ----------------------------------
-// v0.2.6
+// v0.2.7
 //
 // Copyright (c) 2013 Liberty Global
 // Distributed under BSD license
@@ -653,6 +653,9 @@
     
     K.Broadcast = function () {
         EntityBase.call(this);
+        if (kraken.config.region === undefined) {
+            console.warn('Please, specify region before sending requests to Broadcasts endpoint.');
+        }
     };
     
     K.Broadcast.ID = new RootChangingField('id', 'broadcasts');
@@ -661,7 +664,7 @@
     K.Broadcast.CRID = new TextField('crid');
     K.Broadcast.IMI = new TextField('imi');
     K.Broadcast.CHANNEL = new TextField('channel');
-    K.Broadcast.CHANNEL_ID = new PrependField('channel.channelId', 'channels');
+    K.Broadcast.CHANNEL_REF = new PrependField('channel.ref', 'channels');
     K.Broadcast.STATISTICS = new TextField('statistics');
     K.Broadcast.VIDEO_ID = new TextField('videoId');
     K.Broadcast.IMDB_ID = new TextField('imdbId');
@@ -692,9 +695,12 @@
     
     K.Channel = function () {
         EntityBase.call(this);
+        if (kraken.config.region === undefined) {
+            console.warn('Please, specify region before sending requests to Channel endpoint.');
+        }
     };
     
-    K.Channel.ID = new TextField('channelId');
+    K.Channel.REF = new TextField('ref');
     K.Channel.NAME = new TextField('name');
     K.Channel.SYNOPSIS = new TextField('synopsis');
     K.Channel.LOGICAL_POSITION = new NumericField('logicalPosition');

@@ -70,6 +70,13 @@ describe('K.Broadcast', function () {
             });
         });
 
+        describe('CHANNEL_REF', function () {
+            it('should represent "channelRef" attribute', function () {
+                expect(K.Broadcast.CHANNEL_REF).toEqual(jasmine.any(AbstractField));
+                expect(K.Broadcast.CHANNEL_REF.toString()).toEqual('channel.ref');
+            });
+        });
+
         describe('SELF_LINK', function () {
             it('should represent "selfLink" attribute', function () {
                 expect(K.Broadcast.SELF_LINK).toEqual(jasmine.any(AbstractField));

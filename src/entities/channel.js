@@ -12,7 +12,7 @@ K.Channel = function () {
     }
 };
 
-K.Channel.ID = new TextField('channelId');
+K.Channel.REF = new TextField('ref');
 K.Channel.NAME = new TextField('name');
 K.Channel.SYNOPSIS = new TextField('synopsis');
 K.Channel.LOGICAL_POSITION = new NumericField('logicalPosition');
