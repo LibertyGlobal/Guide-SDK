@@ -16,7 +16,7 @@
     kraken.config.region = 'NL';
 
     kraken.Broadcast.create()
-            .limit(2)
+            .limit(256)
             .fields(kraken.Broadcast.ID, kraken.Broadcast.TITLE, kraken.Broadcast.START, kraken.Broadcast.SYNOPSIS)
             .filter(kraken.Broadcast.START.greaterThan('2013-06-24T09:23Z'))
             .filter(kraken.Broadcast.CATEGORY.equalTo('sport'))

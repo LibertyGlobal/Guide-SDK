@@ -112,7 +112,7 @@ EntityBase.prototype._buildURLFromElements = function () {
     this._requestURL = K.config.APIURL;
 
     if (K.config.region !== '') {
-        this._requestURL += 'regions/' + K.config.region + '/';
+        this._requestURL += K.config.region + '/';
     }
 
     this._requestURL += this._baseURL;

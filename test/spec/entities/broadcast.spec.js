@@ -17,28 +17,21 @@ describe('K.Broadcast', function () {
         describe('TITLE', function () {
             it('should represent "title" attribute', function () {
                 expect(K.Broadcast.TITLE).toEqual(jasmine.any(AbstractField));
-                expect(K.Broadcast.TITLE.toString()).toEqual('title');
+                expect(K.Broadcast.TITLE.toString()).toEqual('video.title');
             });
         });
 
         describe('CATEGORY', function () {
             it('should represent "category" attribute', function () {
                 expect(K.Broadcast.CATEGORY).toEqual(jasmine.any(AbstractField));
-                expect(K.Broadcast.CATEGORY.toString()).toEqual('category');
-            });
-        });
-
-        describe('EPISODE', function () {
-            it('should represent "episode" attribute', function () {
-                expect(K.Broadcast.EPISODE).toEqual(jasmine.any(AbstractField));
-                expect(K.Broadcast.EPISODE.toString()).toEqual('episode');
+                expect(K.Broadcast.CATEGORY.toString()).toEqual('video.category');
             });
         });
 
         describe('SYNOPSIS', function () {
             it('should represent "synopsis" attribute', function () {
                 expect(K.Broadcast.SYNOPSIS).toEqual(jasmine.any(AbstractField));
-                expect(K.Broadcast.SYNOPSIS.toString()).toEqual('synopsis');
+                expect(K.Broadcast.SYNOPSIS.toString()).toEqual('video.synopsis');
             });
         });
 
@@ -56,45 +49,17 @@ describe('K.Broadcast', function () {
             });
         });
 
-        describe('YEAR', function () {
-            it('should represent "year" attribute', function () {
-                expect(K.Broadcast.YEAR).toEqual(jasmine.any(AbstractField));
-                expect(K.Broadcast.YEAR.toString()).toEqual('year');
-            });
-        });
-
         describe('VIDEO_ID', function () {
             it('should represent "videoId" attribute', function () {
                 expect(K.Broadcast.VIDEO_ID).toEqual(jasmine.any(AbstractField));
-                expect(K.Broadcast.VIDEO_ID.toString()).toEqual('videoId');
-            });
-        });
-
-        describe('CHANNEL_REF', function () {
-            it('should represent "channelRef" attribute', function () {
-                expect(K.Broadcast.CHANNEL_REF).toEqual(jasmine.any(AbstractField));
-                expect(K.Broadcast.CHANNEL_REF.toString()).toEqual('channel.ref');
-            });
-        });
-
-        describe('SELF_LINK', function () {
-            it('should represent "selfLink" attribute', function () {
-                expect(K.Broadcast.SELF_LINK).toEqual(jasmine.any(AbstractField));
-                expect(K.Broadcast.SELF_LINK.toString()).toEqual('selfLink');
-            });
-        });
-
-        describe('MORE_LINK', function () {
-            it('should represent "moreLink" attribute', function () {
-                expect(K.Broadcast.MORE_LINK).toEqual(jasmine.any(AbstractField));
-                expect(K.Broadcast.MORE_LINK.toString()).toEqual('moreLink');
+                expect(K.Broadcast.VIDEO_ID.toString()).toEqual('video.id');
             });
         });
 
         describe('OPENGRAPH_LINK', function () {
             it('should represent "opengraphLink" attribute', function () {
                 expect(K.Broadcast.OPENGRAPH_LINK).toEqual(jasmine.any(AbstractField));
-                expect(K.Broadcast.OPENGRAPH_LINK.toString()).toEqual('opengraphLink');
+                expect(K.Broadcast.OPENGRAPH_LINK.toString()).toEqual('video.opengraphLink');
             });
         });
     });

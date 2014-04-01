@@ -8,7 +8,7 @@ K.config = {
      * Represents URL of Kraken REST server.
      * @const kraken.config.APIURL
      */
-    APIURL: 'http://appdev.io/kraken/v2/schedule/',
+    APIURL: '//lgi.io/kraken/v2/schedule/data/',
     /**
      * Represents URL of Kraken REST server.
      * @const kraken.config.region

@@ -2,7 +2,7 @@
 // ----------------------------------
 // v0.2.7
 //
-// Copyright (c) 2013 Liberty Global
+// Copyright (c) 2014 Liberty Global
 // Distributed under BSD license
 
 (function (root, factory) {
@@ -178,7 +178,7 @@
          * Represents URL of Kraken REST server.
          * @const kraken.config.APIURL
          */
-        APIURL: 'http://appdev.io/kraken/v2/schedule/',
+        APIURL: '//lgi.io/kraken/v2/schedule/data/',
         /**
          * Represents URL of Kraken REST server.
          * @const kraken.config.region
@@ -599,7 +599,7 @@
         this._requestURL = K.config.APIURL;
     
         if (K.config.region !== '') {
-            this._requestURL += 'regions/' + K.config.region + '/';
+            this._requestURL += K.config.region + '/';
         }
     
         this._requestURL += this._baseURL;
@@ -661,26 +661,27 @@
     K.Broadcast.ID = new RootChangingField('id', 'broadcasts');
     K.Broadcast.START = new NumericField('start');
     K.Broadcast.END = new NumericField('end');
-    K.Broadcast.CRID = new TextField('crid');
+    K.Broadcast.CRID = new TextField('video.crid');
     K.Broadcast.IMI = new TextField('imi');
     K.Broadcast.CHANNEL = new TextField('channel');
-    K.Broadcast.CHANNEL_REF = new PrependField('channel.ref', 'channels');
-    K.Broadcast.STATISTICS = new TextField('statistics');
-    K.Broadcast.VIDEO_ID = new TextField('videoId');
-    K.Broadcast.IMDB_ID = new TextField('imdbId');
-    K.Broadcast.YEAR = new NumericField('year');
-    K.Broadcast.TITLE = new TextField('title');
-    K.Broadcast.SYNOPSIS = new TextField('synopsis');
-    K.Broadcast.CATEGORY = new TextField('category');
-    K.Broadcast.OPENGRAPH_LINK = new TextField('opengraphLink');
-    K.Broadcast.SELF_LINK = new TextField('selfLink');
-    K.Broadcast.CAST = new TextField('cast');
-    K.Broadcast.DIRECTORS = new TextField('directors');
-    K.Broadcast.WRITERS = new TextField('writers');
-    K.Broadcast.EPISODE = new NumericField('episode');
-    K.Broadcast.SEASON = new NumericField('season');
-    K.Broadcast.IMAGE_LINK = new NumericField('imageLink');
-    K.Broadcast.MORE_LINK = new TextField('moreLink');
+    K.Broadcast.CHANNEL_NAME = new TextField('channel.name');
+    //K.Broadcast.CHANNEL_REF = new PrependField('channel.ref', 'channels');
+    //K.Broadcast.STATISTICS = new TextField('video.statistics');
+    K.Broadcast.VIDEO_ID = new TextField('video.id');
+    K.Broadcast.TITLE = new TextField('video.title');
+    K.Broadcast.SYNOPSIS = new TextField('video.synopsis');
+    K.Broadcast.AGE_RATING = new TextField('video.ageRating');
+    K.Broadcast.CATEGORY = new TextField('video.category');
+    K.Broadcast.OPENGRAPH_LINK = new TextField('video.opengraphLink');
+    //K.Broadcast.SELF_LINK = new TextField('selfLink');
+    K.Broadcast.CAST = new TextField('video.cast');
+    K.Broadcast.DIRECTORS = new TextField('video.directors');
+    K.Broadcast.WRITERS = new TextField('video.writers');
+    //K.Broadcast.EPISODE = new NumericField('episode');
+    //K.Broadcast.SEASON = new NumericField('season');
+    K.Broadcast.IMAGE_LINK = new NumericField('video.imageLink');
+    K.Broadcast.BPM = new NumericField('statistics.bpm');
+    //K.Broadcast.MORE_LINK = new TextField('moreLink');
     
     K.Broadcast.prototype = Object.create(EntityBase.prototype);
     K.Broadcast.prototype._baseURL = 'broadcasts.json?';
