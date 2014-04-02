@@ -485,6 +485,15 @@
         return this.items.slice(0);
     };
     
+    
+    /**
+     * Resets data.
+     * @method Collection#reset
+     */
+    Collection.prototype.reset = function () {
+        return this.items = [];
+    };
+    
     /**
      * Represents base query-building logic
      * @namespace kraken
@@ -630,8 +639,8 @@
     };
     
     EntityBase.prototype._processResponse = function (response) {
-        this.filters = response.filter;
-        this.sortings = response.order;
+        this.filters = response.filter || this.filters;
+        this.sortings = response.order || this.sortings;
     };
     
     EntityBase.prototype._createScopedCallback = function (callback) {

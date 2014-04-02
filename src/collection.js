@@ -66,3 +66,12 @@ Collection.prototype.get = function (index) {
 Collection.prototype.toArray = function () {
     return this.items.slice(0);
 };
+
+
+/**
+ * Resets data.
+ * @method Collection#reset
+ */
+Collection.prototype.reset = function () {
+    return this.items = [];
+};

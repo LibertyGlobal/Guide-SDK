@@ -143,8 +143,8 @@ EntityBase.prototype._processData = function (data) {
 };
 
 EntityBase.prototype._processResponse = function (response) {
-    this.filters = response.filter;
-    this.sortings = response.order;
+    this.filters = response.filter || this.filters;
+    this.sortings = response.order || this.sortings;
 };
 
 EntityBase.prototype._createScopedCallback = function (callback) {
