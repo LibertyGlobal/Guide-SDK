@@ -73,5 +73,6 @@ Collection.prototype.toArray = function () {
  * @method Collection#reset
  */
 Collection.prototype.reset = function () {
-    return this.items = [];
+    this.items = [];
+    return this.items;
 };

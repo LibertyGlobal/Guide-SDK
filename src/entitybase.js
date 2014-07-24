@@ -111,6 +111,10 @@ EntityBase.prototype._addURLModification = function (modificationObject) {
 EntityBase.prototype._buildURLFromElements = function () {
     this._requestURL = K.config.APIURL;
 
+    if (this._URLprefix !== undefined) {
+        this._requestURL += this._URLprefix;
+    }
+
     if (K.config.region !== '') {
         this._requestURL += K.config.region + '/';
     }

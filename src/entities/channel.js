@@ -14,7 +14,6 @@ K.Channel = function () {
 
 K.Channel.REF = new TextField('ref');
 K.Channel.NAME = new TextField('name');
-K.Channel.SYNOPSIS = new TextField('synopsis');
 K.Channel.LOGICAL_POSITION = new NumericField('logicalPosition');
 K.Channel.LOGO_LINK = new TextField('logoLink');
 K.Channel.BROADCASTS_LINK = new TextField('broadcastsLink');
@@ -27,3 +26,4 @@ K.utils.addFactory(K.Channel);
 
 K.Channel.prototype = Object.create(EntityBase.prototype);
 K.Channel.prototype._baseURL = 'channels.json?';
+K.Channel.prototype._URLprefix = 'data/';

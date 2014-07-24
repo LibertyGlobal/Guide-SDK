@@ -92,7 +92,7 @@ module.exports = function (grunt) {
         watch: {
             all: {
                 files: [ '<%= meta.src %>/**/*.js', '<%= meta.spec %>/**/*.js' ],
-                tasks: [ 'test' ]
+                tasks: [ 'build' ]
             }
         },
 

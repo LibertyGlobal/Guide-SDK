@@ -11,8 +11,11 @@
         console.log(data);
         this.each(function(element){
             console.log(element.id);
-        })
+        });
+        alert('Wow! There is some output into console.');
     }
-    kraken.Region.create().findOne(onCountriesReceived);
+    kraken.Region.create()
+            .fields(kraken.Region.CATEGORIES, kraken.Region.NAME)
+            .findOne(onCountriesReceived);
 </script>
 </html>

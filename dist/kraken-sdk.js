@@ -178,7 +178,7 @@
          * Represents URL of Kraken REST server.
          * @const kraken.config.APIURL
          */
-        APIURL: '//lgi.io/kraken/v2/schedule/data/',
+        APIURL: '//lgi.io/kraken/v2/schedule/',
         /**
          * Represents URL of Kraken REST server.
          * @const kraken.config.region
@@ -491,7 +491,8 @@
      * @method Collection#reset
      */
     Collection.prototype.reset = function () {
-        return this.items = [];
+        this.items = [];
+        return this.items;
     };
     
     /**
@@ -607,6 +608,10 @@
     EntityBase.prototype._buildURLFromElements = function () {
         this._requestURL = K.config.APIURL;
     
+        if (this._URLprefix !== undefined) {
+            this._requestURL += this._URLprefix;
+        }
+    
         if (K.config.region !== '') {
             this._requestURL += K.config.region + '/';
         }
@@ -681,7 +686,8 @@
     K.Broadcast.SYNOPSIS = new TextField('video.synopsis');
     K.Broadcast.AGE_RATING = new TextField('video.ageRating');
     K.Broadcast.CATEGORY = new TextField('video.category');
-    K.Broadcast.OPENGRAPH_LINK = new TextField('video.opengraphLink');
+    //K.Broadcast.OPENGRAPH_LINK = new TextField('video.opengraphLink');
+    K.Broadcast.RECORD_LINK = new TextField('video.recordLink');
     //K.Broadcast.SELF_LINK = new TextField('selfLink');
     K.Broadcast.CAST = new TextField('video.cast');
     K.Broadcast.DIRECTORS = new TextField('video.directors');
@@ -692,10 +698,11 @@
     K.Broadcast.BPM = new NumericField('statistics.bpm');
     //K.Broadcast.MORE_LINK = new TextField('moreLink');
     
+    K.utils.addFactory(K.Broadcast);
+    
     K.Broadcast.prototype = Object.create(EntityBase.prototype);
     K.Broadcast.prototype._baseURL = 'broadcasts.json?';
-    
-    K.utils.addFactory(K.Broadcast);
+    K.Broadcast.prototype._URLprefix = 'data/';
     /**
      * Class describes channel-specific fields and request logic
      * @namespace kraken.entities
@@ -712,7 +719,6 @@
     
     K.Channel.REF = new TextField('ref');
     K.Channel.NAME = new TextField('name');
-    K.Channel.SYNOPSIS = new TextField('synopsis');
     K.Channel.LOGICAL_POSITION = new NumericField('logicalPosition');
     K.Channel.LOGO_LINK = new TextField('logoLink');
     K.Channel.BROADCASTS_LINK = new TextField('broadcastsLink');
@@ -725,6 +731,7 @@
     
     K.Channel.prototype = Object.create(EntityBase.prototype);
     K.Channel.prototype._baseURL = 'channels.json?';
+    K.Channel.prototype._URLprefix = 'data/';
     /**
      * Encapsulates Region-specific fields and request logic
      * @namespace kraken.entities
@@ -737,6 +744,8 @@
     
     K.Region.ID = new TextField('id');
     K.Region.NAME = new TextField('name');
+    K.Region.SUBREGIONS = new TextField('subregions');
+    K.Region.GENRES = new TextField('genres');
     K.Region.CATEGORIES = new TextField('categories');
     K.Region.CHANNEL_LINEUP_LINK = new TextField('channelLineupLink');
     K.Region.SELF_LINK = new TextField('selfLink');
@@ -747,6 +756,44 @@
     
     K.Region.prototype = Object.create(EntityBase.prototype);
     K.Region.prototype._baseURL = 'regions.json?';
+    /**
+     * Class describes video-specific fields and request logic
+     * @namespace kraken.entities
+     * @class Video
+     * @extends EntityBase
+     */
+    
+    K.Video = function () {
+        EntityBase.call(this);
+        if (kraken.config.region === undefined) {
+            console.warn('Please, specify region before sending requests to Video endpoint.');
+        }
+    };
+    
+    K.Video.ID = new RootChangingField('id', 'videos');
+    K.Video.TITLE = new TextField('title');
+    K.Video.SYNOPSIS = new TextField('synopsis');
+    K.Video.CATEGORY = new TextField('category');
+    K.Video.SEASON = new NumericField('season');
+    K.Video.EPISODE = new NumericField('episode');
+    K.Video.CRID = new TextField('crid');
+    K.Video.STATISTICS = new TextField('statistics');
+    K.Video.AGE_RATING = new TextField('ageRating');
+    K.Video.IMAGE_LINK = new TextField('imageLink');
+    K.Video.OPENGRAPH_LINK = new TextField('opengraphLink');
+    K.Video.SELF_LINK = new TextField('selfLink');
+    K.Video.CAST = new TextField('cast');
+    K.Video.DIRECTORS = new TextField('directors');
+    K.Video.WRITERS = new TextField('writers');
+    K.Video.BPM = new NumericField('statistics.bpm');
+    K.Video.POPULARITY = new NumericField('statistics.popularity');
+    K.Video.MORE_LINK = new TextField('moreLink');
+    
+    K.utils.addFactory(K.Video);
+    
+    K.Video.prototype = Object.create(EntityBase.prototype);
+    K.Video.prototype._baseURL = 'videos.json?';
+    K.Video.prototype._URLprefix = 'data/';
 
     return K;
 

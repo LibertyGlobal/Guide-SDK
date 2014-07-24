@@ -26,7 +26,8 @@ K.Broadcast.TITLE = new TextField('video.title');
 K.Broadcast.SYNOPSIS = new TextField('video.synopsis');
 K.Broadcast.AGE_RATING = new TextField('video.ageRating');
 K.Broadcast.CATEGORY = new TextField('video.category');
-K.Broadcast.OPENGRAPH_LINK = new TextField('video.opengraphLink');
+//K.Broadcast.OPENGRAPH_LINK = new TextField('video.opengraphLink');
+K.Broadcast.RECORD_LINK = new TextField('video.recordLink');
 //K.Broadcast.SELF_LINK = new TextField('selfLink');
 K.Broadcast.CAST = new TextField('video.cast');
 K.Broadcast.DIRECTORS = new TextField('video.directors');
@@ -37,7 +38,8 @@ K.Broadcast.IMAGE_LINK = new NumericField('video.imageLink');
 K.Broadcast.BPM = new NumericField('statistics.bpm');
 //K.Broadcast.MORE_LINK = new TextField('moreLink');
 
+K.utils.addFactory(K.Broadcast);
+
 K.Broadcast.prototype = Object.create(EntityBase.prototype);
 K.Broadcast.prototype._baseURL = 'broadcasts.json?';
-
-K.utils.addFactory(K.Broadcast);
+K.Broadcast.prototype._URLprefix = 'data/';

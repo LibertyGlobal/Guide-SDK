@@ -7,7 +7,7 @@
 </body>
 <script src="../../dist/kraken-sdk.js"></script>
 <script>
-    var onBroadcastsReceived = function(data){
+    var onVideosReceived = function(data){
         this.each(function(element){
             console.log(element);
         });
@@ -16,12 +16,11 @@
 
     kraken.config.region = 'NL';
 
-    kraken.Broadcast.create()
+    kraken.Video.create()
             .limit(256)
-            .fields(kraken.Broadcast.ID, kraken.Broadcast.TITLE, kraken.Broadcast.START, kraken.Broadcast.SYNOPSIS)
-            .filter(kraken.Broadcast.START.greaterThan('2014-06-24T09:23Z'))
-            .filter(kraken.Broadcast.CATEGORY.equalTo('sport'))
-            .findOne(onBroadcastsReceived);
+            .fields(kraken.Video.ID, kraken.Video.TITLE, kraken.Video.SYNOPSIS, kraken.Video.CAST)
+            .filter(kraken.Video.CATEGORY.equalTo('movie'))
+            .findOne(onVideosReceived);
 
 </script>
 </html>

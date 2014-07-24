@@ -10,6 +10,8 @@ K.Region = function () {
 
 K.Region.ID = new TextField('id');
 K.Region.NAME = new TextField('name');
+K.Region.SUBREGIONS = new TextField('subregions');
+K.Region.GENRES = new TextField('genres');
 K.Region.CATEGORIES = new TextField('categories');
 K.Region.CHANNEL_LINEUP_LINK = new TextField('channelLineupLink');
 K.Region.SELF_LINK = new TextField('selfLink');
