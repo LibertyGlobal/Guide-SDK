@@ -696,6 +696,7 @@
     //K.Broadcast.SEASON = new NumericField('season');
     K.Broadcast.IMAGE_LINK = new NumericField('video.imageLink');
     K.Broadcast.BPM = new NumericField('statistics.bpm');
+    K.Broadcast.POPULARITY = new NumericField('statistics.popularity');
     //K.Broadcast.MORE_LINK = new TextField('moreLink');
     
     K.utils.addFactory(K.Broadcast);

@@ -13,49 +13,55 @@ Basic concepts
 
 SDK contains few public classes representing API entities:
 
-* Channel
 * Broadcast
+* Channel
+* Video
 * Region
 
-Entities work very similar to jQuery objects. They encapsulate request building, request executing logic and data collection storage.
+Entities in fact are query builders and encapsulate logic for retrieving data,  filtering, sorting and paging.
 
 
 Usage examples
 --------------
 
 ####Basic example####
-Let's look at most basic example - getting list of countries supported by API.
-This code creates new Region object and gets all records without filtering or sorting.
+Let's look at the most basic example - getting list of regions supported by API.
+Following code gets all records without filtering or sorting.
 
     kraken.Region.create().findAll(dataReceivedCallback);
+    
+    //Response
+    0: Object
+        id: "HU"
+    1: Object
+        id: "IE"
+    2: Object
+        id: "NL"
 
 
 ####Limiting response size####
-You are free to get only first two countries. Let`s modify our example.
+You can limit number of countries in response. Let`s modify previous example.
 
     kraken.Region.create()
     .limit(2)
     .findOne(dataReceivedCallback);
+    
+    //Response
+    0: Object
+        id: "HU"
+    1: Object
+        id: "IE"
 
+This applies to every kind of entity: broadcasts, videos, channels.
 
 ####Paging and difference between findOne, findAll and findNext methods####
-API supports paging and to work with it on client side three data retrieval methods are supported:
+API supports paging and three data retrieval methods are supported:
 
 * __findOne__ - retrieves first page of data,
 * __findNext__ - retrieves next page of data,
 * __findAll__ - retrieves all data pages available for your request.
 
-Maximum possible response (page) size is 128 records and default size is the same.
 You can set particular page size by using `limit()`.
-
-
-####Specifying fields to retrieve####
-It's quite important to get only data you really need, so please, specify fields as following.
-
-    kraken.config.region = 'NL';
-    kraken.Channel.create()
-    .fields(kraken.Channel.TITLE, kraken.Channel.ID)
-    .findAll(dataReceivedCallback);
 
 
 ####Filtering####
@@ -68,14 +74,26 @@ Most advanced tool for specific data retrieval is filtering. In this example we 
 
 
 ####Sorting####
-This will get all channels sorted by title:
+This will get a page of broadcasts for Ierland sorted by popularity:
+
+    kraken.config.region = 'IE';
+    kraken.Broadcast.create()
+            .fields(kraken.Broadcast.ID, kraken.Broadcast.TITLE)
+            .sort(kraken.Broadcast.POPULARITY, 'desc')
+            .findOne(onBroadcastsReceived);
+
+Almost all fields are sortable.
+
+
+####Specifying fields to retrieve####
+Sometimes it is important to minimize response size by getting only data you really need. You can specify fields to retrieve as following.
 
     kraken.config.region = 'NL';
     kraken.Channel.create()
-    .sort(kraken.Channel.title, 'desc')
+    .fields(kraken.Channel.NAME, kraken.Channel.REF)
     .findAll(dataReceivedCallback);
-
-BTW sorting on Broadcast class instances will not work in beta.
+    
+Keep in mind that retrieving any data on channels, videos or broadcasts needs region configuration.
 
 
 Bug tracker
