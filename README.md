@@ -52,7 +52,7 @@ You can limit number of countries in response. Let`s modify previous example.
     1: Object
         id: "IE"
 
-This applies to every kind of entity: broadcasts, videos, channels.
+This applies to every kind of entity: broadcasts, videos, channels. Keep in mind that retrieving any data on channels, videos or broadcasts requires region configuration.
 
 ####Paging and difference between findOne, findAll and findNext methods####
 API supports paging and three data retrieval methods are supported:
@@ -92,8 +92,6 @@ Sometimes it is important to minimize response size by getting only data you rea
     kraken.Channel.create()
     .fields(kraken.Channel.NAME, kraken.Channel.REF)
     .findAll(dataReceivedCallback);
-    
-Keep in mind that retrieving any data on channels, videos or broadcasts needs region configuration.
 
 
 Bug tracker
