@@ -121,14 +121,14 @@ EntityBase.prototype._buildURLFromElements = function () {
 
     this._requestURL += this._baseURL;
 
-    for (var i = 0; i < this._queryModificationActions.length; i++){
+    for (var i = 0; i < this._queryModificationActions.length; i++) {
         //If processing is an action object - execute actionFunction on current URL
-        if (this._queryModificationActions[i].actionFunction){
+        if (this._queryModificationActions[i].actionFunction) {
             this._requestURL = this._executeModificationAction(this._queryModificationActions[i]);
         } else {
             //If this is just a string - concat
             var joinSymbol = '&';
-            if (i === 0){
+            if (i === 0) {
                 joinSymbol = '';
             }
             this._requestURL += joinSymbol + this._queryModificationActions[i];
@@ -138,7 +138,7 @@ EntityBase.prototype._buildURLFromElements = function () {
     return this._requestURL;
 };
 
-EntityBase.prototype._executeModificationAction = function(actionObject){
+EntityBase.prototype._executeModificationAction = function (actionObject) {
     return actionObject.actionFunction.apply(actionObject.context, [this._requestURL, actionObject.stringValue]);
 }
 
@@ -152,10 +152,14 @@ EntityBase.prototype._processResponse = function (response) {
 };
 
 EntityBase.prototype._createScopedCallback = function (callback) {
+
     var scopedCallback = function (data, response) {
         this._processData(data);
         this._processResponse(response);
-        callback.bind(this)(data);
+
+        if (callback !== undefined) {
+            callback.bind(this)(data);
+        }
     };
 
     return scopedCallback.bind(this);

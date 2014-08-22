@@ -36,7 +36,9 @@ Request.prototype.proceedResponse = function (response, nextBatchSteps, pipeline
     if ((nextBatchSteps > 0 || nextBatchSteps === undefined) && this.nextBatchLinkURL !== undefined) {
         requestTransport(this.nextBatchLinkURL, this.createScopedCallback(callback, nextBatchSteps, pipelineData));
     } else {
-        callback.bind(this)(pipelineData, response);
+        if (callback !== undefined) {
+            callback.bind(this)(pipelineData, response);
+        }
     }
 };
 

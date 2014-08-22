@@ -11,33 +11,23 @@ Explore [official page](http://appdev.io) and [JSDoc](http://htmlpreview.github.
 Basic concepts
 --------------
 
-SDK contains few public classes representing API entities:
+SDK contains two public classes representing API entities:
 
 * Broadcast
-* Channel
 * Video
-* Region
 
-Entities in fact are query builders and encapsulate logic for retrieving data,  filtering, sorting and paging.
+They are in fact are query builders and encapsulate logic for retrieving data, filtering, sorting and paging.
 
 
 Usage examples
 --------------
 
 ####Basic example####
-Let's look at the most basic example - getting list of regions supported by API.
-Following code gets all records without filtering or sorting.
+Let's look at the most basic example - getting list of broadcasts without filtering or sorting.
 
-    kraken.Region.create().findAll(dataReceivedCallback);
-    
-    //Response
-    0: Object
-        id: "HU"
-    1: Object
-        id: "IE"
-    2: Object
-        id: "NL"
+    var broadcasts = kraken.Broadcast.create().findOne(dataReceivedCallback);
 
+    //
 
 ####Limiting response size####
 You can limit number of countries in response. Let`s modify previous example.
