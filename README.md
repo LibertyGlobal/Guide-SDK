@@ -1,11 +1,9 @@
 ![Kraken beta logo](https://github.com/LibertyGlobal/Kraken-SDK/blob/master/doc/img/logo-kraken.png?raw=true)
 
-LGI TV Guide JS SDK
+TV Guide JS SDK
 =====================
 
-SDK provides simple way to retrieve TV schedule data.
-
-Explore [official page](http://appdev.io) and [JSDoc](http://htmlpreview.github.io/?http://raw.github.com/LibertyGlobal/Kraken-SDK/master/doc/index.html) for more information.
+SDK provides a simple way to retrieve TV schedule data.
 
 
 Basic concepts
@@ -16,8 +14,7 @@ SDK contains few public classes representing API entities:
 * Video (a piece of video material could be movie or news issue etc.)
 * Broadcast (a piece of video at a particular time on particular channel, always include)
 
-
-Video
+Broadcast always includes video.
 
 Entities are query builders encapsulating data retrieval logic, filtering, sorting and paging.
 
@@ -39,10 +36,8 @@ Following regions are supported:
 
 ####Basic example####
 Let's look at the most basic example - getting list of broadcasts for Netherlands without any filtering or sorting.
-
-	LGI.Guide.config.region = 'NL';
 	
-    var broadcastsObject = LGI.Guide.Video.create()
+    var broadcastsData = LGI.Guide.Video.create()
     	.findOne(dataReceivedCallback);
     	
     //Response
@@ -57,8 +52,6 @@ Probably you are wondered with result containing only _selfLink property. This h
 
 ####Specifying fields to retrieve####
 Let`s specify fields to retrieve as following.
-
-    LGI.Guide.config.region = 'NL';
     
     LGI.Guide.Video.create()
     	.fields(LGI.Guide.Video.ID, LGI.Guide.Video.TITLE)
@@ -77,7 +70,6 @@ Much better! Now we have videos with IDs and titles.
 ####Limiting response size####
 You can limit number of broadcasts or videos in response.
 
-    LGI.Guide.config.region = 'NL';
     LGI.Guide.Broadcast.create()
     	.fields(LGI.Guide.Broadcast.ID, LGI.Guide.Broadcast.TITLE)
     	.limit(2)
@@ -96,7 +88,6 @@ You can set particular page size by using `limit()`.
 ####Filtering####
 Most advanced tool for specific data retrieval is filtering. In this example we will get only broadcasts with category equal to sports.
 
-    LGI.Guide.config.region = 'NL';
     LGI.Guide.Broadcast.create()
     	.filter(LGI.Guide.Broadcast.category.isEqual('sports'))
     	.findAll(dataReceivedCallback);
@@ -105,7 +96,6 @@ Most advanced tool for specific data retrieval is filtering. In this example we 
 ####Sorting####
 This will get a page of broadcasts for Ierland sorted by popularity:
 
-    LGI.Guide.config.region = 'IE';
     LGI.Guide.Broadcast.create()
     	.fields(LGI.Guide.Broadcast.ID, LGI.Guide.Broadcast.TITLE)
         .sort(LGI.Guide.Broadcast.POPULARITY, 'desc')
@@ -113,6 +103,7 @@ This will get a page of broadcasts for Ierland sorted by popularity:
 
 Almost all fields are sortable.
     
+Explore [official page](http://appdev.io) and [JSDoc](http://htmlpreview.github.io/?http://raw.github.com/LibertyGlobal/Kraken-SDK/master/doc/index.html) for more information.
 
 Bug tracker
 -----------
