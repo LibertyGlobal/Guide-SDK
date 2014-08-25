@@ -1,4 +1,4 @@
-var kraken = require('../../dist/lgi-guide-sdk.js');
+var guide = require('../../dist/lgi-guide-sdk.js');
 
 var onDataRetrieved = function(d){
     console.log(d);
@@ -7,4 +7,4 @@ var onDataRetrieved = function(d){
     })
 };
 
-LGI.Guide.Region.create().findAll(onDataRetrieved);
+guide.Region.create().findAll(onDataRetrieved);

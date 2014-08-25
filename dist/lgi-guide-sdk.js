@@ -120,6 +120,10 @@
     
     var nodeRequest = function () {
         function nodeRequest(url, callback, errorCallback) {
+            if (url.indexOf('http:') === -1) {
+                url = 'http:' + url;
+            }
+    
             var http = require('http');
             var urlmodule = require('url');
             var urlData = urlmodule.parse(url, true);
