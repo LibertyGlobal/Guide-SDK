@@ -16,14 +16,14 @@ SDK contains few public classes representing API entities:
 
 Broadcast always includes video.
 
-Entities are query builders encapsulating data retrieval logic, filtering, sorting and paging.
+Entities are query builders encapsulating data retrieval functions, filtering, sorting and paging.
 
 
 Usage examples
 --------------
 
 ####Regions####
-Always specify region before start. 
+Always specify region before start.
 
 	LGI.Guide.config.region = 'NL';
 
@@ -94,7 +94,7 @@ Most advanced tool for specific data retrieval is filtering. In this example we 
 
 
 ####Sorting####
-This will get a page of broadcasts for Ierland sorted by popularity:
+This will retrieve a page of broadcasts for Ierland sorted by popularity:
 
     LGI.Guide.Broadcast.create()
     	.fields(LGI.Guide.Broadcast.ID, LGI.Guide.Broadcast.TITLE)
@@ -103,7 +103,7 @@ This will get a page of broadcasts for Ierland sorted by popularity:
 
 Almost all fields are sortable.
     
-Explore [official page](http://appdev.io) and [JSDoc](http://htmlpreview.github.io/?http://raw.github.com/LibertyGlobal/Kraken-SDK/master/doc/index.html) for more information.
+Explore [JSDoc](http://htmlpreview.github.io/?http://raw.github.com/LibertyGlobal/Kraken-SDK/master/doc/index.html) for available fields lists and more information.
 
 Bug tracker
 -----------
