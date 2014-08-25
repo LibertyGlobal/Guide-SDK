@@ -1,7 +1,7 @@
 /**
  * Represents basic functionality for Kraken data sets.
  *
- * @namespace kraken
+ * @namespace LGI.Guide
  * @class Collection
  */
 

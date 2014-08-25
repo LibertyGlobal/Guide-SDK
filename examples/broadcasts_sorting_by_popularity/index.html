@@ -5,7 +5,7 @@
 </head>
 <body>
 </body>
-<script src="../../dist/kraken-sdk.js"></script>
+<script src="../../dist/lgi-guide-sdk.js"></script>
 <script>
     var onBroadcastsReceived = function(data){
         this.each(function(element){
@@ -14,12 +14,12 @@
         alert('Wow! There is some output into console.');
     }
 
-    kraken.config.region = 'IE';
+    LGI.Guide.config.region = 'IE';
 
-    kraken.Broadcast.create()
+    LGI.Guide.Broadcast.create()
             .limit(5)
-            .fields(kraken.Broadcast.ID, kraken.Broadcast.TITLE, kraken.Broadcast.START, kraken.Broadcast.SYNOPSIS)
-            .sort(kraken.Broadcast.POPULARITY, 'desc')
+            .fields(LGI.Guide.Broadcast.ID, LGI.Guide.Broadcast.TITLE, LGI.Guide.Broadcast.START, LGI.Guide.Broadcast.SYNOPSIS)
+            .sort(LGI.Guide.Broadcast.POPULARITY, 'desc')
             .findOne(onBroadcastsReceived);
 
 </script>

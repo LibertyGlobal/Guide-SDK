@@ -5,7 +5,7 @@
 </head>
 <body>
 </body>
-<script src="../../dist/kraken-sdk.js"></script>
+<script src="../../dist/lgi-guide-sdk.js"></script>
 <script>
     var onBroadcastsReceived = function(data){
         this.each(function(element){
@@ -14,13 +14,13 @@
         alert('Wow! There is some output into console.');
     }
 
-    kraken.config.region = 'NL';
+    LGI.Guide.config.region = 'NL';
 
-    kraken.Broadcast.create()
+    LGI.Guide.Broadcast.create()
             .limit(256)
-            .fields(kraken.Broadcast.ID, kraken.Broadcast.TITLE, kraken.Broadcast.START, kraken.Broadcast.SYNOPSIS)
-            .filter(kraken.Broadcast.START.greaterThan('2014-06-24T09:23Z'))
-            .filter(kraken.Broadcast.CATEGORY.equalTo('sport'))
+            .fields(LGI.Guide.Broadcast.ID, LGI.Guide.Broadcast.TITLE, LGI.Guide.Broadcast.START, LGI.Guide.Broadcast.SYNOPSIS)
+            .filter(LGI.Guide.Broadcast.START.greaterThan('2014-06-24T09:23Z'))
+            .filter(LGI.Guide.Broadcast.CATEGORY.equalTo('sport'))
             .findOne(onBroadcastsReceived);
 
 </script>

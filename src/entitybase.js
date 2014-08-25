@@ -1,6 +1,6 @@
 /**
  * Represents base query-building logic
- * @namespace kraken
+ * @namespace LGI.Guide
  * @class EntityBase
  * @extends Collection
  */
@@ -28,7 +28,7 @@ EntityBase.prototype.limit = function (limitTo) {
 };
 
 /**
- * Determines list of fields to be retrieved from server. For example by "a.shows(kraken.channel.id, kraken.channel.name);"
+ * Determines list of fields to be retrieved from server. For example by "a.shows(LGI.Guide.channel.id, LGI.Guide.channel.name);"
  * @method EntityBase#fields
  * @param {string} multipleArgs You can add unlimited number of strings as multiple parameters.
  */
@@ -39,7 +39,7 @@ EntityBase.prototype.fields = function (multipleArgs) {
 };
 
 /**
- * Sets sorting field and order. For example "a.sort(kraken.broadcast.startTime);"
+ * Sets sorting field and order. For example "a.sort(LGI.Guide.broadcast.startTime);"
  * @order EntityBase#sort
  * @param {string} field Field to sort records by.
  * @param {string} [order="asc"] Determines order we want to sort records with - ascendant (asc) or descendant (desc).
@@ -59,7 +59,7 @@ EntityBase.prototype.sort = function (field, order) {
 };
 
 /**
- * Filters data by some of entity properties. For example "a.filter(kraken.channel.id.equalTo(1));"
+ * Filters data by some of entity properties. For example "a.filter(LGI.Guide.channel.id.equalTo(1));"
  * @method EntityBase#filter
  * @param {string} multipleArgs You can add unlimited number of strings as multiple parameters.
  */
@@ -109,14 +109,14 @@ EntityBase.prototype._addURLModification = function (modificationObject) {
 };
 
 EntityBase.prototype._buildURLFromElements = function () {
-    this._requestURL = K.config.APIURL;
+    this._requestURL = LGI.Guide.config.APIURL;
 
     if (this._URLprefix !== undefined) {
         this._requestURL += this._URLprefix;
     }
 
-    if (K.config.region !== '') {
-        this._requestURL += K.config.region + '/';
+    if (LGI.Guide.config.region !== '') {
+        this._requestURL += LGI.Guide.config.region + '/';
     }
 
     this._requestURL += this._baseURL;

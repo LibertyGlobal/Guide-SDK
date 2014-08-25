@@ -1,6 +1,6 @@
 ![Kraken beta logo](https://github.com/LibertyGlobal/Kraken-SDK/blob/master/doc/img/logo-kraken.png?raw=true)
 
-Kraken JavaScript SDK
+LGI TV Guide JS SDK
 =====================
 
 SDK provides simple way to retrieve TV schedule data.
@@ -11,38 +11,77 @@ Explore [official page](http://appdev.io) and [JSDoc](http://htmlpreview.github.
 Basic concepts
 --------------
 
-SDK contains two public classes representing API entities:
+SDK contains few public classes representing API entities:
 
-* Broadcast
-* Video
+* Video (a piece of video material could be movie or news issue etc.)
+* Broadcast (a piece of video at a particular time on particular channel, always include)
 
-They are in fact are query builders and encapsulate logic for retrieving data, filtering, sorting and paging.
+
+Video
+
+Entities are query builders encapsulating data retrieval logic, filtering, sorting and paging.
 
 
 Usage examples
 --------------
 
+####Regions####
+Always specify region before start. 
+
+	LGI.Guide.config.region = 'NL';
+
+Following regions are supported:
+
+- `NL` Netherlands
+- `IE` Ireland
+- `HU` Hungary
+
+
 ####Basic example####
-Let's look at the most basic example - getting list of broadcasts without filtering or sorting.
+Let's look at the most basic example - getting list of broadcasts for Netherlands without any filtering or sorting.
 
-    var broadcasts = kraken.Broadcast.create().findOne(dataReceivedCallback);
+	LGI.Guide.config.region = 'NL';
+	
+    var broadcastsObject = LGI.Guide.Video.create()
+    	.findOne(dataReceivedCallback);
+    	
+    //Response
+    [
+    	{selfLink: Object},
+		{selfLink: Object},
+		{selfLink: Object},
+		{selfLink: Object}
+	]
 
-    //
+Probably you are wondered with result containing only _selfLink property. This happen because it is important to minimize response size by getting only data you really need.
+
+####Specifying fields to retrieve####
+Let`s specify fields to retrieve as following.
+
+    LGI.Guide.config.region = 'NL';
+    
+    LGI.Guide.Video.create()
+    	.fields(LGI.Guide.Video.ID, LGI.Guide.Video.TITLE)
+    	.findOne(dataReceivedCallback);
+    	
+    //Response
+    [
+    	{id: "7shi89fww", title: "Oorlogsverhalen (3)", selfLink: Object},
+		{id: "3yaqesymo", title: "Millivres - Point of View", selfLink: Object},
+		{id: "5jzc9n9c1", title: "Mahabharat", selfLink: Object},
+		{id: "9l2i1y2sb", title: "Baggage Battles", selfLink: Object}
+    ]
+    
+Much better! Now we have videos with IDs and titles.
 
 ####Limiting response size####
-You can limit number of countries in response. Let`s modify previous example.
+You can limit number of broadcasts or videos in response.
 
-    kraken.Region.create()
-    .limit(2)
-    .findOne(dataReceivedCallback);
-    
-    //Response
-    0: Object
-        id: "HU"
-    1: Object
-        id: "IE"
-
-This applies to every kind of entity: broadcasts, videos, channels. Keep in mind that retrieving any data on channels, videos or broadcasts requires region configuration.
+    LGI.Guide.config.region = 'NL';
+    LGI.Guide.Broadcast.create()
+    	.fields(LGI.Guide.Broadcast.ID, LGI.Guide.Broadcast.TITLE)
+    	.limit(2)
+    	.findOne(dataReceivedCallback);
 
 ####Paging and difference between findOne, findAll and findNext methods####
 API supports paging and three data retrieval methods are supported:
@@ -57,32 +96,23 @@ You can set particular page size by using `limit()`.
 ####Filtering####
 Most advanced tool for specific data retrieval is filtering. In this example we will get only broadcasts with category equal to sports.
 
-    kraken.config.region = 'NL';
-    kraken.Broadcast.create()
-    .filter(kraken.Broadcast.category.isEqual('sports'))
-    .findAll(dataReceivedCallback);
+    LGI.Guide.config.region = 'NL';
+    LGI.Guide.Broadcast.create()
+    	.filter(LGI.Guide.Broadcast.category.isEqual('sports'))
+    	.findAll(dataReceivedCallback);
 
 
 ####Sorting####
 This will get a page of broadcasts for Ierland sorted by popularity:
 
-    kraken.config.region = 'IE';
-    kraken.Broadcast.create()
-            .fields(kraken.Broadcast.ID, kraken.Broadcast.TITLE)
-            .sort(kraken.Broadcast.POPULARITY, 'desc')
-            .findOne(onBroadcastsReceived);
+    LGI.Guide.config.region = 'IE';
+    LGI.Guide.Broadcast.create()
+    	.fields(LGI.Guide.Broadcast.ID, LGI.Guide.Broadcast.TITLE)
+        .sort(LGI.Guide.Broadcast.POPULARITY, 'desc')
+        .findOne(dataReceivedCallback);
 
 Almost all fields are sortable.
-
-
-####Specifying fields to retrieve####
-Sometimes it is important to minimize response size by getting only data you really need. You can specify fields to retrieve as following.
-
-    kraken.config.region = 'NL';
-    kraken.Channel.create()
-    .fields(kraken.Channel.NAME, kraken.Channel.REF)
-    .findAll(dataReceivedCallback);
-
+    
 
 Bug tracker
 -----------

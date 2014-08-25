@@ -4,12 +4,13 @@
     } else if (typeof define === 'function' && define.amd) {
         define(factory);
     } else {
-        root.kraken = root.K = factory();
+        root.LGI = {};
+        root.LGI.Guide = factory();
     }
 }(this, function () {
 
     //= main
 
-    return K;
+    return LGI.Guide;
 
 }));

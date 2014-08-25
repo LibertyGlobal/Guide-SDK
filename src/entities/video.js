@@ -1,38 +1,38 @@
 /**
  * Class describes video-specific fields and request logic
- * @namespace kraken.entities
+ * @namespace LGI.Guide.entities
  * @class Video
  * @extends EntityBase
  */
 
-K.Video = function () {
+LGI.Guide.Video = function () {
     EntityBase.call(this);
-    if (kraken.config.region === undefined) {
+    if (LGI.Guide.config.region === undefined) {
         console.warn('Please, specify region before sending requests to Video endpoint.');
     }
 };
 
-K.Video.ID = new RootChangingField('id', 'videos');
-K.Video.TITLE = new TextField('title');
-K.Video.SYNOPSIS = new TextField('synopsis');
-K.Video.CATEGORY = new TextField('category');
-K.Video.SEASON = new NumericField('season');
-K.Video.EPISODE = new NumericField('episode');
-K.Video.CRID = new TextField('crid');
-K.Video.STATISTICS = new TextField('statistics');
-K.Video.AGE_RATING = new TextField('ageRating');
-K.Video.IMAGE_LINK = new TextField('imageLink');
-K.Video.OPENGRAPH_LINK = new TextField('opengraphLink');
-K.Video.SELF_LINK = new TextField('selfLink');
-K.Video.CAST = new TextField('cast');
-K.Video.DIRECTORS = new TextField('directors');
-K.Video.WRITERS = new TextField('writers');
-K.Video.BPM = new NumericField('statistics.bpm');
-K.Video.POPULARITY = new NumericField('statistics.popularity');
-K.Video.MORE_LINK = new TextField('moreLink');
+LGI.Guide.Video.ID = new RootChangingField('id', 'videos');
+LGI.Guide.Video.TITLE = new TextField('title');
+LGI.Guide.Video.SYNOPSIS = new TextField('synopsis');
+LGI.Guide.Video.CATEGORY = new TextField('category');
+LGI.Guide.Video.SEASON = new NumericField('season');
+LGI.Guide.Video.EPISODE = new NumericField('episode');
+LGI.Guide.Video.CRID = new TextField('crid');
+LGI.Guide.Video.STATISTICS = new TextField('statistics');
+LGI.Guide.Video.AGE_RATING = new TextField('ageRating');
+LGI.Guide.Video.IMAGE_LINK = new TextField('imageLink');
+LGI.Guide.Video.OPENGRAPH_LINK = new TextField('opengraphLink');
+LGI.Guide.Video.SELF_LINK = new TextField('selfLink');
+LGI.Guide.Video.CAST = new TextField('cast');
+LGI.Guide.Video.DIRECTORS = new TextField('directors');
+LGI.Guide.Video.WRITERS = new TextField('writers');
+LGI.Guide.Video.BPM = new NumericField('statistics.bpm');
+LGI.Guide.Video.POPULARITY = new NumericField('statistics.popularity');
+LGI.Guide.Video.MORE_LINK = new TextField('moreLink');
 
-K.utils.addFactory(K.Video);
+LGI.Guide.utils.addFactory(LGI.Guide.Video);
 
-K.Video.prototype = Object.create(EntityBase.prototype);
-K.Video.prototype._baseURL = 'videos.json?';
-K.Video.prototype._URLprefix = 'data/';
+LGI.Guide.Video.prototype = Object.create(EntityBase.prototype);
+LGI.Guide.Video.prototype._baseURL = 'videos.json?';
+LGI.Guide.Video.prototype._URLprefix = 'data/';

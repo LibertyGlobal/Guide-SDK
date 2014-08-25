@@ -1,46 +1,46 @@
 /**
  * Class describes broadcast-specific fields and request logic
- * @namespace kraken.entities
+ * @namespace LGI.Guide.entities
  * @class Broadcast
  * @extends EntityBase
  */
 
-K.Broadcast = function () {
+LGI.Guide.Broadcast = function () {
     EntityBase.call(this);
-    if (kraken.config.region === undefined) {
+    if (LGI.Guide.config.region === undefined) {
         console.warn('Please, specify region before sending requests to Broadcasts endpoint.');
     }
 };
 
-K.Broadcast.ID = new RootChangingField('id', 'broadcasts');
-K.Broadcast.START = new NumericField('start');
-K.Broadcast.END = new NumericField('end');
-K.Broadcast.CRID = new TextField('video.crid');
-K.Broadcast.IMI = new TextField('imi');
-K.Broadcast.CHANNEL = new TextField('channel');
-K.Broadcast.CHANNEL_NAME = new TextField('channel.name');
-//K.Broadcast.CHANNEL_REF = new PrependField('channel.ref', 'channels');
-//K.Broadcast.STATISTICS = new TextField('video.statistics');
-K.Broadcast.VIDEO_ID = new TextField('video.id');
-K.Broadcast.TITLE = new TextField('video.title');
-K.Broadcast.SYNOPSIS = new TextField('video.synopsis');
-K.Broadcast.AGE_RATING = new TextField('video.ageRating');
-K.Broadcast.CATEGORY = new TextField('video.category');
-//K.Broadcast.OPENGRAPH_LINK = new TextField('video.opengraphLink');
-K.Broadcast.RECORD_LINK = new TextField('video.recordLink');
-//K.Broadcast.SELF_LINK = new TextField('selfLink');
-K.Broadcast.CAST = new TextField('video.cast');
-K.Broadcast.DIRECTORS = new TextField('video.directors');
-K.Broadcast.WRITERS = new TextField('video.writers');
-//K.Broadcast.EPISODE = new NumericField('episode');
-//K.Broadcast.SEASON = new NumericField('season');
-K.Broadcast.IMAGE_LINK = new NumericField('video.imageLink');
-K.Broadcast.BPM = new NumericField('statistics.bpm');
-K.Broadcast.POPULARITY = new NumericField('statistics.popularity');
-//K.Broadcast.MORE_LINK = new TextField('moreLink');
+LGI.Guide.Broadcast.ID = new RootChangingField('id', 'broadcasts');
+LGI.Guide.Broadcast.START = new NumericField('start');
+LGI.Guide.Broadcast.END = new NumericField('end');
+LGI.Guide.Broadcast.CRID = new TextField('video.crid');
+LGI.Guide.Broadcast.IMI = new TextField('imi');
+LGI.Guide.Broadcast.CHANNEL = new TextField('channel');
+LGI.Guide.Broadcast.CHANNEL_NAME = new TextField('channel.name');
+//LGI.Guide.Broadcast.CHANNEL_REF = new PrependField('channel.ref', 'channels');
+//LGI.Guide.Broadcast.STATISTICS = new TextField('video.statistics');
+LGI.Guide.Broadcast.VIDEO_ID = new TextField('video.id');
+LGI.Guide.Broadcast.TITLE = new TextField('video.title');
+LGI.Guide.Broadcast.SYNOPSIS = new TextField('video.synopsis');
+LGI.Guide.Broadcast.AGE_RATING = new TextField('video.ageRating');
+LGI.Guide.Broadcast.CATEGORY = new TextField('video.category');
+//LGI.Guide.Broadcast.OPENGRAPH_LINK = new TextField('video.opengraphLink');
+LGI.Guide.Broadcast.RECORD_LINK = new TextField('video.recordLink');
+//LGI.Guide.Broadcast.SELF_LINK = new TextField('selfLink');
+LGI.Guide.Broadcast.CAST = new TextField('video.cast');
+LGI.Guide.Broadcast.DIRECTORS = new TextField('video.directors');
+LGI.Guide.Broadcast.WRITERS = new TextField('video.writers');
+//LGI.Guide.Broadcast.EPISODE = new NumericField('episode');
+//LGI.Guide.Broadcast.SEASON = new NumericField('season');
+LGI.Guide.Broadcast.IMAGE_LINK = new NumericField('video.imageLink');
+LGI.Guide.Broadcast.BPM = new NumericField('statistics.bpm');
+LGI.Guide.Broadcast.POPULARITY = new NumericField('statistics.popularity');
+//LGI.Guide.Broadcast.MORE_LINK = new TextField('moreLink');
 
-K.utils.addFactory(K.Broadcast);
+LGI.Guide.utils.addFactory(LGI.Guide.Broadcast);
 
-K.Broadcast.prototype = Object.create(EntityBase.prototype);
-K.Broadcast.prototype._baseURL = 'broadcasts.json?';
-K.Broadcast.prototype._URLprefix = 'data/';
+LGI.Guide.Broadcast.prototype = Object.create(EntityBase.prototype);
+LGI.Guide.Broadcast.prototype._baseURL = 'broadcasts.json?';
+LGI.Guide.Broadcast.prototype._URLprefix = 'data/';

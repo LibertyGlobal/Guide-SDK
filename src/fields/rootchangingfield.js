@@ -1,6 +1,6 @@
 /**
  * Root changing field differs from other fields with it`s behaviour on filtering. Instead of being added to the arguments of request this field should be added as root like /broadcasts/1z,2z.json
- * @namespace kraken.fields
+ * @namespace LGI.Guide.fields
  * @class PrependField
  * @extends AbstractField
  * @tutorial Typical case for using PrependField is to find broadcast by ID.

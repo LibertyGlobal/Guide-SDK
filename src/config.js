@@ -1,17 +1,17 @@
 /**
  * Global variables
- * @namespace kraken.config
+ * @namespace LGI.Guide.config
  */
 
-K.config = {
+LGI.Guide.config = {
     /**
      * Represents URL of Kraken REST server.
-     * @const kraken.config.APIURL
+     * @const LGI.Guide.config.APIURL
      */
     APIURL: '//lgi.io/kraken/v2/schedule/',
     /**
      * Represents URL of Kraken REST server.
-     * @const kraken.config.region
+     * @const LGI.Guide.config.region
      */
     region: ''
 };

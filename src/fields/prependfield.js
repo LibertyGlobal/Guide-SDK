@@ -1,6 +1,6 @@
 /**
  * Prepend field differs from other fields with it`s behaviour on filtering. Instead of being added to the arguments of request this field should be added to URL path.
- * @namespace kraken.fields
+ * @namespace LGI.Guide.fields
  * @class PrependField
  * @extends AbstractField
  * @tutorial Typical case for using PrependField is to find broadcasts by ChannelIds.

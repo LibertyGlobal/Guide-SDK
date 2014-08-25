@@ -5,7 +5,7 @@
 </head>
 <body>
 </body>
-<script src="../../dist/kraken-sdk.js"></script>
+<script src="../../dist/lgi-guide-sdk.js"></script>
 <script>
     var onCountriesReceived = function(data){
         console.log(data);
@@ -14,8 +14,8 @@
         });
         alert('Wow! There is some output into console.');
     }
-    kraken.Region.create()
-            .fields(kraken.Region.CATEGORIES, kraken.Region.NAME)
+    LGI.Guide.Region.create()
+            .fields(LGI.Guide.Region.CATEGORIES, LGI.Guide.Region.NAME)
             .findOne(onCountriesReceived);
 </script>
 </html>

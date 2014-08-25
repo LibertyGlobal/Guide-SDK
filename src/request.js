@@ -1,6 +1,6 @@
 /**
  * Request is a class which is designed to be used as a property of entity to communicate with server and remember state of data transfer
- * @namespace kraken
+ * @namespace LGI.Guide
  * @class Request
  */
 

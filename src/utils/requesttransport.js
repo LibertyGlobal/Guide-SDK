@@ -1,7 +1,7 @@
 /**
  * Determines are we in NodeJS or not and returns right transport module.
- * @namespace kraken
- * @function kraken.requestTransport
+ * @namespace LGI.Guide
+ * @function LGI.Guide.requestTransport
  */
 
 var chooseTransport = function () {

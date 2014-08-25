@@ -27,14 +27,14 @@
         <article>
             <pre class="prettyprint source"><code>/**
  * Class describes channel-specific fields and request logic
- * @namespace kraken.entities
+ * @namespace LGI.Guide.entities
  * @class Channel
  * @extends EntityBase
  */
 
 K.Channel = function () {
     EntityBase.call(this);
-    if (kraken.config.region === undefined) {
+    if (LGI.Guide.config.region === undefined) {
         console.warn('Please, specify region before sending requests to Channel endpoint.');
     }
 };

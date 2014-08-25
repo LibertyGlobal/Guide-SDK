@@ -1,8 +1,6 @@
 //Defining global namespace
-var kraken = {};
-
-//Defining shortcut for namespace
-var K = kraken;
+var LGI = {};
+LGI.Guide = {};
 
 //= utils/utils
 

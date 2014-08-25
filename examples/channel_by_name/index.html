@@ -5,7 +5,7 @@
 </head>
 <body>
 </body>
-<script src="../../dist/kraken-sdk.js"></script>
+<script src="../../dist/lgi-guide-sdk.js"></script>
 <script>
     var onChannelReceived = function(data){
         this.each(function(element){
@@ -14,12 +14,12 @@
         alert('Wow! There is some output into console.');
     }
 
-    kraken.config.region = 'NL';
+    LGI.Guide.config.region = 'NL';
 
-    kraken.Channel.create()
+    LGI.Guide.Channel.create()
             .limit(5)
-            .fields(kraken.Channel.NAME, kraken.Channel.LOGICAL_POSITION)
-            .filter(kraken.Channel.NAME.equalTo('UPC On Demand'))
+            .fields(LGI.Guide.Channel.NAME, LGI.Guide.Channel.LOGICAL_POSITION)
+            .filter(LGI.Guide.Channel.NAME.equalTo('UPC On Demand'))
             .findOne(onChannelReceived);
 
 </script>

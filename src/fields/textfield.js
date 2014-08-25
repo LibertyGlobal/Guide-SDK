@@ -1,6 +1,6 @@
 /**
  * Textual field supports equal and regexp matching.  Fields are used for sorting, filtering data also they represents entities data properties names.
- * @namespace kraken.fields
+ * @namespace LGI.Guide.fields
  * @class TextField
  * @extends AbstractField
  * @tutorial Typical case for using TextField is to find broadcasts in particular category.

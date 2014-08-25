@@ -1,4 +1,4 @@
-// Kraken SDK
+// LGI TV Guide JS SDK
 // ----------------------------------
 // v0.2.7
 //
@@ -11,22 +11,21 @@
     } else if (typeof define === 'function' && define.amd) {
         define(factory);
     } else {
-        root.kraken = root.K = factory();
+        root.LGI = {};
+        root.LGI.Guide = factory();
     }
 }(this, function () {
 
     //Defining global namespace
-    var kraken = {};
-    
-    //Defining shortcut for namespace
-    var K = kraken;
+    var LGI = {};
+    LGI.Guide = {};
     
     /**
      * @namespace utils
      * @module utils
      */
     
-    K.utils = {
+    LGI.Guide.utils = {
         addFactory: function (objectToProceed) {
             objectToProceed.create = function () {
                 return new objectToProceed();
@@ -154,8 +153,8 @@
     
     /**
      * Determines are we in NodeJS or not and returns right transport module.
-     * @namespace kraken
-     * @function kraken.requestTransport
+     * @namespace LGI.Guide
+     * @function LGI.Guide.requestTransport
      */
     
     var chooseTransport = function () {
@@ -170,25 +169,25 @@
     
     /**
      * Global variables
-     * @namespace kraken.config
+     * @namespace LGI.Guide.config
      */
     
-    K.config = {
+    LGI.Guide.config = {
         /**
          * Represents URL of Kraken REST server.
-         * @const kraken.config.APIURL
+         * @const LGI.Guide.config.APIURL
          */
         APIURL: '//lgi.io/kraken/v2/schedule/',
         /**
          * Represents URL of Kraken REST server.
-         * @const kraken.config.region
+         * @const LGI.Guide.config.region
          */
         region: ''
     };
     
     /**
      * Request is a class which is designed to be used as a property of entity to communicate with server and remember state of data transfer
-     * @namespace kraken
+     * @namespace LGI.Guide
      * @class Request
      */
     
@@ -240,7 +239,7 @@
     
     /**
      * Abstract field with generic logic. Fields are used for sorting, filtering data also they represents entities data properties names.
-     * @namespace kraken.fields
+     * @namespace LGI.Guide.fields
      * @class AbstractField
      */
     
@@ -266,7 +265,7 @@
     
     /**
      * Numeric field supports math comparing functions.  Fields are used for sorting, filtering data also they represents entities data properties names.
-     * @namespace kraken.fields
+     * @namespace LGI.Guide.fields
      * @class NumericField
      * @extends AbstractField
      */
@@ -324,7 +323,7 @@
     
     /**
      * Textual field supports equal and regexp matching.  Fields are used for sorting, filtering data also they represents entities data properties names.
-     * @namespace kraken.fields
+     * @namespace LGI.Guide.fields
      * @class TextField
      * @extends AbstractField
      * @tutorial Typical case for using TextField is to find broadcasts in particular category.
@@ -356,7 +355,7 @@
     
     /**
      * Prepend field differs from other fields with it`s behaviour on filtering. Instead of being added to the arguments of request this field should be added to URL path.
-     * @namespace kraken.fields
+     * @namespace LGI.Guide.fields
      * @class PrependField
      * @extends AbstractField
      * @tutorial Typical case for using PrependField is to find broadcasts by ChannelIds.
@@ -387,7 +386,7 @@
     
     /**
      * Root changing field differs from other fields with it`s behaviour on filtering. Instead of being added to the arguments of request this field should be added as root like /broadcasts/1z,2z.json
-     * @namespace kraken.fields
+     * @namespace LGI.Guide.fields
      * @class PrependField
      * @extends AbstractField
      * @tutorial Typical case for using PrependField is to find broadcast by ID.
@@ -421,7 +420,7 @@
     /**
      * Represents basic functionality for Kraken data sets.
      *
-     * @namespace kraken
+     * @namespace LGI.Guide
      * @class Collection
      */
     
@@ -499,7 +498,7 @@
     
     /**
      * Represents base query-building logic
-     * @namespace kraken
+     * @namespace LGI.Guide
      * @class EntityBase
      * @extends Collection
      */
@@ -527,7 +526,7 @@
     };
     
     /**
-     * Determines list of fields to be retrieved from server. For example by "a.shows(kraken.channel.id, kraken.channel.name);"
+     * Determines list of fields to be retrieved from server. For example by "a.shows(LGI.Guide.channel.id, LGI.Guide.channel.name);"
      * @method EntityBase#fields
      * @param {string} multipleArgs You can add unlimited number of strings as multiple parameters.
      */
@@ -538,7 +537,7 @@
     };
     
     /**
-     * Sets sorting field and order. For example "a.sort(kraken.broadcast.startTime);"
+     * Sets sorting field and order. For example "a.sort(LGI.Guide.broadcast.startTime);"
      * @order EntityBase#sort
      * @param {string} field Field to sort records by.
      * @param {string} [order="asc"] Determines order we want to sort records with - ascendant (asc) or descendant (desc).
@@ -558,7 +557,7 @@
     };
     
     /**
-     * Filters data by some of entity properties. For example "a.filter(kraken.channel.id.equalTo(1));"
+     * Filters data by some of entity properties. For example "a.filter(LGI.Guide.channel.id.equalTo(1));"
      * @method EntityBase#filter
      * @param {string} multipleArgs You can add unlimited number of strings as multiple parameters.
      */
@@ -608,14 +607,14 @@
     };
     
     EntityBase.prototype._buildURLFromElements = function () {
-        this._requestURL = K.config.APIURL;
+        this._requestURL = LGI.Guide.config.APIURL;
     
         if (this._URLprefix !== undefined) {
             this._requestURL += this._URLprefix;
         }
     
-        if (K.config.region !== '') {
-            this._requestURL += K.config.region + '/';
+        if (LGI.Guide.config.region !== '') {
+            this._requestURL += LGI.Guide.config.region + '/';
         }
     
         this._requestURL += this._baseURL;
@@ -666,142 +665,142 @@
     
     /**
      * Class describes broadcast-specific fields and request logic
-     * @namespace kraken.entities
+     * @namespace LGI.Guide.entities
      * @class Broadcast
      * @extends EntityBase
      */
     
-    K.Broadcast = function () {
+    LGI.Guide.Broadcast = function () {
         EntityBase.call(this);
-        if (kraken.config.region === undefined) {
+        if (LGI.Guide.config.region === undefined) {
             console.warn('Please, specify region before sending requests to Broadcasts endpoint.');
         }
     };
     
-    K.Broadcast.ID = new RootChangingField('id', 'broadcasts');
-    K.Broadcast.START = new NumericField('start');
-    K.Broadcast.END = new NumericField('end');
-    K.Broadcast.CRID = new TextField('video.crid');
-    K.Broadcast.IMI = new TextField('imi');
-    K.Broadcast.CHANNEL = new TextField('channel');
-    K.Broadcast.CHANNEL_NAME = new TextField('channel.name');
-    //K.Broadcast.CHANNEL_REF = new PrependField('channel.ref', 'channels');
-    //K.Broadcast.STATISTICS = new TextField('video.statistics');
-    K.Broadcast.VIDEO_ID = new TextField('video.id');
-    K.Broadcast.TITLE = new TextField('video.title');
-    K.Broadcast.SYNOPSIS = new TextField('video.synopsis');
-    K.Broadcast.AGE_RATING = new TextField('video.ageRating');
-    K.Broadcast.CATEGORY = new TextField('video.category');
-    //K.Broadcast.OPENGRAPH_LINK = new TextField('video.opengraphLink');
-    K.Broadcast.RECORD_LINK = new TextField('video.recordLink');
-    //K.Broadcast.SELF_LINK = new TextField('selfLink');
-    K.Broadcast.CAST = new TextField('video.cast');
-    K.Broadcast.DIRECTORS = new TextField('video.directors');
-    K.Broadcast.WRITERS = new TextField('video.writers');
-    //K.Broadcast.EPISODE = new NumericField('episode');
-    //K.Broadcast.SEASON = new NumericField('season');
-    K.Broadcast.IMAGE_LINK = new NumericField('video.imageLink');
-    K.Broadcast.BPM = new NumericField('statistics.bpm');
-    K.Broadcast.POPULARITY = new NumericField('statistics.popularity');
-    //K.Broadcast.MORE_LINK = new TextField('moreLink');
+    LGI.Guide.Broadcast.ID = new RootChangingField('id', 'broadcasts');
+    LGI.Guide.Broadcast.START = new NumericField('start');
+    LGI.Guide.Broadcast.END = new NumericField('end');
+    LGI.Guide.Broadcast.CRID = new TextField('video.crid');
+    LGI.Guide.Broadcast.IMI = new TextField('imi');
+    LGI.Guide.Broadcast.CHANNEL = new TextField('channel');
+    LGI.Guide.Broadcast.CHANNEL_NAME = new TextField('channel.name');
+    //LGI.Guide.Broadcast.CHANNEL_REF = new PrependField('channel.ref', 'channels');
+    //LGI.Guide.Broadcast.STATISTICS = new TextField('video.statistics');
+    LGI.Guide.Broadcast.VIDEO_ID = new TextField('video.id');
+    LGI.Guide.Broadcast.TITLE = new TextField('video.title');
+    LGI.Guide.Broadcast.SYNOPSIS = new TextField('video.synopsis');
+    LGI.Guide.Broadcast.AGE_RATING = new TextField('video.ageRating');
+    LGI.Guide.Broadcast.CATEGORY = new TextField('video.category');
+    //LGI.Guide.Broadcast.OPENGRAPH_LINK = new TextField('video.opengraphLink');
+    LGI.Guide.Broadcast.RECORD_LINK = new TextField('video.recordLink');
+    //LGI.Guide.Broadcast.SELF_LINK = new TextField('selfLink');
+    LGI.Guide.Broadcast.CAST = new TextField('video.cast');
+    LGI.Guide.Broadcast.DIRECTORS = new TextField('video.directors');
+    LGI.Guide.Broadcast.WRITERS = new TextField('video.writers');
+    //LGI.Guide.Broadcast.EPISODE = new NumericField('episode');
+    //LGI.Guide.Broadcast.SEASON = new NumericField('season');
+    LGI.Guide.Broadcast.IMAGE_LINK = new NumericField('video.imageLink');
+    LGI.Guide.Broadcast.BPM = new NumericField('statistics.bpm');
+    LGI.Guide.Broadcast.POPULARITY = new NumericField('statistics.popularity');
+    //LGI.Guide.Broadcast.MORE_LINK = new TextField('moreLink');
     
-    K.utils.addFactory(K.Broadcast);
+    LGI.Guide.utils.addFactory(LGI.Guide.Broadcast);
     
-    K.Broadcast.prototype = Object.create(EntityBase.prototype);
-    K.Broadcast.prototype._baseURL = 'broadcasts.json?';
-    K.Broadcast.prototype._URLprefix = 'data/';
+    LGI.Guide.Broadcast.prototype = Object.create(EntityBase.prototype);
+    LGI.Guide.Broadcast.prototype._baseURL = 'broadcasts.json?';
+    LGI.Guide.Broadcast.prototype._URLprefix = 'data/';
     /**
      * Class describes channel-specific fields and request logic
-     * @namespace kraken.entities
+     * @namespace LGI.Guide.entities
      * @class Channel
      * @extends EntityBase
      */
     
-    K.Channel = function () {
+    LGI.Guide.Channel = function () {
         EntityBase.call(this);
-        if (kraken.config.region === undefined) {
+        if (LGI.Guide.config.region === undefined) {
             console.warn('Please, specify region before sending requests to Channel endpoint.');
         }
     };
     
-    K.Channel.REF = new TextField('ref');
-    K.Channel.NAME = new TextField('name');
-    K.Channel.LOGICAL_POSITION = new NumericField('logicalPosition');
-    K.Channel.LOGO_LINK = new TextField('logoLink');
-    K.Channel.BROADCASTS_LINK = new TextField('broadcastsLink');
-    K.Channel.OPENGRAPH_LINK = new TextField('opengraphLink');
-    K.Channel.SELF_LINK = new TextField('selfLink');
-    K.Channel.GENRES = new TextField('genres');
-    K.Channel.BROADCASTS = new TextField('broadcasts');
+    LGI.Guide.Channel.REF = new TextField('ref');
+    LGI.Guide.Channel.NAME = new TextField('name');
+    LGI.Guide.Channel.LOGICAL_POSITION = new NumericField('logicalPosition');
+    LGI.Guide.Channel.LOGO_LINK = new TextField('logoLink');
+    LGI.Guide.Channel.BROADCASTS_LINK = new TextField('broadcastsLink');
+    LGI.Guide.Channel.OPENGRAPH_LINK = new TextField('opengraphLink');
+    LGI.Guide.Channel.SELF_LINK = new TextField('selfLink');
+    LGI.Guide.Channel.GENRES = new TextField('genres');
+    LGI.Guide.Channel.BROADCASTS = new TextField('broadcasts');
     
-    K.utils.addFactory(K.Channel);
+    LGI.Guide.utils.addFactory(LGI.Guide.Channel);
     
-    K.Channel.prototype = Object.create(EntityBase.prototype);
-    K.Channel.prototype._baseURL = 'channels.json?';
-    K.Channel.prototype._URLprefix = 'data/';
+    LGI.Guide.Channel.prototype = Object.create(EntityBase.prototype);
+    LGI.Guide.Channel.prototype._baseURL = 'channels.json?';
+    LGI.Guide.Channel.prototype._URLprefix = 'data/';
     /**
      * Encapsulates Region-specific fields and request logic
-     * @namespace kraken.entities
+     * @namespace LGI.Guide.entities
      * @class Region
      * @extends EntityBase
      */
-    K.Region = function () {
+    LGI.Guide.Region = function () {
         EntityBase.call(this);
     };
     
-    K.Region.ID = new TextField('id');
-    K.Region.NAME = new TextField('name');
-    K.Region.SUBREGIONS = new TextField('subregions');
-    K.Region.GENRES = new TextField('genres');
-    K.Region.CATEGORIES = new TextField('categories');
-    K.Region.CHANNEL_LINEUP_LINK = new TextField('channelLineupLink');
-    K.Region.SELF_LINK = new TextField('selfLink');
-    K.Region.TOP_BROADCASTS_LINK = new TextField('topBroadcastsLink');
-    K.Region.TOP_VIDEOS_LINK = new TextField('topVideosLink');
+    LGI.Guide.Region.ID = new TextField('id');
+    LGI.Guide.Region.NAME = new TextField('name');
+    LGI.Guide.Region.SUBREGIONS = new TextField('subregions');
+    LGI.Guide.Region.GENRES = new TextField('genres');
+    LGI.Guide.Region.CATEGORIES = new TextField('categories');
+    LGI.Guide.Region.CHANNEL_LINEUP_LINK = new TextField('channelLineupLink');
+    LGI.Guide.Region.SELF_LINK = new TextField('selfLink');
+    LGI.Guide.Region.TOP_BROADCASTS_LINK = new TextField('topBroadcastsLink');
+    LGI.Guide.Region.TOP_VIDEOS_LINK = new TextField('topVideosLink');
     
-    K.utils.addFactory(K.Region);
+    LGI.Guide.utils.addFactory(LGI.Guide.Region);
     
-    K.Region.prototype = Object.create(EntityBase.prototype);
-    K.Region.prototype._baseURL = 'regions.json?';
+    LGI.Guide.Region.prototype = Object.create(EntityBase.prototype);
+    LGI.Guide.Region.prototype._baseURL = 'regions.json?';
     /**
      * Class describes video-specific fields and request logic
-     * @namespace kraken.entities
+     * @namespace LGI.Guide.entities
      * @class Video
      * @extends EntityBase
      */
     
-    K.Video = function () {
+    LGI.Guide.Video = function () {
         EntityBase.call(this);
-        if (kraken.config.region === undefined) {
+        if (LGI.Guide.config.region === undefined) {
             console.warn('Please, specify region before sending requests to Video endpoint.');
         }
     };
     
-    K.Video.ID = new RootChangingField('id', 'videos');
-    K.Video.TITLE = new TextField('title');
-    K.Video.SYNOPSIS = new TextField('synopsis');
-    K.Video.CATEGORY = new TextField('category');
-    K.Video.SEASON = new NumericField('season');
-    K.Video.EPISODE = new NumericField('episode');
-    K.Video.CRID = new TextField('crid');
-    K.Video.STATISTICS = new TextField('statistics');
-    K.Video.AGE_RATING = new TextField('ageRating');
-    K.Video.IMAGE_LINK = new TextField('imageLink');
-    K.Video.OPENGRAPH_LINK = new TextField('opengraphLink');
-    K.Video.SELF_LINK = new TextField('selfLink');
-    K.Video.CAST = new TextField('cast');
-    K.Video.DIRECTORS = new TextField('directors');
-    K.Video.WRITERS = new TextField('writers');
-    K.Video.BPM = new NumericField('statistics.bpm');
-    K.Video.POPULARITY = new NumericField('statistics.popularity');
-    K.Video.MORE_LINK = new TextField('moreLink');
+    LGI.Guide.Video.ID = new RootChangingField('id', 'videos');
+    LGI.Guide.Video.TITLE = new TextField('title');
+    LGI.Guide.Video.SYNOPSIS = new TextField('synopsis');
+    LGI.Guide.Video.CATEGORY = new TextField('category');
+    LGI.Guide.Video.SEASON = new NumericField('season');
+    LGI.Guide.Video.EPISODE = new NumericField('episode');
+    LGI.Guide.Video.CRID = new TextField('crid');
+    LGI.Guide.Video.STATISTICS = new TextField('statistics');
+    LGI.Guide.Video.AGE_RATING = new TextField('ageRating');
+    LGI.Guide.Video.IMAGE_LINK = new TextField('imageLink');
+    LGI.Guide.Video.OPENGRAPH_LINK = new TextField('opengraphLink');
+    LGI.Guide.Video.SELF_LINK = new TextField('selfLink');
+    LGI.Guide.Video.CAST = new TextField('cast');
+    LGI.Guide.Video.DIRECTORS = new TextField('directors');
+    LGI.Guide.Video.WRITERS = new TextField('writers');
+    LGI.Guide.Video.BPM = new NumericField('statistics.bpm');
+    LGI.Guide.Video.POPULARITY = new NumericField('statistics.popularity');
+    LGI.Guide.Video.MORE_LINK = new TextField('moreLink');
     
-    K.utils.addFactory(K.Video);
+    LGI.Guide.utils.addFactory(LGI.Guide.Video);
     
-    K.Video.prototype = Object.create(EntityBase.prototype);
-    K.Video.prototype._baseURL = 'videos.json?';
-    K.Video.prototype._URLprefix = 'data/';
+    LGI.Guide.Video.prototype = Object.create(EntityBase.prototype);
+    LGI.Guide.Video.prototype._baseURL = 'videos.json?';
+    LGI.Guide.Video.prototype._URLprefix = 'data/';
 
-    return K;
+    return LGI.Guide;
 
 }));
