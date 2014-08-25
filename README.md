@@ -35,12 +35,13 @@ Following regions are supported:
 
 
 ####Basic example####
-Let's look at the most basic example - getting list of broadcasts for Netherlands without any filtering or sorting.
+Let's look at the most basic example - getting list of broadcasts for Netherlands without any filtering or sorting:
 	
     var broadcastsData = LGI.Guide.Video.create()
     	.findOne(dataReceivedCallback);
     	
-    //Response
+Response:
+
     [
     	{selfLink: Object},
 		{selfLink: Object},
@@ -51,19 +52,20 @@ Let's look at the most basic example - getting list of broadcasts for Netherland
 Probably you are wondered with result containing only _selfLink property. This happen because it is important to minimize response size by getting only data you really need.
 
 ####Specifying fields to retrieve####
-Let`s specify fields to retrieve as following.
+Let`s specify fields to retrieve as following:
     
     LGI.Guide.Video.create()
     	.fields(LGI.Guide.Video.ID, LGI.Guide.Video.TITLE)
     	.findOne(dataReceivedCallback);
     	
-    //Response
-    [
-    	{id: "7shi89fww", title: "Oorlogsverhalen (3)", selfLink: Object},
+Response:
+	
+	[
+		{id: "7shi89fww", title: "Oorlogsverhalen (3)", selfLink: Object},
 		{id: "3yaqesymo", title: "Millivres - Point of View", selfLink: Object},
 		{id: "5jzc9n9c1", title: "Mahabharat", selfLink: Object},
 		{id: "9l2i1y2sb", title: "Baggage Battles", selfLink: Object}
-    ]
+	]
     
 Much better! Now we have videos with IDs and titles.
 
@@ -82,7 +84,7 @@ API supports paging and three data retrieval methods are supported:
 * __findNext__ - retrieves next page of data,
 * __findAll__ - retrieves all data pages available for your request.
 
-You can set particular page size by using `limit()`.
+You can set particular page size by using __limit()__.
 
 
 ####Filtering####
