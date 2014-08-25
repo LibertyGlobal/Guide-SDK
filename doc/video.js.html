@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: entities/region.js</title>
+    <title>JSDoc: Source: entities/video.js</title>
     
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Source: entities/region.js</h1>
+    <h1 class="page-title">Source: entities/video.js</h1>
     
     
 
@@ -26,29 +26,43 @@
     <section>
         <article>
             <pre class="prettyprint source"><code>/**
- * Encapsulates Region-specific fields and request logic
+ * Class describes video-specific fields and request logic
  * @namespace LGI.Guide.entities
- * @class Region
+ * @class Video
  * @extends EntityBase
  */
-LGI.Guide.Region = function () {
+
+LGI.Guide.Video = function () {
     EntityBase.call(this);
+    if (LGI.Guide.config.region === undefined) {
+        console.warn('Please, specify region before sending requests to Video endpoint.');
+    }
 };
 
-LGI.Guide.Region.ID = new TextField('id');
-LGI.Guide.Region.NAME = new TextField('name');
-LGI.Guide.Region.SUBREGIONS = new TextField('subregions');
-LGI.Guide.Region.GENRES = new TextField('genres');
-LGI.Guide.Region.CATEGORIES = new TextField('categories');
-LGI.Guide.Region.CHANNEL_LINEUP_LINK = new TextField('channelLineupLink');
-LGI.Guide.Region.SELF_LINK = new TextField('selfLink');
-LGI.Guide.Region.TOP_BROADCASTS_LINK = new TextField('topBroadcastsLink');
-LGI.Guide.Region.TOP_VIDEOS_LINK = new TextField('topVideosLink');
+LGI.Guide.Video.ID = new RootChangingField('id', 'videos');
+LGI.Guide.Video.TITLE = new TextField('title');
+LGI.Guide.Video.SYNOPSIS = new TextField('synopsis');
+LGI.Guide.Video.CATEGORY = new TextField('category');
+LGI.Guide.Video.SEASON = new NumericField('season');
+LGI.Guide.Video.EPISODE = new NumericField('episode');
+LGI.Guide.Video.CRID = new TextField('crid');
+LGI.Guide.Video.STATISTICS = new TextField('statistics');
+LGI.Guide.Video.AGE_RATING = new TextField('ageRating');
+LGI.Guide.Video.IMAGE_LINK = new TextField('imageLink');
+LGI.Guide.Video.OPENGRAPH_LINK = new TextField('opengraphLink');
+LGI.Guide.Video.SELF_LINK = new TextField('selfLink');
+LGI.Guide.Video.CAST = new TextField('cast');
+LGI.Guide.Video.DIRECTORS = new TextField('directors');
+LGI.Guide.Video.WRITERS = new TextField('writers');
+LGI.Guide.Video.BPM = new NumericField('statistics.bpm');
+LGI.Guide.Video.POPULARITY = new NumericField('statistics.popularity');
+LGI.Guide.Video.MORE_LINK = new TextField('moreLink');
 
-LGI.Guide.utils.addFactory(LGI.Guide.Region);
+LGI.Guide.utils.addFactory(LGI.Guide.Video);
 
-LGI.Guide.Region.prototype = Object.create(EntityBase.prototype);
-LGI.Guide.Region.prototype._baseURL = 'regions.json?';</code></pre>
+LGI.Guide.Video.prototype = Object.create(EntityBase.prototype);
+LGI.Guide.Video.prototype._baseURL = 'videos.json?';
+LGI.Guide.Video.prototype._URLprefix = 'data/';</code></pre>
         </article>
     </section>
 

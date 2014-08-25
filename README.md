@@ -3,7 +3,7 @@
 TV Guide JS SDK
 =====================
 
-SDK provides a simple way to retrieve TV schedule data.
+Provides a simple way to retrieve TV schedule data.
 
 
 Basic concepts
@@ -11,12 +11,12 @@ Basic concepts
 
 SDK contains few public classes representing API entities:
 
-* Video (a piece of video material could be movie or news issue etc.)
-* Broadcast (a piece of video at a particular time on particular channel, always include)
+* Video (a piece of video material, could be movie or news issue etc.)
+* Broadcast (a piece of video at a particular time on a particular channel)
 
-Broadcast always includes video.
+Broadcast always include video.
 
-Entities are query builders encapsulating data retrieval functions, filtering, sorting and paging.
+Entities are query builders encapsulating data retrieval functions, filtering, sorting and paging in order to provide simple API facade.
 
 
 Usage examples
@@ -96,7 +96,7 @@ Most advanced tool for specific data retrieval is filtering. In this example we 
 
 
 ####Sorting####
-This will retrieve a page of broadcasts for Ierland sorted by popularity:
+This will retrieve a page of broadcasts sorted by popularity:
 
     LGI.Guide.Broadcast.create()
     	.fields(LGI.Guide.Broadcast.ID, LGI.Guide.Broadcast.TITLE)
@@ -110,4 +110,4 @@ Explore [JSDoc](http://htmlpreview.github.io/?http://raw.github.com/LibertyGloba
 Bug tracker
 -----------
 
-Have a bug? Please [create an issue on GitHub](https://github.com/LibertyGlobal/sdk/issues)!
+Have a bug? Please [create an issue on GitHub](https://github.com/LibertyGlobal/sdk/issues)

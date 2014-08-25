@@ -32,41 +32,45 @@
  * @extends EntityBase
  */
 
-K.Broadcast = function () {
+LGI.Guide.Broadcast = function () {
     EntityBase.call(this);
     if (LGI.Guide.config.region === undefined) {
         console.warn('Please, specify region before sending requests to Broadcasts endpoint.');
     }
 };
 
-K.Broadcast.ID = new RootChangingField('id', 'broadcasts');
-K.Broadcast.START = new NumericField('start');
-K.Broadcast.END = new NumericField('end');
-K.Broadcast.CRID = new TextField('crid');
-K.Broadcast.IMI = new TextField('imi');
-K.Broadcast.CHANNEL = new TextField('channel');
-K.Broadcast.CHANNEL_REF = new PrependField('channel.ref', 'channels');
-K.Broadcast.STATISTICS = new TextField('statistics');
-K.Broadcast.VIDEO_ID = new TextField('videoId');
-K.Broadcast.IMDB_ID = new TextField('imdbId');
-K.Broadcast.YEAR = new NumericField('year');
-K.Broadcast.TITLE = new TextField('title');
-K.Broadcast.SYNOPSIS = new TextField('synopsis');
-K.Broadcast.CATEGORY = new TextField('category');
-K.Broadcast.OPENGRAPH_LINK = new TextField('opengraphLink');
-K.Broadcast.SELF_LINK = new TextField('selfLink');
-K.Broadcast.CAST = new TextField('cast');
-K.Broadcast.DIRECTORS = new TextField('directors');
-K.Broadcast.WRITERS = new TextField('writers');
-K.Broadcast.EPISODE = new NumericField('episode');
-K.Broadcast.SEASON = new NumericField('season');
-K.Broadcast.IMAGE_LINK = new NumericField('imageLink');
-K.Broadcast.MORE_LINK = new TextField('moreLink');
+LGI.Guide.Broadcast.ID = new RootChangingField('id', 'broadcasts');
+LGI.Guide.Broadcast.START = new NumericField('start');
+LGI.Guide.Broadcast.END = new NumericField('end');
+LGI.Guide.Broadcast.CRID = new TextField('video.crid');
+LGI.Guide.Broadcast.IMI = new TextField('imi');
+LGI.Guide.Broadcast.CHANNEL = new TextField('channel');
+LGI.Guide.Broadcast.CHANNEL_NAME = new TextField('channel.name');
+//LGI.Guide.Broadcast.CHANNEL_REF = new PrependField('channel.ref', 'channels');
+//LGI.Guide.Broadcast.STATISTICS = new TextField('video.statistics');
+LGI.Guide.Broadcast.VIDEO_ID = new TextField('video.id');
+LGI.Guide.Broadcast.TITLE = new TextField('video.title');
+LGI.Guide.Broadcast.SYNOPSIS = new TextField('video.synopsis');
+LGI.Guide.Broadcast.AGE_RATING = new TextField('video.ageRating');
+LGI.Guide.Broadcast.CATEGORY = new TextField('video.category');
+//LGI.Guide.Broadcast.OPENGRAPH_LINK = new TextField('video.opengraphLink');
+LGI.Guide.Broadcast.RECORD_LINK = new TextField('video.recordLink');
+//LGI.Guide.Broadcast.SELF_LINK = new TextField('selfLink');
+LGI.Guide.Broadcast.CAST = new TextField('video.cast');
+LGI.Guide.Broadcast.DIRECTORS = new TextField('video.directors');
+LGI.Guide.Broadcast.WRITERS = new TextField('video.writers');
+//LGI.Guide.Broadcast.EPISODE = new NumericField('episode');
+//LGI.Guide.Broadcast.SEASON = new NumericField('season');
+LGI.Guide.Broadcast.IMAGE_LINK = new NumericField('video.imageLink');
+LGI.Guide.Broadcast.BPM = new NumericField('statistics.bpm');
+LGI.Guide.Broadcast.POPULARITY = new NumericField('statistics.popularity');
+//LGI.Guide.Broadcast.MORE_LINK = new TextField('moreLink');
 
-K.Broadcast.prototype = Object.create(EntityBase.prototype);
-K.Broadcast.prototype._baseURL = 'broadcasts.json?';
+LGI.Guide.utils.addFactory(LGI.Guide.Broadcast);
 
-K.utils.addFactory(K.Broadcast);</code></pre>
+LGI.Guide.Broadcast.prototype = Object.create(EntityBase.prototype);
+LGI.Guide.Broadcast.prototype._baseURL = 'broadcasts.json?';
+LGI.Guide.Broadcast.prototype._URLprefix = 'data/';</code></pre>
         </article>
     </section>
 
@@ -76,13 +80,13 @@ K.utils.addFactory(K.Broadcast);</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="module-utils.html">utils</a></li></ul><h3>Classes</h3><ul><li><a href="AbstractField.html">AbstractField</a></li><li><a href="Broadcast.html">Broadcast</a></li><li><a href="Channel.html">Channel</a></li><li><a href="Collection.html">Collection</a></li><li><a href="EntityBase.html">EntityBase</a></li><li><a href="NumericField.html">NumericField</a></li><li><a href="PrependField.html">PrependField</a></li><li><a href="Region.html">Region</a></li><li><a href="Request.html">Request</a></li><li><a href="TextField.html">TextField</a></li></ul><h3>Namespaces</h3><ul><li><a href="kraken.config.html">config</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="module-utils.html">utils</a></li></ul><h3>Classes</h3><ul><li><a href="AbstractField.html">AbstractField</a></li><li><a href="Broadcast.html">Broadcast</a></li><li><a href="Channel.html">Channel</a></li><li><a href="Collection.html">Collection</a></li><li><a href="EntityBase.html">EntityBase</a></li><li><a href="NumericField.html">NumericField</a></li><li><a href="PrependField.html">PrependField</a></li><li><a href="Region.html">Region</a></li><li><a href="Request.html">Request</a></li><li><a href="TextField.html">TextField</a></li><li><a href="Video.html">Video</a></li></ul><h3>Namespaces</h3><ul><li><a href="LGI.Guide.config.html">config</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.0-dev</a> on Mon Jul 29 2013 14:02:33 GMT-0000 (UTC)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.0-dev</a> on Mon Aug 25 2014 16:57:51 GMT+0200 (CEST)
 </footer>
 
 <script> prettyPrint(); </script>
