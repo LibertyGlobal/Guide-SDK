@@ -1,9 +1,9 @@
 {
     "name": "lgi-guide-sdk",
     "title": "LGI TV Guide JS SDK",
-    "version": "0.2.7",
+    "version": "0.2.8",
     "description": "LGI TV Guide API client library",
-    "main": "dist/kraken-sdk.js",
+    "main": "dist/lgi-guide-sdk.js",
     "ignore": [
         "/.*",
         "src/",
@@ -21,7 +21,7 @@
     ],
     "readme": "![Kraken beta logo](https://github.com/LibertyGlobal/Kraken-SDK/blob/master/doc/img/logo-kraken.png?raw=true)\n\nKraken JavaScript SDK\n=====================\n\nSDK provides simple way to retrieve TV schedule data.\n\nExplore [official page](http://appdev.io) and [JSDoc](http://htmlpreview.github.io/?http://raw.github.com/LibertyGlobal/Kraken-SDK/master/doc/index.html) for more information.\n\n\nBasic concepts\n--------------\n\nSDK contains few public classes representing API entities:\n\n* Channel\n* Broadcast\n* Region\n\nEntities work very similar to jQuery objects. They encapsulate request building, request executing logic and data collection storage.\n\n\nUsage examples\n--------------\n\n####Basic example####\nLet's look at most basic example - getting list of countries supported by API.\nThis code creates new Region object and gets all records without filtering or sorting.\n\n    kraken.Region.create().findAll(dataReceivedCallback);\n\n\n####Limiting response size####\nYou are free to get only first two countries. Let`s modify our example.\n\n    kraken.Region.create()\n    .limit(2)\n    .findOne(dataReceivedCallback);\n\n\n####Paging and difference between findOne, findAll and findNext methods####\nAPI supports paging and to work with it on client side three data retrieval methods are supported:\n\n* __findOne__ - retrieves first page of data,\n* __findNext__ - retrieves next page of data,\n* __findAll__ - retrieves all data pages available for your request.\n\nMaximum possible response (page) size is 128 records and default size is the same.\nYou can set particular page size by using `limit()`.\n\n\n####Specifying fields to retrieve####\nIt's quite important to get only data you really need, so please, specify fields as following.\n\n    kraken.config.region = 'NL';\n    kraken.Channel.create()\n    .fields(kraken.Channel.TITLE, kraken.Channel.ID)\n    .findAll(dataReceivedCallback);\n\n\n####Filtering####\nMost advanced tool for specific data retrieval is filtering. In this example we will get only broadcasts with category equal to sports.\n\n    kraken.config.region = 'NL';\n    kraken.Broadcast.create()\n    .filter(kraken.Broadcast.category.isEqual('sports'))\n    .findAll(dataReceivedCallback);\n\n\n####Sorting####\nThis will get all channels sorted by title:\n\n    kraken.config.region = 'NL';\n    kraken.Channel.create()\n    .sort(kraken.Channel.title, 'desc')\n    .findAll(dataReceivedCallback);\n\nBTW sorting on Broadcast class instances will not work in beta.\n\n\nBug tracker\n-----------\n\nHave a bug? Please [create an issue on GitHub](https://github.com/LibertyGlobal/sdk/issues)!\n",
     "readmeFilename": "README.md",
-    "_id": "kraken-sdk@0.2.7",
+    "_id": "lgi-guide-sdk@0.2.7",
     "repository": {
         "type": "git",
         "url": "git://github.com/LibertyGlobal/Kraken-SDK.git"
