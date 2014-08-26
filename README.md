@@ -105,7 +105,7 @@ This will retrieve a page of broadcasts sorted by popularity:
 
 Almost all fields are sortable.
     
-Explore [JSDoc](http://htmlpreview.github.io/?http://raw.github.com/LibertyGlobal/Kraken-SDK/master/doc/index.html) for available fields lists and more information.
+Explore [JSDoc](http://cdn.rawgit.com/LibertyGlobal/Guide-SDK/master/doc/index.html) for available fields lists and more information.
 
 Bug tracker
 -----------
