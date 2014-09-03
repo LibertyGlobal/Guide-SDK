@@ -12,9 +12,8 @@ Basic concepts
 SDK contains few public classes representing API entities:
 
 * Video (a piece of video material, could be movie or news issue etc.)
-* Broadcast (a piece of video at a particular time on a particular channel)
-
-Broadcast always include video.
+* Broadcast (a piece of video at a particular time on a particular channel,  includes a video object)
+* Channel (TV Channel could be useful e.g. for getting all channels with LGI.Guide.Channel.create().findAll())
 
 Entities are query builders encapsulating data retrieval functions, filtering, sorting and paging in order to provide simple API facade.
 
@@ -104,8 +103,64 @@ This will retrieve a page of broadcasts sorted by popularity:
         .findOne(dataReceivedCallback);
 
 Almost all fields are sortable.
+
+####Entities fields available for sorting, filtering, retrieval####
+
+#####Broadcast#####
+- ID
+- START (date/time of broadcast`s start as ISO formatted date without a seconds e.g. 2014-06-24T09:23Z)
+- END (date/time of broadcast`s end as ISO formatted date without a seconds e.g. 2014-06-24T09:23Z)
+- CRID
+- IMI
+- CHANNEL_NAME
+- VIDEO_ID
+- TITLE
+- SYNOPSIS
+- AGE_RATING
+- CATEGORY
+- RECORD_LINK
+- CAST
+- DIRECTORS
+- WRITERS
+- IMAGE_LINK
+- BPM
+- POPULARITY
+
+#####Video#####
+- ID
+- TITLE
+- SYNOPSIS
+- CATEGORY
+- SEASON
+- EPISODE
+- CRID
+- STATISTICS
+- AGE_RATING
+- IMAGE_LINK
+- OPENGRAPH_LINK
+- SELF_LINK
+- CAST
+- DIRECTORS
+- WRITERS
+- BPM
+- POPULARITY
+- MORE_LINK
+
+#####Channel#####
+- REF
+- NAME
+- LOGICAL_POSITION
+- LOGO_LINK
+- BROADCASTS_LINK
+- OPENGRAPH_LINK
+- SELF_LINK
+- GENRES
+- BROADCASTS
+
+
     
-Explore [JSDoc](http://cdn.rawgit.com/LibertyGlobal/Guide-SDK/master/doc/index.html) for available fields lists and more information.
+Look at JSDoc [JSDoc](http://cdn.rawgit.com/LibertyGlobal/Guide-SDK/master/doc/index.html) for more details.
+Start to develop from exploring demos folder of repository.
 
 Bug tracker
 -----------
