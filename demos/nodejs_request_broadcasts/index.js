@@ -7,4 +7,4 @@ var onDataRetrieved = function(d){
     })
 };
 
-guide.Region.create().findAll(onDataRetrieved);
+guide.Broadcast.create().findAll(onDataRetrieved);

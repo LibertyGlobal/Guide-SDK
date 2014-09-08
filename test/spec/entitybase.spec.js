@@ -20,12 +20,12 @@ describe('EntityBase', function () {
             expect(this.sut.limit(1)).toBe(this.sut);
         });
 
-        it('should add the "maxBatchSize" parameter to the query string', function () {
+        it('should add the "limit" parameter to the query string', function () {
             this.sut.limit(10);
             this.sut.findOne();
 
             expect(this.requestExecutionSpy).toHaveBeenCalled();
-            expect(this.requestExecutionSpy.calls[0].args[0]).toMatch(/maxBatchSize=10/);
+            expect(this.requestExecutionSpy.calls[0].args[0]).toMatch(/limit=10/);
         });
     });
 
@@ -39,12 +39,12 @@ describe('EntityBase', function () {
             expect(this.sut.fields('foo')).toBe(this.sut);
         });
 
-        it('should add the "show" parameter with comma-separated values to the query string', function () {
+        it('should add the "fields" parameter with comma-separated values to the query string', function () {
             this.sut.fields('foo', 'bar', 'baz.qux');
             this.sut.findOne();
 
             expect(this.requestExecutionSpy).toHaveBeenCalled();
-            expect(this.requestExecutionSpy.calls[0].args[0]).toMatch(/show=foo,bar,baz\.qux/);
+            expect(this.requestExecutionSpy.calls[0].args[0]).toMatch(/fields=foo,bar,baz\.qux/);
         });
     });
 

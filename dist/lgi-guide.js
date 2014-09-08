@@ -1,6 +1,6 @@
 // LGI TV Guide JS SDK
 // ----------------------------------
-// v0.2.7
+// v0.2.8
 //
 // Copyright (c) 2014 Liberty Global
 // Distributed under BSD license
@@ -181,7 +181,7 @@
          * Represents URL of Kraken REST server.
          * @const LGI.Guide.config.APIURL
          */
-        APIURL: '//lgi.io/kraken/v2/schedule/',
+        APIURL: '//api.lgi.io/kraken/v2/schedule/',
         /**
          * Represents URL of Kraken REST server.
          * @const LGI.Guide.config.region
@@ -524,18 +524,18 @@
      * @param {number} limitTo Number of maximum data elements in response.
      */
     EntityBase.prototype.limit = function (limitTo) {
-        this._addURLModification('maxBatchSize=' + limitTo);
+        this._addURLModification('limit=' + limitTo);
     
         return this;
     };
     
     /**
-     * Determines list of fields to be retrieved from server. For example by "a.shows(LGI.Guide.channel.id, LGI.Guide.channel.name);"
+     * Determines list of fields to be retrieved from server. For example by "a.fields(LGI.Guide.channel.id, LGI.Guide.channel.name);"
      * @method EntityBase#fields
      * @param {string} multipleArgs You can add unlimited number of strings as multiple parameters.
      */
     EntityBase.prototype.fields = function (multipleArgs) {
-        this._addURLModification('show=' + Array.prototype.slice.call(arguments).join(','));
+        this._addURLModification('fields=' + Array.prototype.slice.call(arguments).join(','));
     
         return this;
     };
@@ -636,6 +636,8 @@
                 this._requestURL += joinSymbol + this._queryModificationActions[i];
             }
         }
+    
+        this._requestURL += '&app_id=dc573c37&app_key=f4521ced0cb9af73374731a77b2f21f6';
     
         return this._requestURL;
     };

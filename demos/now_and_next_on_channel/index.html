@@ -5,7 +5,7 @@
 </head>
 <body>
 </body>
-<script src="../../dist/lgi-guide-sdk.js"></script>
+<script src="../../dist/lgi-guide.js"></script>
 <script>
     var onBroadcastsReceived = function (data) {
         this.each(function (element) {
@@ -21,7 +21,7 @@
     //And cut off seconds
     nowDate = nowDate.substr(0, nowDate.lastIndexOf(':')) + 'Z';
 
-    LGI.Guide.Broadcast.create()
+    var broadcasts = LGI.Guide.Broadcast.create()
             .limit(256)
             .fields(LGI.Guide.Broadcast.ID, LGI.Guide.Broadcast.START, LGI.Guide.Broadcast.END, LGI.Guide.Broadcast.CHANNEL_NAME, LGI.Guide.Broadcast.TITLE, LGI.Guide.Broadcast.IMAGE_LINK)
             .filter(LGI.Guide.Broadcast.START.greaterThan(nowDate))
