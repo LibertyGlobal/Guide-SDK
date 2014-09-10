@@ -158,7 +158,7 @@ Almost all fields are sortable.
 
 
     
-Look at JSDoc [JSDoc](http://cdn.rawgit.com/LibertyGlobal/Guide-SDK/master/doc/index.html) for more details.
+Look at [JSDoc](http://cdn.rawgit.com/LibertyGlobal/Guide-SDK/master/doc/index.html) for more details.
 Start to develop from exploring demos folder of repository.
 
 Bug tracker
