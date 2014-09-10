@@ -13,7 +13,6 @@ SDK contains few public classes representing API entities:
 
 * Video (a piece of video material, could be movie or news issue etc.)
 * Broadcast (a piece of video at a particular time on a particular channel,  includes a video object)
-* Channel (TV Channel could be useful e.g. for getting all channels with LGI.Guide.Channel.create().findAll())
 
 Entities are query builders encapsulating data retrieval functions, filtering, sorting and paging in order to provide simple API facade.
 
