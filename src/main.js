@@ -4,7 +4,7 @@ LGI.Guide = {};
 
 //= utils/utils
 
-//= utils/jsonp
+//= utils/xmlhttprequest
 
 //= utils/noderequest
 

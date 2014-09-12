@@ -135,8 +135,6 @@ EntityBase.prototype._buildURLFromElements = function () {
         }
     }
 
-    this._requestURL += '&app_id=dc573c37&app_key=f4521ced0cb9af73374731a77b2f21f6';
-
     return this._requestURL;
 };
 

@@ -33,89 +33,42 @@
         }
     };
     
-    var jsonp = function () {
-        var counter = 0, head, window = this, config = {};
+    var xhrRequest = function () {
     
-        function load(url, pfnError) {
-            var script = document.createElement('script'),
-                done = false;
+      function noop() {}
     
-            script.src = url;
-            script.async = true;
+      function xhrRequest(url, successCallback, errorCallback) {
+        var transport = new XMLHttpRequest();
     
-            var errorHandler = pfnError || config.error;
-            if (typeof errorHandler === 'function') {
-                script.onerror = function (ex) {
-                    errorHandler({url: url, event: ex});
-                };
-            } else {
-                script.onerror = function (ex) {
-                    console.warn('KrakenSDK: Error during request to ' + url);
-                };
-            }
-    
-            script.onload = script.onreadystatechange = function () {
-                if (!done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
-                    done = true;
-                    script.onload = script.onreadystatechange = null;
-                    if (script && script.parentNode) {
-                        script.parentNode.removeChild(script);
-                    }
-                }
-            };
-    
-            if (!head) {
-                head = document.getElementsByTagName('head')[0];
-            }
-            head.appendChild(script);
+        if (typeof successCallback !== 'function') {
+          successCallback = noop;
         }
     
-        function encode(str) {
-            return encodeURIComponent(str);
+        if (typeof errorCallback !== 'function') {
+          errorCallback = noop;
         }
     
-        function removeParameter(url, parameter) {
-            var urlparts = url.split('?');
+        transport.open('GET', url);
+        transport.setRequestHeader('Authorization', '?');
+        transport.responseType = 'json';
     
-            if (urlparts.length >= 2) {
-                var urlBase = urlparts.shift(); //get first part, and remove from array
-                var queryString = urlparts.join("?"); //join it back up
+        transport.onload = function () {
+          successCallback(transport.response);
+        };
     
-                var prefix = encodeURIComponent(parameter) + '=';
-                var pars = queryString.split(/[&;]/g);
-                for (var i = pars.length; i-- > 0;) {            //reverse iteration as may be destructive
-                    if (pars[i].lastIndexOf(prefix, 0) !== -1) {  //idiom for string.startsWith
-                        pars.splice(i, 1);
-                    }
-                }
-                url = urlBase + '?' + pars.join('&');
-            }
-            return url;
-        }
+        transport.onerror = function () {
+          errorCallback(new Error('An error occurred while retrieving data (status ' + transport.status + ')'));
+        };
     
-        function jsonp(url, callback, callbackName) {
+        transport.ontimeout = function () {
+          errorCallback(new Error('Request timed out'));
+        };
     
-            var query = (url || '').indexOf('?') === -1 ? '?' : '&', key;
+        transport.send(null);
+      }
     
-            callbackName = (callbackName || config.callbackName || 'callback');
-            var uniqueName = callbackName + "_json" + (++counter);
+      return xhrRequest;
     
-            url = removeParameter(url, callbackName);
-    
-            window[ uniqueName ] = function (data) {
-                callback(data);
-                try {
-                    delete window[ uniqueName ];
-                } catch (e) {
-                }
-                window[ uniqueName ] = null;
-            };
-    
-            load(url + query + callbackName + '=' + uniqueName);
-            return uniqueName;
-        }
-    
-        return jsonp;
     };
     
     var nodeRequest = function () {
@@ -165,7 +118,7 @@
         if (typeof module !== 'undefined' && module.exports) {
             return nodeRequest();
         } else {
-            return jsonp();
+            return xhrRequest();
         }
     };
     
@@ -636,8 +589,6 @@
                 this._requestURL += joinSymbol + this._queryModificationActions[i];
             }
         }
-    
-        this._requestURL += '&app_id=dc573c37&app_key=f4521ced0cb9af73374731a77b2f21f6';
     
         return this._requestURL;
     };

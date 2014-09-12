@@ -8,7 +8,7 @@ var chooseTransport = function () {
     if (typeof module !== 'undefined' && module.exports) {
         return nodeRequest();
     } else {
-        return jsonp();
+        return xhrRequest();
     }
 };
 
