@@ -1,5 +1,3 @@
-![Kraken beta logo](https://github.com/LibertyGlobal/Kraken-SDK/blob/master/doc/img/logo-kraken.png?raw=true)
-
 TV Guide JS SDK
 =====================
 
