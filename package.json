@@ -1,7 +1,7 @@
 {
   "name": "lgi-guide",
   "title": "LGI TV Guide JS SDK",
-  "version": "0.2.8",
+  "version": "0.3.0",
   "description": "Kraken API client library",
   "main": "dist/kraken-sdk.js",
   "devDependencies": {
@@ -22,8 +22,8 @@
     "test": "grunt test"
   },
   "repository": {
-      "type": "git",
-      "url": "http://github.com/LibertyGlobal/Guide-SDK"
+    "type": "git",
+    "url": "http://github.com/LibertyGlobal/Guide-SDK"
   },
   "keywords": [
     "tv",

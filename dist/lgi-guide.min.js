@@ -1,6 +1,6 @@
 // LGI TV Guide JS SDK
 // ----------------------------------
-// v0.2.8
+// v0.3.0
 //
 // Copyright (c) 2014 Liberty Global
 // Distributed under BSD license
