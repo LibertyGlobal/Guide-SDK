@@ -135,7 +135,7 @@
          * Represents URL of Kraken REST server.
          * @const LGI.Guide.config.APIURL
          */
-        APIURL: '//api.lgi.io/kraken/v2/schedule/',
+        APIURL: 'https://api.lgi.io/kraken/v2/schedule/',
         /**
          * Represents URL of Kraken REST server.
          * @const LGI.Guide.config.region
