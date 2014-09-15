@@ -3,6 +3,12 @@ TV Guide JS SDK
 
 Provides a simple way to retrieve TV schedule data.
 
+Get the latest version
+----------------------
+
+- [lgi-guide.js](https://github.com/LibertyGlobal/Guide-SDK/blob/master/dist/lgi-guide.js) (raw source with comments)
+- [lgi-guide.min.js](https://github.com/LibertyGlobal/Guide-SDK/blob/master/dist/lgi-guide.min.js) (minified)
+
 
 Basic concepts
 --------------
