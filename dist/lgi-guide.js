@@ -1,6 +1,6 @@
 // LGI TV Guide JS SDK
 // ----------------------------------
-// v0.3.0
+// v0.4.0
 //
 // Copyright (c) 2014 Liberty Global
 // Distributed under BSD license
@@ -53,8 +53,29 @@
         transport.setRequestHeader('app_key', 'f4521ced0cb9af73374731a77b2f21f6');
         transport.responseType = 'json';
     
-        transport.onload = function () {
-          successCallback(transport.response);
+        transport.onreadystatechange = function () {
+          if (transport.readyState === 4 && transport.status === 200) {
+            var reply = transport.responseText;
+            var json;
+    
+            if (typeof reply === 'object' && !!reply) {
+              json = reply;
+            } else if (typeof reply === 'string' && !!reply) {
+              try {
+                json = JSON.parse(reply);
+              } catch (error) {
+                errorCallback(new Error('Invalid JSON response received'));
+    
+                return;
+              }
+            } else {
+              errorCallback(new Error('Invalid JSON response received'));
+    
+              return;
+            }
+    
+            successCallback(json);
+          }
         };
     
         transport.onerror = function () {
