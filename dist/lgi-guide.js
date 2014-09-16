@@ -1,6 +1,6 @@
 // LGI TV Guide JS SDK
 // ----------------------------------
-// v0.4.1
+// v0.4.2
 //
 // Copyright (c) 2014 Liberty Global
 // Distributed under BSD license
@@ -189,17 +189,17 @@
         pipelineData = pipelineData.concat(response.data);
     
         if (response.nextBatchLink) {
-            this.nextBatchLinkURL = response.nextBatchLink.href;
+            this.nextBatchLink = response.nextBatchLink.href;
         } else {
-            this.nextBatchLinkURL = undefined;
+            this.nextBatchLink = undefined;
         }
     
         if (nextBatchSteps !== undefined) {
             nextBatchSteps--;
         }
     
-        if ((nextBatchSteps > 0 || nextBatchSteps === undefined) && this.nextBatchLinkURL !== undefined) {
-            requestTransport(this.nextBatchLinkURL, this.createScopedCallback(callback, nextBatchSteps, pipelineData));
+        if ((nextBatchSteps > 0 || nextBatchSteps === undefined) && this.nextBatchLink !== undefined && !!this.nextBatchLink) {
+            requestTransport(this.nextBatchLink, this.createScopedCallback(callback, nextBatchSteps, pipelineData));
         } else {
             if (callback !== undefined) {
                 callback.bind(this)(pipelineData, response);
