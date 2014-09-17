@@ -8,7 +8,7 @@ LGI.Guide.config = {
      * Represents URL of Kraken REST server.
      * @const LGI.Guide.config.APIURL
      */
-    APIURL: 'https://api.lgi.io/kraken/v2/schedule/',
+    APIURL: 'http://api.lgi.io/kraken/v2/schedule/',
     /**
      * Represents URL of Kraken REST server.
      * @const LGI.Guide.config.region

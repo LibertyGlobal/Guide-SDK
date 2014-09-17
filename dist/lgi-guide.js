@@ -1,6 +1,6 @@
 // LGI TV Guide JS SDK
 // ----------------------------------
-// v0.4.2
+// v0.4.3
 //
 // Copyright (c) 2014 Liberty Global
 // Distributed under BSD license
@@ -155,7 +155,7 @@
          * Represents URL of Kraken REST server.
          * @const LGI.Guide.config.APIURL
          */
-        APIURL: 'https://api.lgi.io/kraken/v2/schedule/',
+        APIURL: 'http://api.lgi.io/kraken/v2/schedule/',
         /**
          * Represents URL of Kraken REST server.
          * @const LGI.Guide.config.region
