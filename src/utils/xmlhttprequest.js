@@ -14,8 +14,8 @@ var xhrRequest = function () {
     }
 
     transport.open('GET', url);
-    transport.setRequestHeader('app_id', 'dc573c37');
-    transport.setRequestHeader('app_key', 'f4521ced0cb9af73374731a77b2f21f6');
+    transport.setRequestHeader('X-Auth-Id', 'dc573c37');
+    transport.setRequestHeader('X-Auth-Key', 'f4521ced0cb9af73374731a77b2f21f6');
 
     transport.onreadystatechange = function () {
       if (transport.readyState === 4 && transport.status === 200) {
