@@ -1,25 +1,17 @@
 {
   "name": "lgi-guide",
   "title": "LGI TV Guide JS SDK",
-  "version": "0.4.4",
+  "version": "0.5.0",
   "description": "Kraken API client library",
   "main": "dist/kraken-sdk.js",
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-clean": "~0.4.1",
-    "grunt-contrib-concat": "~0.3.0",
-    "grunt-contrib-uglify": "~0.2.2",
-    "grunt-contrib-jshint": "~0.6.0",
-    "grunt-contrib-watch": "~0.4.4",
-    "grunt-contrib-jasmine": "~0.5.1",
-    "grunt-template-jasmine-istanbul": "~0.2.4",
-    "grunt-rigger": "~0.5.0",
-    "grunt-bumpup": "~0.2.0",
-    "grunt-jsdoc": "~0.3.3",
-    "grunt-plato": "~0.2.0"
+    "gulp": "^3.8.10",
+    "gulp-clean": "^0.3.1",
+    "gulp-concat": "^2.4.2",
+    "gulp-util": "^3.0.1"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": ""
   },
   "repository": {
     "type": "git",
