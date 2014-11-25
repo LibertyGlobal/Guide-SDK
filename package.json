@@ -1,7 +1,7 @@
 {
   "name": "lgi-guide",
   "title": "LGI TV Guide JS SDK",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "Kraken API client library",
   "main": "dist/kraken-sdk.js",
   "devDependencies": {
