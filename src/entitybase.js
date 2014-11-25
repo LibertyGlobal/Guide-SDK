@@ -76,10 +76,11 @@ EntityBase.prototype.filter = function (multipleArgs) {
  * Retrieves one page of data.
  * @method EntityBase#findOne
  * @param {Function} callback Callback to execute and pass response to.
+ * @param {Function} [errorCallback] Callback to execute on error.
  */
-EntityBase.prototype.findOne = function (callback) {
+EntityBase.prototype.findOne = function (callback, errorCallback) {
     this._buildURLFromElements();
-    this._request.execute(this._requestURL, this._createScopedCallback(callback), 1);
+    this._request.execute(this._requestURL, this._createScopedCallback(callback), 1, errorCallback);
     return this;
 };
 
@@ -87,9 +88,10 @@ EntityBase.prototype.findOne = function (callback) {
  * Retrieves next page of data.
  * @method EntityBase#findNext
  * @param {Function} callback Callback to execute and pass response to.
+ * @param {Function} [errorCallback] Callback to execute on error.
  */
-EntityBase.prototype.findNext = function (callback) {
-    this._request.execute(this._request.nextBatchLink || this._buildURLFromElements(), this._createScopedCallback(callback), 1);
+EntityBase.prototype.findNext = function (callback, errorCallback) {
+    this._request.execute(this._request.nextBatchLink || this._buildURLFromElements(), this._createScopedCallback(callback), 1, errorCallback);
     return this;
 };
 
@@ -97,10 +99,11 @@ EntityBase.prototype.findNext = function (callback) {
  * Retrieves all pages of data one by one and then executes callback.
  * @method EntityBase#findAll
  * @param {Function} callback Callback to execute and pass response to.
+ * @param {Function} [errorCallback] Callback to execute on error.
  */
-EntityBase.prototype.findAll = function (callback) {
+EntityBase.prototype.findAll = function (callback, errorCallback) {
     this._buildURLFromElements();
-    this._request.execute(this._requestURL, this._createScopedCallback(callback));
+    this._request.execute(this._requestURL, this._createScopedCallback(callback), errorCallback);
     return this;
 };
 

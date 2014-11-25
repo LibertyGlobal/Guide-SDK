@@ -1,7 +1,7 @@
 {
     "name": "lgi-guide-sdk",
     "title": "LGI TV Guide JS SDK",
-    "version": "0.4.5",
+    "version": "0.4.6",
     "description": "LGI TV Guide API client library",
     "main": "dist/lgi-guide-sdk.js",
     "ignore": [
