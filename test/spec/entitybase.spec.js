@@ -124,9 +124,9 @@ describe('EntityBase', function () {
         });
 
         it('should invoke Request#execute() with the URL, callback, and limit arguments', function () {
-            this.sut.findOne();
+            this.sut.findOne(function () {}, function () {});
 
-            expect(this.requestExecutionSpy).toHaveBeenCalledWith(jasmine.any(String), jasmine.any(Function), 1);
+            expect(this.requestExecutionSpy).toHaveBeenCalledWith(jasmine.any(String), jasmine.any(Function), 1, jasmine.any(Function));
         });
     });
 
@@ -140,9 +140,9 @@ describe('EntityBase', function () {
 
         describe('when fetching for the first time', function () {
             it('should invoke Request#execute() with the URL, callback, and the limit arguments', function () {
-                this.sut.findNext();
+                this.sut.findNext(function () {}, function () {});
 
-                expect(this.requestExecutionSpy).toHaveBeenCalledWith(jasmine.any(String), jasmine.any(Function), 1);
+                expect(this.requestExecutionSpy).toHaveBeenCalledWith(jasmine.any(String), jasmine.any(Function), 1, jasmine.any(Function));
             });
         });
 
@@ -152,9 +152,9 @@ describe('EntityBase', function () {
             });
 
             it('should invoke Request#execute() with the "nextBatchLink" URL from previous response, callback, and the limit arguments', function () {
-                this.sut.findNext();
+                this.sut.findNext(function () {}, function () {});
 
-                expect(this.requestExecutionSpy).toHaveBeenCalledWith('foo', jasmine.any(Function), 1);
+                expect(this.requestExecutionSpy).toHaveBeenCalledWith('foo', jasmine.any(Function), 1, jasmine.any(Function));
             });
         });
     });
@@ -168,9 +168,9 @@ describe('EntityBase', function () {
         });
 
         it('should invoke Request#execute() with the URL and a callback', function () {
-            this.sut.findAll();
+            this.sut.findAll(function () {}, function () {});
 
-            expect(this.requestExecutionSpy).toHaveBeenCalledWith(jasmine.any(String), jasmine.any(Function));
+            expect(this.requestExecutionSpy).toHaveBeenCalledWith(jasmine.any(String), jasmine.any(Function), jasmine.any(Function));
         });
     });
 });

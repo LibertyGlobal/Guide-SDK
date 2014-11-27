@@ -1,6 +1,6 @@
 // LGI TV Guide JS SDK
 // ----------------------------------
-// v0.4.4
+// v0.4.6
 //
 // Copyright (c) 2014 Liberty Global
 // Distributed under BSD license
@@ -48,44 +48,38 @@
           errorCallback = noop;
         }
     
-        transport.open('GET', url);
+        transport.open('GET', url, true);
         transport.setRequestHeader('X-Auth-Id', 'dc573c37');
         transport.setRequestHeader('X-Auth-Key', 'f4521ced0cb9af73374731a77b2f21f6');
     
         transport.onreadystatechange = function () {
-          if (transport.readyState === 4 && transport.status === 200) {
-            var reply = transport.responseText;
-            var json;
-    
-            if (typeof reply === 'object' && !!reply) {
-              json = reply;
-            } else if (typeof reply === 'string' && !!reply) {
+          if (transport.readyState === 4) {
+            if (transport.status === 200) {
               try {
-                json = JSON.parse(reply);
-              } catch (error) {
-                errorCallback(new Error('Invalid JSON response received'));
+                var json = JSON.parse(transport.responseText);
     
-                return;
+                successCallback(json);
+              } catch (error) {
+                errorCallback(new Error([
+                  'Invalid JSON response',
+                  '(' + error.message + ')'
+                ].join(' ')));
               }
             } else {
-              errorCallback(new Error('Invalid JSON response received'));
-    
-              return;
+              errorCallback(new Error([
+                'Unexpected server response',
+                '(status=' + transport.status + ',',
+                'statusText=' + transport.statusText + ')'
+              ].join(' ')));
             }
-    
-            successCallback(json);
           }
         };
     
-        transport.onerror = function () {
-          errorCallback(new Error('An error occurred while retrieving data (status ' + transport.status + ')'));
-        };
-    
-        transport.ontimeout = function () {
-          errorCallback(new Error('Request timed out'));
-        };
-    
-        transport.send(null);
+        try {
+          transport.send(null);
+        } catch (error) {
+          errorCallback(error.description);
+        }
       }
     
       return xhrRequest;
@@ -176,13 +170,15 @@
         this.nextBatchLink = '';
     }
     
-    Request.prototype.execute = function (URL, callback, nextBatchSteps) {
+    Request.prototype.execute = function (URL, callback, nextBatchSteps, errorCallback) {
         var pipelineData = [];
     
         //noinspection JSUnusedGlobalSymbols
         this.initialRequestURL = URL;
     
-        requestTransport(URL, this.createScopedCallback(callback, nextBatchSteps, pipelineData));
+        requestTransport(URL,
+            this.createScopedCallback(callback, nextBatchSteps, pipelineData),
+            errorCallback);
     };
     
     Request.prototype.proceedResponse = function (response, nextBatchSteps, pipelineData, callback) {
@@ -552,10 +548,11 @@
      * Retrieves one page of data.
      * @method EntityBase#findOne
      * @param {Function} callback Callback to execute and pass response to.
+     * @param {Function} [errorCallback] Callback to execute on error.
      */
-    EntityBase.prototype.findOne = function (callback) {
+    EntityBase.prototype.findOne = function (callback, errorCallback) {
         this._buildURLFromElements();
-        this._request.execute(this._requestURL, this._createScopedCallback(callback), 1);
+        this._request.execute(this._requestURL, this._createScopedCallback(callback), 1, errorCallback);
         return this;
     };
     
@@ -563,9 +560,10 @@
      * Retrieves next page of data.
      * @method EntityBase#findNext
      * @param {Function} callback Callback to execute and pass response to.
+     * @param {Function} [errorCallback] Callback to execute on error.
      */
-    EntityBase.prototype.findNext = function (callback) {
-        this._request.execute(this._request.nextBatchLink || this._buildURLFromElements(), this._createScopedCallback(callback), 1);
+    EntityBase.prototype.findNext = function (callback, errorCallback) {
+        this._request.execute(this._request.nextBatchLink || this._buildURLFromElements(), this._createScopedCallback(callback), 1, errorCallback);
         return this;
     };
     
@@ -573,10 +571,11 @@
      * Retrieves all pages of data one by one and then executes callback.
      * @method EntityBase#findAll
      * @param {Function} callback Callback to execute and pass response to.
+     * @param {Function} [errorCallback] Callback to execute on error.
      */
-    EntityBase.prototype.findAll = function (callback) {
+    EntityBase.prototype.findAll = function (callback, errorCallback) {
         this._buildURLFromElements();
-        this._request.execute(this._requestURL, this._createScopedCallback(callback));
+        this._request.execute(this._requestURL, this._createScopedCallback(callback), errorCallback);
         return this;
     };
     

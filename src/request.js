@@ -11,13 +11,15 @@ function Request() {
     this.nextBatchLink = '';
 }
 
-Request.prototype.execute = function (URL, callback, nextBatchSteps) {
+Request.prototype.execute = function (URL, callback, nextBatchSteps, errorCallback) {
     var pipelineData = [];
 
     //noinspection JSUnusedGlobalSymbols
     this.initialRequestURL = URL;
 
-    requestTransport(URL, this.createScopedCallback(callback, nextBatchSteps, pipelineData));
+    requestTransport(URL,
+        this.createScopedCallback(callback, nextBatchSteps, pipelineData),
+        errorCallback);
 };
 
 Request.prototype.proceedResponse = function (response, nextBatchSteps, pipelineData, callback) {

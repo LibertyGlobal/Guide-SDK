@@ -13,44 +13,38 @@ var xhrRequest = function () {
       errorCallback = noop;
     }
 
-    transport.open('GET', url);
+    transport.open('GET', url, true);
     transport.setRequestHeader('X-Auth-Id', 'dc573c37');
     transport.setRequestHeader('X-Auth-Key', 'f4521ced0cb9af73374731a77b2f21f6');
 
     transport.onreadystatechange = function () {
-      if (transport.readyState === 4 && transport.status === 200) {
-        var reply = transport.responseText;
-        var json;
-
-        if (typeof reply === 'object' && !!reply) {
-          json = reply;
-        } else if (typeof reply === 'string' && !!reply) {
+      if (transport.readyState === 4) {
+        if (transport.status === 200) {
           try {
-            json = JSON.parse(reply);
-          } catch (error) {
-            errorCallback(new Error('Invalid JSON response received'));
+            var json = JSON.parse(transport.responseText);
 
-            return;
+            successCallback(json);
+          } catch (error) {
+            errorCallback(new Error([
+              'Invalid JSON response',
+              '(' + error.message + ')'
+            ].join(' ')));
           }
         } else {
-          errorCallback(new Error('Invalid JSON response received'));
-
-          return;
+          errorCallback(new Error([
+            'Unexpected server response',
+            '(status=' + transport.status + ',',
+            'statusText=' + transport.statusText + ')'
+          ].join(' ')));
         }
-
-        successCallback(json);
       }
     };
 
-    transport.onerror = function () {
-      errorCallback(new Error('An error occurred while retrieving data (status ' + transport.status + ')'));
-    };
-
-    transport.ontimeout = function () {
-      errorCallback(new Error('Request timed out'));
-    };
-
-    transport.send(null);
+    try {
+      transport.send(null);
+    } catch (error) {
+      errorCallback(error.description);
+    }
   }
 
   return xhrRequest;
