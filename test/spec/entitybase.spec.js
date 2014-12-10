@@ -12,7 +12,7 @@ describe('EntityBase', function () {
 
     describe('limit()', function () {
         beforeEach(function () {
-            this.requestExecutionSpy = spyOn(Request.prototype, 'execute');
+            this.requestExecutionSpy = spyOn(GuideRequest.prototype, 'execute');
             this.sut = new EntityBase();
         });
 
@@ -31,7 +31,7 @@ describe('EntityBase', function () {
 
     describe('fields()', function () {
         beforeEach(function () {
-            this.requestExecutionSpy = spyOn(Request.prototype, 'execute');
+            this.requestExecutionSpy = spyOn(GuideRequest.prototype, 'execute');
             this.sut = new EntityBase();
         });
 
@@ -50,7 +50,7 @@ describe('EntityBase', function () {
 
     describe('sort()', function () {
         beforeEach(function () {
-            this.requestExecutionSpy = spyOn(Request.prototype, 'execute');
+            this.requestExecutionSpy = spyOn(GuideRequest.prototype, 'execute');
             this.sut = new EntityBase();
         });
 
@@ -97,7 +97,7 @@ describe('EntityBase', function () {
 
     describe('filter()', function () {
         beforeEach(function () {
-            this.requestExecutionSpy = spyOn(Request.prototype, 'execute');
+            this.requestExecutionSpy = spyOn(GuideRequest.prototype, 'execute');
             this.sut = new EntityBase();
         });
 
@@ -119,11 +119,11 @@ describe('EntityBase', function () {
         // TODO: real tests
 
         beforeEach(function () {
-            this.requestExecutionSpy = spyOn(Request.prototype, 'execute');
+            this.requestExecutionSpy = spyOn(GuideRequest.prototype, 'execute');
             this.sut = new EntityBase();
         });
 
-        it('should invoke Request#execute() with the URL, callback, and limit arguments', function () {
+        it('should invoke GuideRequest#execute() with the URL, callback, and limit arguments', function () {
             this.sut.findOne(function () {}, function () {});
 
             expect(this.requestExecutionSpy).toHaveBeenCalledWith(jasmine.any(String), jasmine.any(Function), 1, jasmine.any(Function));
@@ -134,12 +134,12 @@ describe('EntityBase', function () {
         // TODO: real tests
 
         beforeEach(function () {
-            this.requestExecutionSpy = spyOn(Request.prototype, 'execute');
+            this.requestExecutionSpy = spyOn(GuideRequest.prototype, 'execute');
             this.sut = new EntityBase();
         });
 
         describe('when fetching for the first time', function () {
-            it('should invoke Request#execute() with the URL, callback, and the limit arguments', function () {
+            it('should invoke GuideRequest#execute() with the URL, callback, and the limit arguments', function () {
                 this.sut.findNext(function () {}, function () {});
 
                 expect(this.requestExecutionSpy).toHaveBeenCalledWith(jasmine.any(String), jasmine.any(Function), 1, jasmine.any(Function));
@@ -151,7 +151,7 @@ describe('EntityBase', function () {
                 this.sut._request.nextBatchLink = 'foo';
             });
 
-            it('should invoke Request#execute() with the "nextBatchLink" URL from previous response, callback, and the limit arguments', function () {
+            it('should invoke GuideRequest#execute() with the "nextBatchLink" URL from previous response, callback, and the limit arguments', function () {
                 this.sut.findNext(function () {}, function () {});
 
                 expect(this.requestExecutionSpy).toHaveBeenCalledWith('foo', jasmine.any(Function), 1, jasmine.any(Function));
@@ -163,11 +163,11 @@ describe('EntityBase', function () {
         // TODO: real tests
 
         beforeEach(function () {
-            this.requestExecutionSpy = spyOn(Request.prototype, 'execute');
+            this.requestExecutionSpy = spyOn(GuideRequest.prototype, 'execute');
             this.sut = new EntityBase();
         });
 
-        it('should invoke Request#execute() with the URL and a callback', function () {
+        it('should invoke GuideRequest#execute() with the URL and a callback', function () {
             this.sut.findAll(function () {}, function () {});
 
             expect(this.requestExecutionSpy).toHaveBeenCalledWith(jasmine.any(String), jasmine.any(Function), jasmine.any(Function));
