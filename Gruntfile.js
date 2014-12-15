@@ -22,7 +22,7 @@ module.exports = function (grunt) {
                 'src/main.js',
                 'src/utils/*.js',
                 'src/config.js',
-                'src/request.js',
+                'src/guiderequest.js',
                 'src/fields/*.js',
                 'src/collection.js',
                 'src/entitybase.js',

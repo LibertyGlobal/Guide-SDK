@@ -11,7 +11,7 @@ function EntityBase() {
     this.filters = [];
     this._queryModificationActions = [];
     this._requestURL = '';
-    this._request = new Request();
+    this._request = new GuideRequest();
 }
 
 EntityBase.prototype = Object.create(Collection.prototype);

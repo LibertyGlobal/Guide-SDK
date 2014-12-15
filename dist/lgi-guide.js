@@ -1,6 +1,6 @@
 // LGI TV Guide JS SDK
 // ----------------------------------
-// v0.4.6
+// v0.4.7
 //
 // Copyright (c) 2014 Liberty Global
 // Distributed under BSD license
@@ -124,13 +124,15 @@
     };
     
     /**
-     * Determines are we in NodeJS or not and returns right transport module.
+     * Selects the appropriate transport adapter for current environment.
      * @namespace LGI.Guide
      * @function LGI.Guide.requestTransport
      */
     
     var chooseTransport = function () {
-        if (typeof module !== 'undefined' && module.exports) {
+        if (typeof MAF !== 'undefined') {
+            return mafRequest();
+        } else if (typeof module !== 'undefined' && module.exports) {
             return nodeRequest();
         } else {
             return xhrRequest();
@@ -158,19 +160,19 @@
     };
     
     /**
-     * Request is a class which is designed to be used as a property of entity to communicate with server and remember state of data transfer
+     * GuideRequest is a class which is designed to be used as a property of entity to communicate with server and remember state of data transfer
      * @namespace LGI.Guide
-     * @class Request
+     * @class GuideRequest
      */
     
-    function Request() {
+    function GuideRequest() {
         //Initial request URL needed to make items observable and fire onChange event of entity
         //noinspection JSUnusedGlobalSymbols
         this.initialRequestURL = '';
         this.nextBatchLink = '';
     }
     
-    Request.prototype.execute = function (URL, callback, nextBatchSteps, errorCallback) {
+    GuideRequest.prototype.execute = function (URL, callback, nextBatchSteps) {
         var pipelineData = [];
     
         //noinspection JSUnusedGlobalSymbols
@@ -181,7 +183,7 @@
             errorCallback);
     };
     
-    Request.prototype.proceedResponse = function (response, nextBatchSteps, pipelineData, callback) {
+    GuideRequest.prototype.proceedResponse = function (response, nextBatchSteps, pipelineData, callback) {
         pipelineData = pipelineData.concat(response.data);
     
         if (response.nextBatchLink) {
@@ -203,7 +205,7 @@
         }
     };
     
-    Request.prototype.createScopedCallback = function (callback, nextBatchSteps, pipelineData) {
+    GuideRequest.prototype.createScopedCallback = function (callback, nextBatchSteps, pipelineData) {
         var scopedCallback = function (data) {
             this.proceedResponse(data, nextBatchSteps, pipelineData, callback);
         };
@@ -483,7 +485,7 @@
         this.filters = [];
         this._queryModificationActions = [];
         this._requestURL = '';
-        this._request = new Request();
+        this._request = new GuideRequest();
     }
     
     EntityBase.prototype = Object.create(Collection.prototype);
