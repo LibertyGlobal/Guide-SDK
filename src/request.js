@@ -1,17 +1,17 @@
 /**
- * GuideRequest is a class which is designed to be used as a property of entity to communicate with server and remember state of data transfer
+ * Request is a class which is designed to be used as a property of entity to communicate with server and remember state of data transfer
  * @namespace LGI.Guide
- * @class GuideRequest
+ * @class Request
  */
 
-function GuideRequest() {
+function Request() {
     //Initial request URL needed to make items observable and fire onChange event of entity
     //noinspection JSUnusedGlobalSymbols
     this.initialRequestURL = '';
     this.nextBatchLink = '';
 }
 
-GuideRequest.prototype.execute = function (URL, callback, nextBatchSteps) {
+Request.prototype.execute = function (URL, callback, nextBatchSteps, errorCallback) {
     var pipelineData = [];
 
     //noinspection JSUnusedGlobalSymbols
@@ -22,7 +22,7 @@ GuideRequest.prototype.execute = function (URL, callback, nextBatchSteps) {
         errorCallback);
 };
 
-GuideRequest.prototype.proceedResponse = function (response, nextBatchSteps, pipelineData, callback) {
+Request.prototype.proceedResponse = function (response, nextBatchSteps, pipelineData, callback) {
     pipelineData = pipelineData.concat(response.data);
 
     if (response.nextBatchLink) {
@@ -44,7 +44,7 @@ GuideRequest.prototype.proceedResponse = function (response, nextBatchSteps, pip
     }
 };
 
-GuideRequest.prototype.createScopedCallback = function (callback, nextBatchSteps, pipelineData) {
+Request.prototype.createScopedCallback = function (callback, nextBatchSteps, pipelineData) {
     var scopedCallback = function (data) {
         this.proceedResponse(data, nextBatchSteps, pipelineData, callback);
     };

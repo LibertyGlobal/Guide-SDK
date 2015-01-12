@@ -12,7 +12,7 @@ LGI.Guide = {};
 
 //= config
 
-//= guiderequest
+//= request
 
 //= fields/abstractfield
 
