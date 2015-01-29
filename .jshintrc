@@ -1,15 +1,24 @@
 {
-    "asi": true,
-    "curly": true,
-    "eqnull": true,
-    "eqeqeq": true,
-    "globals": {
-        "module": true,
-        "define": true,
-        "window": true,
-        "document": true,
-        "console": true,
-        "Kraken": true,
-        "K": true
-    }
+  "camelcase": true,
+  "curly": true,
+  "eqeqeq": true,
+  "immed": true,
+  "indent": 2,
+  "latedef": true,
+  "noarg": true,
+  "noempty": true,
+  "nonbsp": true,
+  "quotmark": "single",
+  "undef": true,
+  "unused": true,
+  "strict": true,
+  "sub": true,
+  "browser": true,
+  "jquery": true,
+  "node": true,
+  "phantom": true,
+  "worker": false,
+  "globals": {
+    "_": true
+  }
 }

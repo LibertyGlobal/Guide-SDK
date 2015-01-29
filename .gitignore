@@ -1,9 +1,4 @@
 .idea
-.DS_Store
-.grunt
-npm-debug.log
 node_modules
-report
-SpecRunner.html
-test/lib
-junit
+coverage
+.tmp

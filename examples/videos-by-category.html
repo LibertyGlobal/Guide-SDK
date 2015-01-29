@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+    <meta charset="UTF-8">
+    <title>LGI Guide</title>
+
+    <style>
+      body {
+        box-sizing: border-box;
+        width: 800px;
+        margin: 50px auto;
+        padding: 0;
+        background: #111;
+        color: #eee;
+        font: 20px/1.5 Helvetica, Arial, sans-serif;
+      }
+
+      h1, h2, h3, h4 {
+        font-weight: normal;
+      }
+
+      #main {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      #main li {
+        margin-bottom: 50px;
+      }
+
+      #main li:before,
+      #main li:after {
+        content: ' ';
+        display: table;
+      }
+
+      #main li:after {
+        clear: both;
+      }
+
+      #main img {
+        float: left;
+        margin-right: 25px;
+      }
+
+      #main p {
+        color: #999;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Movies</h1>
+
+    <ul id="main"></ul>
+
+    <script id="data-template" type="text/html">
+      <% _.each(items, function (item) { %>
+      <li>
+        <img src="<%= item.imageLink.href %>" alt="<%= item.title %>">
+        <h2><%= item.title %></h2>
+        <p><%= item.shortSynopsis %></p>
+      </li>
+      <% }); %>
+    </script>
+
+    <script id="error-template" type="text/html">
+      <li class="error">An error has occurred while retrieving the data</li>
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+    <script src="../dist/lgi-guide-standalone.js"></script>
+
+    <script>
+      LGI.Guide.initialize({
+        region: 'IE',
+        appId: 'demo',
+        appKey: 'demo'
+      });
+
+      LGI.Guide.findVideos()
+          .fields(LGI.Guide.Video.TITLE, LGI.Guide.Video.SHORT_SYNOPSIS, LGI.Guide.Video.IMAGE_LINK)
+          .filter(LGI.Guide.Video.CATEGORY.matches('movie'))
+          .limit(10)
+          .execute(onSuccess, onError);
+
+      var main = document.getElementById('main');
+      var dataTemplate = _.template(document.getElementById('data-template').textContent);
+      var errorTemplate = _.template(document.getElementById('error-template').textContent);
+
+      function onSuccess(response) {
+        main.innerHTML = dataTemplate({ items: response.data });
+      }
+
+      function onError() {
+        main.innerHTML = errorTemplate();
+      }
+    </script>
+  </body>
+</html>

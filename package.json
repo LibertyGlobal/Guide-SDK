@@ -1,27 +1,59 @@
 {
   "name": "lgi-guide",
-  "title": "LGI TV Guide JS SDK",
+  "title": "Liberty Global TV Guide SDK",
   "version": "0.5.0",
-  "description": "Kraken API client library",
-  "main": "dist/kraken-sdk.js",
-  "devDependencies": {
-    "gulp": "^3.8.10",
-    "gulp-clean": "^0.3.1",
-    "gulp-concat": "^2.4.2",
-    "gulp-util": "^3.0.1"
+  "description": "A utility library for the Liberty Global Schedule APIs",
+  "private": true,
+  "license": "MIT",
+  "main": "dist/lgi-guide-bare-bones.js",
+  "directories": {
+    "test": "test"
   },
   "scripts": {
-    "test": ""
+    "test": "./node_modules/.bin/gulp test"
   },
   "repository": {
     "type": "git",
     "url": "http://github.com/LibertyGlobal/Guide-SDK"
   },
-  "keywords": [
-    "tv",
-    "schedule",
-    "api"
+  "author": "Jorigis Snaras <jsnaras@libertyglobal.com>",
+  "contributors": [
+    {
+      "name": "Denis Radin",
+      "email": "dradin@libertyglobal.com"
+    },
+    {
+      "name": "John Archambault",
+      "email": "jarchambault@libertyglobal.com"
+    },
+    {
+      "name": "Maciej Jurczyk",
+      "email": "mjurczyk@libertyglobal.com"
+    }
   ],
-  "author": "Liberty Global",
-  "license": "BSD"
+  "devDependencies": {
+    "gulp": "^3.8.10",
+    "gulp-clean": "^0.3.1",
+    "gulp-concat": "^2.4.3",
+    "gulp-header": "^1.2.2",
+    "gulp-jsdoc": "^0.1.4",
+    "gulp-jshint": "^1.9.0",
+    "gulp-karma": "0.0.4",
+    "gulp-markdox": "^0.1.1",
+    "gulp-notify": "^2.1.0",
+    "gulp-plumber": "^0.6.6",
+    "gulp-rename": "^1.2.0",
+    "gulp-rigger": "^0.5.8",
+    "gulp-uglify": "^1.0.1",
+    "gulp-util": "^3.0.2",
+    "jsdoc": "^3.3.0-alpha13",
+    "jsdoc-to-markdown": "^0.6.3",
+    "jshint-stylish": "^1.0.0",
+    "karma": "^0.12.28",
+    "karma-coverage": "^0.2.7",
+    "karma-jasmine": "^0.3.2",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "lazypipe": "^0.2.2",
+    "run-sequence": "^1.0.2"
+  }
 }

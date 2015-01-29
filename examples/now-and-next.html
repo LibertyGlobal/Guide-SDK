@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+    <meta charset="UTF-8">
+    <title>LGI Guide</title>
+
+    <style>
+      body {
+        box-sizing: border-box;
+        width: 600px;
+        margin: 50px auto;
+        padding: 0;
+        background: #111;
+        color: #ccc;
+        font: 16px/1.5 Helvetica, Arial, sans-serif;
+      }
+
+      h1, h2, h3, h4 {
+        font-weight: normal;
+        color: #fff;
+      }
+
+      #main {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      li {
+        padding: 30px 0;
+        border-bottom: 1px solid #333;
+      }
+
+      li:last-child {
+        border-bottom: 0;
+      }
+
+      li.error {
+        color: #a00000;
+      }
+
+      li p {
+        margin: 0;
+      }
+
+      span {
+        font-size: 15px;
+        color: #aaa;
+      }
+
+      .channel {
+        float: left;
+      }
+
+      .time {
+        float: right;
+      }
+
+      h2 {
+        clear: both;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Now on TV</h1>
+
+    <ul id="main"></ul>
+
+    <script id="data-template" type="text/html">
+      <% _.each(items, function (item) { %>
+      <li>
+        <span class="channel"><%= item.channel.name %></span>
+        <span class="time">started at <%= new Date(item.start).toLocaleString() %></span>
+        <h2><%= item.video.title %></h2>
+        <p><%= item.video.shortSynopsis %></p>
+      </li>
+      <% }); %>
+    </script>
+
+    <script id="error-template" type="text/html">
+      <li class="error">An error has occurred while loading data</li>
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+    <script src="../dist/lgi-guide-standalone.js"></script>
+
+    <script>
+      LGI.Guide.initialize({
+        region: 'IE',
+        appId: 'demo',
+        appKey: 'demo'
+      });
+
+      LGI.Guide.findBroadcasts()
+          .fields([
+            LGI.Guide.Video.TITLE, LGI.Guide.Video.SHORT_SYNOPSIS,
+            LGI.Guide.Broadcast.START, LGI.Guide.Broadcast.END,
+            LGI.Guide.Channel.NAME
+          ])
+          .filter([
+            LGI.Guide.Broadcast.START.isLessThan(new Date().toJSON()),
+            LGI.Guide.Broadcast.END.isGreaterThan(new Date().toJSON())
+          ])
+          .filter([
+            LGI.Guide.Channel.NAME.isEqualTo('BBC 1'),
+            LGI.Guide.Channel.NAME.isEqualTo('TG4 HD'),
+            LGI.Guide.Channel.NAME.isEqualTo('Discovery')
+          ])
+          .limit(3)
+          .execute(onSuccess, onError);
+
+      var main = document.getElementById('main');
+      var dataTemplate = _.template(document.getElementById('data-template').textContent);
+      var errorTemplate = _.template(document.getElementById('error-template').textContent);
+
+      function onSuccess(response) {
+        main.innerHTML = dataTemplate({ items: response.data });
+      }
+
+      function onError() {
+        main.innerHTML = dataTemplate();
+      }
+    </script>
+  </body>
+</html>
