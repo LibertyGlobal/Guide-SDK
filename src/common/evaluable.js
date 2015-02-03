@@ -63,3 +63,14 @@ Evaluable.prototype.evaluate = function (context) {
 
   return this.value;
 };
+
+/**
+ * Returns the item serialized into a string.
+ *
+ * @returns {string} Serialized item
+ */
+Evaluable.prototype.toString = function () {
+  'use strict';
+
+  return this.evaluate(null);
+};

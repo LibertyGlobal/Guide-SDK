@@ -20,6 +20,22 @@ describe('Evaluable', function () {
     });
   });
 
+  describe('#toString()', function () {
+    it('should delegate to #evaluate() with null context', function () {
+      var context = {
+        evaluate: function () {
+          return 'context';
+        }
+      };
+      var sut = new Evaluable('foo', context);
+
+      spyOn(sut, 'evaluate').and.returnValue('foobar');
+
+      expect(sut.toString()).toEqual('foobar');
+      expect(sut.evaluate).toHaveBeenCalledWith(null);
+    });
+  });
+
   describe('#evaluate()', function () {
     describe('provided there is a context passed when initializing', function () {
       describe('when the context argument is the same', function () {

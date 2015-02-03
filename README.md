@@ -159,7 +159,7 @@ API Documentation
 -----------------
 
 <a name="LGI"></a>
-###LGI → <code>object</code>
+##LGI → <code>object</code>
 
 * [LGI](#LGI) → <code>object</code>
   * [.Guide](#LGI.Guide) → <code>object</code>
@@ -182,6 +182,8 @@ API Documentation
         * [.toString()](#LGI.Guide..RequestBuilder#toString) ⇒ <code>string</code>
     * [class: ~Field](#LGI.Guide..Field) ⇐ <code>[Evaluable](#new_Evaluable_new)</code>
       * [new Field(context, name)](#new_LGI.Guide..Field_new)
+      * _inherits_
+        * [.toString()](#Evaluable#toString) ⇒ <code>string</code>
     * [class: ~NumericField](#LGI.Guide..NumericField) ⇐ <code>[Field](#LGI.Guide..Field)</code>
       * [new NumericField(context, name)](#new_LGI.Guide..NumericField_new)
       * _instance_
@@ -190,22 +192,28 @@ API Documentation
         * [.isEqualTo(value)](#LGI.Guide..NumericField#isEqualTo) ⇒ <code>[Expression](#new_Expression_new)</code>
         * [.isGreaterThanOrEqualTo(value)](#LGI.Guide..NumericField#isGreaterThanOrEqualTo) ⇒ <code>[Expression](#new_Expression_new)</code>
         * [.isGreaterThan(value)](#LGI.Guide..NumericField#isGreaterThan) ⇒ <code>[Expression](#new_Expression_new)</code>
+      * _inherits_
+        * [.toString()](#Evaluable#toString) ⇒ <code>string</code>
     * [class: ~TextField](#LGI.Guide..TextField) ⇐ <code>[Field](#LGI.Guide..Field)</code>
       * [new TextField(context, name)](#new_LGI.Guide..TextField_new)
       * _instance_
         * [.isEqualTo(value)](#LGI.Guide..TextField#isEqualTo) ⇒ <code>[Expression](#new_Expression_new)</code>
+      * _inherits_
+        * [.toString()](#Evaluable#toString) ⇒ <code>string</code>
     * [class: ~FuzzyMatchField](#LGI.Guide..FuzzyMatchField) ⇐ <code>[TextField](#LGI.Guide..TextField)</code>
       * [new FuzzyMatchField(context, name)](#new_LGI.Guide..FuzzyMatchField_new)
       * _instance_
         * [.matches(value)](#LGI.Guide..FuzzyMatchField#matches) ⇒ <code>[Expression](#new_Expression_new)</code>
       * _inherits_
         * [.isEqualTo(value)](#LGI.Guide..TextField#isEqualTo) ⇒ <code>[Expression](#new_Expression_new)</code>
+        * [.toString()](#Evaluable#toString) ⇒ <code>string</code>
     * [class: ~MultiValueField](#LGI.Guide..MultiValueField) ⇐ <code>[TextField](#LGI.Guide..TextField)</code>
       * [new MultiValueField(context, name)](#new_LGI.Guide..MultiValueField_new)
       * _instance_
         * [.isIn(...values)](#LGI.Guide..MultiValueField#isIn) ⇒ <code>[Expression](#new_Expression_new)</code>
       * _inherits_
         * [.isEqualTo(value)](#LGI.Guide..TextField#isEqualTo) ⇒ <code>[Expression](#new_Expression_new)</code>
+        * [.toString()](#Evaluable#toString) ⇒ <code>string</code>
 
 <a name="LGI.Guide"></a>
 ###LGI.Guide → <code>object</code>
@@ -230,6 +238,8 @@ API Documentation
       * [.toString()](#LGI.Guide..RequestBuilder#toString) ⇒ <code>string</code>
   * [class: ~Field](#LGI.Guide..Field) ⇐ <code>[Evaluable](#new_Evaluable_new)</code>
     * [new Field(context, name)](#new_LGI.Guide..Field_new)
+    * _inherits_
+      * [.toString()](#Evaluable#toString) ⇒ <code>string</code>
   * [class: ~NumericField](#LGI.Guide..NumericField) ⇐ <code>[Field](#LGI.Guide..Field)</code>
     * [new NumericField(context, name)](#new_LGI.Guide..NumericField_new)
     * _instance_
@@ -238,22 +248,28 @@ API Documentation
       * [.isEqualTo(value)](#LGI.Guide..NumericField#isEqualTo) ⇒ <code>[Expression](#new_Expression_new)</code>
       * [.isGreaterThanOrEqualTo(value)](#LGI.Guide..NumericField#isGreaterThanOrEqualTo) ⇒ <code>[Expression](#new_Expression_new)</code>
       * [.isGreaterThan(value)](#LGI.Guide..NumericField#isGreaterThan) ⇒ <code>[Expression](#new_Expression_new)</code>
+    * _inherits_
+      * [.toString()](#Evaluable#toString) ⇒ <code>string</code>
   * [class: ~TextField](#LGI.Guide..TextField) ⇐ <code>[Field](#LGI.Guide..Field)</code>
     * [new TextField(context, name)](#new_LGI.Guide..TextField_new)
     * _instance_
       * [.isEqualTo(value)](#LGI.Guide..TextField#isEqualTo) ⇒ <code>[Expression](#new_Expression_new)</code>
+    * _inherits_
+      * [.toString()](#Evaluable#toString) ⇒ <code>string</code>
   * [class: ~FuzzyMatchField](#LGI.Guide..FuzzyMatchField) ⇐ <code>[TextField](#LGI.Guide..TextField)</code>
     * [new FuzzyMatchField(context, name)](#new_LGI.Guide..FuzzyMatchField_new)
     * _instance_
       * [.matches(value)](#LGI.Guide..FuzzyMatchField#matches) ⇒ <code>[Expression](#new_Expression_new)</code>
     * _inherits_
       * [.isEqualTo(value)](#LGI.Guide..TextField#isEqualTo) ⇒ <code>[Expression](#new_Expression_new)</code>
+      * [.toString()](#Evaluable#toString) ⇒ <code>string</code>
   * [class: ~MultiValueField](#LGI.Guide..MultiValueField) ⇐ <code>[TextField](#LGI.Guide..TextField)</code>
     * [new MultiValueField(context, name)](#new_LGI.Guide..MultiValueField_new)
     * _instance_
       * [.isIn(...values)](#LGI.Guide..MultiValueField#isIn) ⇒ <code>[Expression](#new_Expression_new)</code>
     * _inherits_
       * [.isEqualTo(value)](#LGI.Guide..TextField#isEqualTo) ⇒ <code>[Expression](#new_Expression_new)</code>
+      * [.toString()](#Evaluable#toString) ⇒ <code>string</code>
 
 <a name="LGI.Guide.Broadcast"></a>
 ####Guide.Broadcast → <code>[Resource](#new_Resource_new)</code>
@@ -469,6 +485,12 @@ Builds the URL for the request based on provided parameters.
 ####class: Guide~Field ⇐ <code>[Evaluable](#new_Evaluable_new)</code>
 **Extends:** <code>[Evaluable](#new_Evaluable_new)</code>
 **Access:** protected
+
+* [class: ~Field](#LGI.Guide..Field) ⇐ <code>[Evaluable](#new_Evaluable_new)</code>
+  * [new Field(context, name)](#new_LGI.Guide..Field_new)
+  * _inherits_
+    * [.toString()](#Evaluable#toString) ⇒ <code>string</code>
+
 <a name="new_LGI.Guide..Field_new"></a>
 #####new Field(context, name)
 Represents a field (property) of a resource.
@@ -491,6 +513,8 @@ Represents a field (property) of a resource.
     * [.isEqualTo(value)](#LGI.Guide..NumericField#isEqualTo) ⇒ <code>[Expression](#new_Expression_new)</code>
     * [.isGreaterThanOrEqualTo(value)](#LGI.Guide..NumericField#isGreaterThanOrEqualTo) ⇒ <code>[Expression](#new_Expression_new)</code>
     * [.isGreaterThan(value)](#LGI.Guide..NumericField#isGreaterThan) ⇒ <code>[Expression](#new_Expression_new)</code>
+  * _inherits_
+    * [.toString()](#Evaluable#toString) ⇒ <code>string</code>
 
 <a name="new_LGI.Guide..NumericField_new"></a>
 #####new NumericField(context, name)
@@ -560,6 +584,8 @@ comparison `field>value` when evaluated.
   * [new TextField(context, name)](#new_LGI.Guide..TextField_new)
   * _instance_
     * [.isEqualTo(value)](#LGI.Guide..TextField#isEqualTo) ⇒ <code>[Expression](#new_Expression_new)</code>
+  * _inherits_
+    * [.toString()](#Evaluable#toString) ⇒ <code>string</code>
 
 <a name="new_LGI.Guide..TextField_new"></a>
 #####new TextField(context, name)
@@ -591,6 +617,7 @@ comparison `field=value` when evaluated.
     * [.matches(value)](#LGI.Guide..FuzzyMatchField#matches) ⇒ <code>[Expression](#new_Expression_new)</code>
   * _inherits_
     * [.isEqualTo(value)](#LGI.Guide..TextField#isEqualTo) ⇒ <code>[Expression](#new_Expression_new)</code>
+    * [.toString()](#Evaluable#toString) ⇒ <code>string</code>
 
 <a name="new_LGI.Guide..FuzzyMatchField_new"></a>
 #####new FuzzyMatchField(context, name)
@@ -622,6 +649,7 @@ comparison `field~value` when evaluated.
     * [.isIn(...values)](#LGI.Guide..MultiValueField#isIn) ⇒ <code>[Expression](#new_Expression_new)</code>
   * _inherits_
     * [.isEqualTo(value)](#LGI.Guide..TextField#isEqualTo) ⇒ <code>[Expression](#new_Expression_new)</code>
+    * [.toString()](#Evaluable#toString) ⇒ <code>string</code>
 
 <a name="new_LGI.Guide..MultiValueField_new"></a>
 #####new MultiValueField(context, name)
