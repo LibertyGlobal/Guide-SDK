@@ -60,6 +60,16 @@ describe('Guide', function () {
         });
       });
     });
+
+    it('it should return the Guide object itself', function () {
+      var actual = Guide.initialize({
+        region: 'mock-region',
+        appId: 'mock-app-id',
+        appKey: 'mock-app-key'
+      });
+
+      expect(actual).toEqual(Guide);
+    });
   });
 
   describe('findBroadcasts()', function () {

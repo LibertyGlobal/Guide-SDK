@@ -166,7 +166,7 @@ API Documentation
     * [.Broadcast](#LGI.Guide.Broadcast) → <code>[Resource](#new_Resource_new)</code>
     * [.Channel](#LGI.Guide.Channel) → <code>[Resource](#new_Resource_new)</code>
     * [.Video](#LGI.Guide.Video) → <code>[Resource](#new_Resource_new)</code>
-    * [.initialize(settings)](#LGI.Guide.initialize)
+    * [.initialize(settings)](#LGI.Guide.initialize) ⇒ <code>[Guide](#LGI.Guide)</code>
     * [.findBroadcasts(...ids)](#LGI.Guide.findBroadcasts) ⇒ <code>[RequestBuilder](#LGI.Guide..RequestBuilder)</code>
     * [.findVideos(...ids)](#LGI.Guide.findVideos) ⇒ <code>[RequestBuilder](#LGI.Guide..RequestBuilder)</code>
     * [.findChannels(...ids)](#LGI.Guide.findChannels) ⇒ <code>[RequestBuilder](#LGI.Guide..RequestBuilder)</code>
@@ -222,7 +222,7 @@ API Documentation
   * [.Broadcast](#LGI.Guide.Broadcast) → <code>[Resource](#new_Resource_new)</code>
   * [.Channel](#LGI.Guide.Channel) → <code>[Resource](#new_Resource_new)</code>
   * [.Video](#LGI.Guide.Video) → <code>[Resource](#new_Resource_new)</code>
-  * [.initialize(settings)](#LGI.Guide.initialize)
+  * [.initialize(settings)](#LGI.Guide.initialize) ⇒ <code>[Guide](#LGI.Guide)</code>
   * [.findBroadcasts(...ids)](#LGI.Guide.findBroadcasts) ⇒ <code>[RequestBuilder](#LGI.Guide..RequestBuilder)</code>
   * [.findVideos(...ids)](#LGI.Guide.findVideos) ⇒ <code>[RequestBuilder](#LGI.Guide..RequestBuilder)</code>
   * [.findChannels(...ids)](#LGI.Guide.findChannels) ⇒ <code>[RequestBuilder](#LGI.Guide..RequestBuilder)</code>
@@ -326,8 +326,9 @@ Represents a video resource and its fields
 | RECORD_LINK | <code>[Field](#LGI.Guide..Field)</code> |
 
 <a name="LGI.Guide.initialize"></a>
-####Guide.initialize(settings)
+####Guide.initialize(settings) ⇒ <code>[Guide](#LGI.Guide)</code>
 Initializes the Guide for the given region.
+Returns itself.
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -336,6 +337,7 @@ Initializes the Guide for the given region.
 | settings.appId | <code>string</code> | App id (used for authentication) |
 | settings.appKey | <code>string</code> | App key (used for authentication) |
 
+**Returns**: <code>[Guide](#LGI.Guide)</code> - Itself
 **Throws**:
 
 - <code>TypeError</code> Invalid configuration object

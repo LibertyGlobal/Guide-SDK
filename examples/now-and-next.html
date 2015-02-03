@@ -85,26 +85,26 @@
     <script src="../dist/lgi-guide-standalone.js"></script>
 
     <script>
-      LGI.Guide.initialize({
+      var Guide = LGI.Guide.initialize({
         region: 'IE',
         appId: 'demo',
         appKey: 'demo'
       });
 
-      LGI.Guide.findBroadcasts()
+      Guide.findBroadcasts()
           .fields([
-            LGI.Guide.Video.TITLE, LGI.Guide.Video.SHORT_SYNOPSIS,
-            LGI.Guide.Broadcast.START, LGI.Guide.Broadcast.END,
-            LGI.Guide.Channel.NAME
+            Guide.Video.TITLE, Guide.Video.SHORT_SYNOPSIS,
+            Guide.Broadcast.START, Guide.Broadcast.END,
+            Guide.Channel.NAME
           ])
           .filter([
-            LGI.Guide.Broadcast.START.isLessThan(new Date().toJSON()),
-            LGI.Guide.Broadcast.END.isGreaterThan(new Date().toJSON())
+            Guide.Broadcast.START.isLessThan(new Date().toJSON()),
+            Guide.Broadcast.END.isGreaterThan(new Date().toJSON())
           ])
           .filter([
-            LGI.Guide.Channel.NAME.isEqualTo('BBC 1'),
-            LGI.Guide.Channel.NAME.isEqualTo('TG4 HD'),
-            LGI.Guide.Channel.NAME.isEqualTo('Discovery')
+            Guide.Channel.NAME.isEqualTo('BBC 1'),
+            Guide.Channel.NAME.isEqualTo('TG4 HD'),
+            Guide.Channel.NAME.isEqualTo('Discovery')
           ])
           .limit(3)
           .execute(onSuccess, onError);

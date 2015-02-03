@@ -14,11 +14,13 @@ var Guide = {
 
   /**
    * Initializes the Guide for the given region.
+   * Returns itself.
    *
    * @param {object} settings The settings object
    * @param {string} settings.region Target region code
    * @param {string} settings.appId App id (used for authentication)
    * @param {string} settings.appKey App key (used for authentication)
+   * @returns {LGI.Guide} Itself
    * @throws {TypeError} Invalid configuration object
    * @throws {TypeError} Invalid region code
    * @throws {TypeError} Invalid app id
@@ -46,6 +48,8 @@ var Guide = {
     this.settings.region = settings.region;
     this.settings.appId = settings.appId;
     this.settings.appKey = settings.appKey;
+
+    return Guide;
   },
 
   /**

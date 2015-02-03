@@ -1,7 +1,7 @@
 {
   "name": "lgi-guide",
   "title": "Liberty Global TV Guide SDK",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "A utility library for the Liberty Global Schedule APIs",
   "private": true,
   "license": "MIT",

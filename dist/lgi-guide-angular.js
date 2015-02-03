@@ -1,6 +1,6 @@
 /**
  * Liberty Global TV Guide SDK (Angular version) - A utility library for the Liberty Global Schedule APIs
- * @version v0.5.2
+ * @version v0.5.3
  * @link 
  * @license MIT
  */
@@ -972,6 +972,8 @@ angular.module('lgi.guide', ['$http'])
           this.settings.region = settings.region;
           this.settings.appId = settings.appId;
           this.settings.appKey = settings.appKey;
+      
+          return Guide;
         },
       
         /**
