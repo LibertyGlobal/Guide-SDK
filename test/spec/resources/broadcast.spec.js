@@ -23,6 +23,10 @@ describe('Broadcast', function () {
       expect(Broadcast.END).toEqual(jasmine.any(NumericField));
     });
 
+    it('should have a field VIDEO', function () {
+      expect(Broadcast.VIDEO).toEqual(jasmine.any(Field));
+    });
+
     it('should have a field CHANNEL', function () {
       expect(Broadcast.CHANNEL).toEqual(jasmine.any(Field));
     });

@@ -283,6 +283,7 @@ Represents a broadcast resource and its fields
 | START | <code>[NumericField](#LGI.Guide..NumericField)</code> |
 | END | <code>[NumericField](#LGI.Guide..NumericField)</code> |
 | CHANNEL | <code>[Field](#LGI.Guide..Field)</code> |
+| VIDEO | <code>[Field](#LGI.Guide..Field)</code> |
 | BUZZ_PER_MINUTE | <code>[NumericField](#LGI.Guide..NumericField)</code> |
 | POPULARITY | <code>[NumericField](#LGI.Guide..NumericField)</code> |
 
@@ -670,4 +671,3 @@ comparison `field=val1,val2,...,valN` when evaluated.
 | ...values | <code>string</code> | The values to compare to |
 
 **Returns**: <code>[Expression](#new_Expression_new)</code> - Expression of the comparison
-

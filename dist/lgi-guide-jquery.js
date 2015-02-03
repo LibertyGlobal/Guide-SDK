@@ -1,6 +1,6 @@
 /**
  * Liberty Global TV Guide SDK (jQuery version) - A utility library for the Liberty Global Schedule APIs
- * @version v0.5.1
+ * @version v0.5.2
  * @link 
  * @license MIT
  */
@@ -866,6 +866,7 @@
    * @property {LGI.Guide~NumericField} START
    * @property {LGI.Guide~NumericField} END
    * @property {LGI.Guide~Field} CHANNEL
+   * @property {LGI.Guide~Field} VIDEO
    * @property {LGI.Guide~NumericField} BUZZ_PER_MINUTE
    * @property {LGI.Guide~NumericField} POPULARITY
    */
@@ -875,6 +876,7 @@
   Broadcast.START = new NumericField(Broadcast, 'start');
   Broadcast.END = new NumericField(Broadcast, 'end');
   Broadcast.CHANNEL = new Field(Broadcast, 'channel');
+  Broadcast.VIDEO = new Field(Broadcast, 'video');
   Broadcast.BUZZ_PER_MINUTE = new NumericField(Broadcast, 'statistics.bpm');
   Broadcast.POPULARITY = new NumericField(Broadcast, 'statistics.popularity');
   /* globals Resource, Field, NumericField, FuzzyMatchField, MultiValueField */

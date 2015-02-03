@@ -9,6 +9,7 @@
  * @property {LGI.Guide~NumericField} START
  * @property {LGI.Guide~NumericField} END
  * @property {LGI.Guide~Field} CHANNEL
+ * @property {LGI.Guide~Field} VIDEO
  * @property {LGI.Guide~NumericField} BUZZ_PER_MINUTE
  * @property {LGI.Guide~NumericField} POPULARITY
  */
@@ -18,5 +19,6 @@ Broadcast.IMI = new Field(Broadcast, 'imi');
 Broadcast.START = new NumericField(Broadcast, 'start');
 Broadcast.END = new NumericField(Broadcast, 'end');
 Broadcast.CHANNEL = new Field(Broadcast, 'channel');
+Broadcast.VIDEO = new Field(Broadcast, 'video');
 Broadcast.BUZZ_PER_MINUTE = new NumericField(Broadcast, 'statistics.bpm');
 Broadcast.POPULARITY = new NumericField(Broadcast, 'statistics.popularity');
