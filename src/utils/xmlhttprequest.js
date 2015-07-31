@@ -14,8 +14,8 @@ var xhrRequest = function () {
     }
 
     transport.open('GET', url, true);
-    transport.setRequestHeader('X-Auth-Id', 'dc573c37');
-    transport.setRequestHeader('X-Auth-Key', 'f4521ced0cb9af73374731a77b2f21f6');
+    transport.setRequestHeader('X-Auth-Id', LGI.Guide.config.authId);
+    transport.setRequestHeader('X-Auth-Key', LGI.Guide.config.authKey);
 
     transport.onreadystatechange = function () {
       if (transport.readyState === 4) {

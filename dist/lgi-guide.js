@@ -1,6 +1,6 @@
 // LGI TV Guide JS SDK
 // ----------------------------------
-// v0.4.6
+// v0.4.8
 //
 // Copyright (c) 2015 Liberty Global
 // Distributed under BSD license
@@ -19,6 +19,28 @@
     //Defining global namespace
     var LGI = {};
     LGI.Guide = {};
+    
+    /**
+     * Global variables
+     * @namespace LGI.Guide.config
+     */
+    
+    LGI.Guide.config = {
+        /**
+         * Represents URL of Kraken REST server.
+         * @const LGI.Guide.config.APIURL
+         */
+        APIURL: 'http://api.lgi.io/kraken/v2/schedule/',
+        /**
+         * Represents URL of Kraken REST server.
+         * @const LGI.Guide.config.region
+         */
+        region: '',
+    
+        authId: 'dc573c37',
+    
+        authKey: 'f4521ced0cb9af73374731a77b2f21f6'
+    };
     
     /**
      * @namespace utils
@@ -49,8 +71,8 @@
         }
     
         transport.open('GET', url, true);
-        transport.setRequestHeader('X-Auth-Id', 'dc573c37');
-        transport.setRequestHeader('X-Auth-Key', 'f4521ced0cb9af73374731a77b2f21f6');
+        transport.setRequestHeader('X-Auth-Id', LGI.Guide.config.authId);
+        transport.setRequestHeader('X-Auth-Key', LGI.Guide.config.authKey);
     
         transport.onreadystatechange = function () {
           if (transport.readyState === 4) {
@@ -124,15 +146,13 @@
     };
     
     /**
-     * Selects the appropriate transport adapter for current environment.
+     * Determines are we in NodeJS or not and returns right transport module.
      * @namespace LGI.Guide
      * @function LGI.Guide.requestTransport
      */
     
     var chooseTransport = function () {
-        if (typeof MAF !== 'undefined') {
-            return mafRequest();
-        } else if (typeof module !== 'undefined' && module.exports) {
+        if (typeof module !== 'undefined' && module.exports) {
             return nodeRequest();
         } else {
             return xhrRequest();
@@ -140,24 +160,6 @@
     };
     
     var requestTransport = chooseTransport();
-    
-    /**
-     * Global variables
-     * @namespace LGI.Guide.config
-     */
-    
-    LGI.Guide.config = {
-        /**
-         * Represents URL of Kraken REST server.
-         * @const LGI.Guide.config.APIURL
-         */
-        APIURL: 'http://api.lgi.io/kraken/v2/schedule/',
-        /**
-         * Represents URL of Kraken REST server.
-         * @const LGI.Guide.config.region
-         */
-        region: ''
-    };
     
     /**
      * Request is a class which is designed to be used as a property of entity to communicate with server and remember state of data transfer
@@ -663,22 +665,29 @@
     LGI.Guide.Broadcast.IMI = new TextField('imi');
     LGI.Guide.Broadcast.CHANNEL = new TextField('channel');
     LGI.Guide.Broadcast.CHANNEL_NAME = new TextField('channel.name');
+    LGI.Guide.Broadcast.CHANNEL_NUMBER = new NumericField('channel.logicalPosition');
+    LGI.Guide.Broadcast.LOGICAL_POSITION = new NumericField('channel.logicalPosition');
     //LGI.Guide.Broadcast.CHANNEL_REF = new PrependField('channel.ref', 'channels');
     //LGI.Guide.Broadcast.STATISTICS = new TextField('video.statistics');
     LGI.Guide.Broadcast.VIDEO_ID = new TextField('video.id');
     LGI.Guide.Broadcast.TITLE = new TextField('video.title');
     LGI.Guide.Broadcast.SYNOPSIS = new TextField('video.synopsis');
+    LGI.Guide.Broadcast.SHORT_SYNOPSIS = new TextField('video.shortSynopsis');
     LGI.Guide.Broadcast.AGE_RATING = new TextField('video.ageRating');
     LGI.Guide.Broadcast.CATEGORY = new TextField('video.category');
+    LGI.Guide.Broadcast.SUBCATEGORY = new TextField('video.subcategory');
     //LGI.Guide.Broadcast.OPENGRAPH_LINK = new TextField('video.opengraphLink');
     LGI.Guide.Broadcast.RECORD_LINK = new TextField('video.recordLink');
     //LGI.Guide.Broadcast.SELF_LINK = new TextField('selfLink');
     LGI.Guide.Broadcast.CAST = new TextField('video.cast');
     LGI.Guide.Broadcast.DIRECTORS = new TextField('video.directors');
     LGI.Guide.Broadcast.WRITERS = new TextField('video.writers');
+    LGI.Guide.Broadcast.YEAR = new NumericField('video.year');
     //LGI.Guide.Broadcast.EPISODE = new NumericField('episode');
     //LGI.Guide.Broadcast.SEASON = new NumericField('season');
     LGI.Guide.Broadcast.IMAGE_LINK = new NumericField('video.imageLink');
+    LGI.Guide.Broadcast.VIDEO_BPM = new NumericField('video.statistics.bpm');
+    LGI.Guide.Broadcast.LANGUAGE = new TextField('video.language');
     LGI.Guide.Broadcast.BPM = new NumericField('statistics.bpm');
     LGI.Guide.Broadcast.POPULARITY = new NumericField('statistics.popularity');
     //LGI.Guide.Broadcast.MORE_LINK = new TextField('moreLink');

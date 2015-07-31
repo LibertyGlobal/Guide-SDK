@@ -13,5 +13,9 @@ LGI.Guide.config = {
      * Represents URL of Kraken REST server.
      * @const LGI.Guide.config.region
      */
-    region: ''
+    region: '',
+
+    authId: 'dc573c37',
+
+    authKey: 'f4521ced0cb9af73374731a77b2f21f6'
 };
