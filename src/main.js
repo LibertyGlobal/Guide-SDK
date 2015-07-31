@@ -2,6 +2,8 @@
 var LGI = {};
 LGI.Guide = {};
 
+//= config
+
 //= utils/utils
 
 //= utils/xmlhttprequest
@@ -9,8 +11,6 @@ LGI.Guide = {};
 //= utils/noderequest
 
 //= utils/requesttransport
-
-//= config
 
 //= request
 
